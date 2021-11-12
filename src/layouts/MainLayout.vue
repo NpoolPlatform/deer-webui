@@ -24,21 +24,23 @@
         </q-carousel>
         <q-space />
         <q-btn flat class="text-grey-8 text-caption">{{ $t('GENERAL.DEPOSIT_ELETRICAL_FEE') }}</q-btn>
-        <q-btn-toggle
-          v-model="model"
-          class="lang-toggle"
-          no-caps
-          rounded
-          unelevated
-          toggle-color="primary"
-          color="white"
-          text-color="primary"
-          size="8px"
+        <q-select
+          v-model="locale"
           :options="[
-            {label: '中文', value: 'one'},
-            {label: '英文', value: 'two'}
+            { value: 'en-US', label: $t('LANG.ENGLISH') },
+            { value: 'zh-CN', label: $t('LANG.CHINESE') }
           ]"
-        />
+          :label="$t('LANG.LANGUAGE')"
+          dense
+          borderless
+          emit-value
+          map-options
+          options-dense
+        >
+          <template v-slot:prepend>
+            <q-icon name="language" color="blue" />
+          </template>
+        </q-select>
       </q-toolbar>
       <q-toolbar style="padding: 0 100px 0 100px;">
         <q-icon name="mic" style="color: #616161; font-size: 1.5rem;" />
@@ -52,12 +54,16 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'MainLayout',
   setup () {
+    const { locale } = useI18n({ useScope: 'global' })
+
     return {
+      locale,
       slide: ref('style'),
       model: ref('one'),
       announcements: [
