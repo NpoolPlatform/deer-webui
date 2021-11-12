@@ -4,11 +4,15 @@ export default {
     CHINESE: 'Chinese',
     LANGUAGE: 'Language'
   },
-  GENERAL: {
-    DEPOSIT_ELETRICAL_FEE: 'Deposit Power Fee'
-  },
   MENU: {
     POWERGOODS: 'Mall',
-    HELP: 'Help'
+    HELP: 'Help',
+    DEPOSIT_ELETRICAL_FEE: 'Deposit Power Fee',
+    MYASSETS: 'Assets',
+    MYORDERS: 'Orders',
+    MYCOUPONS: 'Coupons',
+    INVITATIONS: 'Invitations',
+    SETTING: 'Setting',
+    EXIT: 'Exit'
   }
 }
