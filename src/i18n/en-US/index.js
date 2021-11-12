@@ -14,5 +14,12 @@ export default {
     INVITATIONS: 'Invitations',
     SETTING: 'Setting',
     EXIT: 'Exit'
+  },
+  SLOGAN: {
+    MINEME_MAIN: 'Mine Me, Digital Power Assets Along with You',
+    MINEME_SUBTITLE: 'Safety Convenient Reality'
+  },
+  BUTTON: {
+    START_MINE_NOW: 'Start Mine now'
   }
 }

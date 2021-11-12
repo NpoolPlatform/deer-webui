@@ -14,5 +14,12 @@ export default {
       INVITATIONS: '有奖邀请',
       SETTING: '设置',
       EXIT: '退出'
+    },
+    SLOGAN: {
+      MINEME_MAIN: 'Mine Me, 身边触手可及的算力资产',
+      MINEME_SUBTITLE: '安全 便捷 真实'
+    },
+    BUTTON: {
+      START_MINE_NOW: '立即开始挖矿之旅'
     }
   }
