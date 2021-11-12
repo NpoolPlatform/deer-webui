@@ -6,5 +6,9 @@ export default {
   },
   GENERAL: {
     DEPOSIT_ELETRICAL_FEE: 'Deposit Power Fee'
+  },
+  MENU: {
+    POWERGOODS: 'Mall',
+    HELP: 'Help'
   }
 }

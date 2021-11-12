@@ -9,7 +9,6 @@
           infinite
           vertical
           autoplay
-          arrows=false
           height="1.5rem"
         >
           <q-carousel-slide
@@ -42,8 +41,14 @@
           </template>
         </q-select>
       </q-toolbar>
-      <q-toolbar style="padding: 0 100px 0 100px;">
-        <q-icon name="mic" style="color: #616161; font-size: 1.5rem;" />
+      <q-toolbar style="padding: 0 100px 0 100px; height: 60px;">
+        <q-btn flat class="margin-0" style="padding: 0 40px 0 0;">
+          <img src="logo/logo.png" style="width: 80px;">
+        </q-btn>
+        <q-tabs v-model="tab" class="text-grey-8" inline-label indicator-color="blue" active-color="blue">
+          <q-tab name="goods" icon="storefront" :label="$t('MENU.POWERGOODS')" />
+          <q-tab name="help" icon="help" :label="$t('MENU.HELP')" />
+        </q-tabs>
       </q-toolbar>
     </q-header>
     
@@ -68,13 +73,14 @@ export default defineComponent({
       model: ref('one'),
       announcements: [
         {
-          title: "A frog jump over a brown fox",
-          url: "http://localhost:8080",
+          title: 'A frog jump over a brown fox',
+          url: 'http://localhost:8080',
         }, {
-          title: "A frog jump over another brown fox",
-          url: "http://localhost:8080",
+          title: 'A frog jump over another brown fox',
+          url: 'http://localhost:8080',
         }
-      ]
+      ],
+      tab: ref('goods')
     }
   },
   methods: {
