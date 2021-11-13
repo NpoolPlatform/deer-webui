@@ -4,7 +4,7 @@
       <div class="left-banner">
         <h3 class="slogan-main">{{ $t('SLOGAN.MINEME_MAIN') }}</h3>
         <h5 class="slogan-subtitle">{{ $t('SLOGAN.MINEME_SUBTITLE') }}</h5>
-        <q-btn class="start-btn" icon-right="arrow_right_alt">{{ $t('BUTTON.START_MINE_NOW') }}</q-btn>
+        <q-btn class="start-btn" icon-right="arrow_right_alt" rounded>{{ $t('BUTTON.START_MINE_NOW') }}</q-btn>
       </div>
       <q-carousel
           v-model="slide"

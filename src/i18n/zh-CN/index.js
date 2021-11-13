@@ -5,6 +5,7 @@ export default {
       LANGUAGE: '语言'
     },
     MENU: {
+      MAINPAGE: 'Mine Me',
       POWERGOODS: '算力商城',
       HELP: '帮助中心',
       DEPOSIT_ELETRICAL_FEE: '续缴电费',

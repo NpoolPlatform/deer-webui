@@ -2,9 +2,10 @@ export default {
   LANG: {
     ENGLISH: 'English',
     CHINESE: 'Chinese',
-    LANGUAGE: 'Language'
+    LANGUAGE: 'Lang'
   },
   MENU: {
+    MAINPAGE: 'Mine Me',
     POWERGOODS: 'Mall',
     HELP: 'Help',
     DEPOSIT_ELETRICAL_FEE: 'Deposit Power Fee',
@@ -20,6 +21,6 @@ export default {
     MINEME_SUBTITLE: 'Safety Convenient Reality'
   },
   BUTTON: {
-    START_MINE_NOW: 'Start Mine now'
+    START_MINE_NOW: 'Start Mining now'
   }
 }

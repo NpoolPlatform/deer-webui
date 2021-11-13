@@ -46,6 +46,7 @@
           <img src="logo/logo.png" style="width: 80px;">
         </q-btn>
         <q-tabs v-model="tab" class="text-grey-8" inline-label indicator-color="blue" active-color="blue">
+          <q-tab name="mainpage" icon="whatshot" :label="$t('MENU.MAINPAGE')" />
           <q-tab name="goods" icon="storefront" :label="$t('MENU.POWERGOODS')" />
           <q-tab name="help" icon="help" :label="$t('MENU.HELP')" />
         </q-tabs>
@@ -125,6 +126,9 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
+        <q-btn dense flat icon="notifications_none" color="grey-6">
+          <q-badge v-if="newMessages > 0" floating rounded dense color="red" align="middle">{{ newMessages }}</q-badge>
+        </q-btn>
       </q-toolbar>
     </q-header>
     
@@ -144,9 +148,9 @@ export default defineComponent({
     const { locale } = useI18n({ useScope: 'global' })
 
     return {
+      newMessages: 0,
       locale,
       slide: ref('style'),
-      model: ref('one'),
       announcements: [
         {
           title: 'A frog jump over a brown fox',
@@ -156,7 +160,7 @@ export default defineComponent({
           url: 'http://localhost:8080',
         }
       ],
-      tab: ref('goods'),
+      tab: ref('mainpage'),
       username: 'kikakkz@hotmail.com'
     }
   },
