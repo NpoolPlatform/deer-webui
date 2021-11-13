@@ -26,11 +26,11 @@
     <div class="container">
       <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
       <q-list class="recommend-list">
-        <recommend-good
+        <recommend-good-card
           v-for="recommend in recommends"
           :key="recommend.id"
           :good="recommend">
-        </recommend-good>
+        </recommend-good-card>
       </q-list>
     </div>
   </div>
@@ -38,12 +38,12 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import RecommendGood from '../components/RecommendGood.vue'
+import RecommendGoodCard from '../components/RecommendGoodCard.vue'
 
 export default defineComponent({
   name: 'PageIndex',
   components: {
-    RecommendGood
+    RecommendGoodCard
   },
   setup () {
     return {

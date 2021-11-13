@@ -93,7 +93,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'RecommentGood',
+  name: 'RecommentGoodCard',
   props: {
     good: {
       type: Object,
@@ -114,8 +114,8 @@ export default defineComponent({
     },
     onBuyNowClick: function () {
       this.$router.push({
-        path: '/good',
-        params: {
+        name: 'good',
+        props: {
           good: this.good
         }
       })
