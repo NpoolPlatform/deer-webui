@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner">
+    <div class="banner container">
       <div class="left-banner">
         <h3 class="slogan-main">{{ $t('SLOGAN.MINEME_MAIN') }}</h3>
         <h5 class="slogan-subtitle">{{ $t('SLOGAN.MINEME_SUBTITLE') }}</h5>
@@ -23,14 +23,28 @@
           </q-carousel-slide>
         </q-carousel>
     </div>
+    <div class="container">
+      <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
+      <q-list class="recommend-list">
+        <recommend-good
+          v-for="recommend in recommends"
+          :key="recommend.id"
+          :good="recommend">
+        </recommend-good>
+      </q-list>
+    </div>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
+import RecommendGood from '../components/RecommendGood.vue'
 
 export default defineComponent({
   name: 'PageIndex',
+  components: {
+    RecommendGood
+  },
   setup () {
     return {
       slide: ref('style'),
@@ -52,6 +66,129 @@ export default defineComponent({
           image: 'images/slider-4.png',
           url: 'http://localhost:8080',
         }
+      ],
+      recommends: [
+        {
+          id: 1,
+          cointype: 'BTC',
+          coinlogo: 'logo/btc.png',
+          title: '蚂蚁矿机S19Pro套餐',
+          duration: 180,
+          unit: 'TH/s',
+          amount: 200,
+          posters: [],
+          gotourl: 'http://localhost:8080',
+          fees: [
+            {
+              type: '技术服务费',
+              paytype: 'percent',
+              percent: 10,
+            }, {
+              type: '电费',
+              paytype: 'amount',
+              unitamount: 0.05,
+              currency: 'USDT'
+            }
+          ],
+          start: Math.round(+new Date()/1000),
+          badges: ['新币种'],
+          outsale: false,
+          presale: false,
+          price: 2029.70,
+          priceunit: 'USDT',
+          pricecurrency: 'USDT',
+          pricecurrencychar: '$'
+        }, {
+          id: 2,
+          cointype: 'BTC',
+          coinlogo: 'logo/btc.png',
+          title: '蚂蚁矿机S20Pro套餐',
+          duration: 180,
+          unit: 'TH/s',
+          amount: 200,
+          posters: [],
+          gotourl: 'http://localhost:8080',
+          fees: [
+            {
+              type: '技术服务费',
+              paytype: 'percent',
+              percent: 10,
+            }, {
+              type: '电费',
+              paytype: 'amount',
+              unitamount: 0.05,
+              currency: 'USDT'
+            }
+          ],
+          start: Math.round(+new Date()/1000),
+          badges: ['热卖'],
+          outsale: false,
+          presale: false,
+          price: 1029.70,
+          priceunit: 'USDT',
+          pricecurrency: 'USDT',
+          pricecurrencychar: '$'
+        }, {
+          id: 3,
+          cointype: 'BTC',
+          coinlogo: 'logo/btc.png',
+          title: '蚂蚁矿机S21Pro套餐',
+          duration: 180,
+          unit: 'TH/s',
+          amount: 200,
+          posters: [],
+          gotourl: 'http://localhost:8080',
+          fees: [
+            {
+              type: '技术服务费',
+              paytype: 'percent',
+              percent: 10,
+            }, {
+              type: '电费',
+              paytype: 'amount',
+              unitamount: 0.05,
+              currency: 'USDT'
+            }
+          ],
+          start: Math.round(+new Date()/1000),
+          badges: ['热卖'],
+          outsale: false,
+          presale: false,
+          price: 1129.70,
+          priceunit: 'USDT',
+          pricecurrency: 'USDT',
+          pricecurrencychar: '$'
+        }, {
+          id: 4,
+          cointype: 'BTC',
+          coinlogo: 'logo/btc.png',
+          title: '蚂蚁矿机S22Pro套餐',
+          duration: 180,
+          unit: 'TH/s',
+          amount: 200,
+          posters: [],
+          gotourl: 'http://localhost:8080',
+          fees: [
+            {
+              type: '技术服务费',
+              paytype: 'percent',
+              percent: 10,
+            }, {
+              type: '电费',
+              paytype: 'amount',
+              unitamount: 0.05,
+              currency: 'USDT'
+            }
+          ],
+          start: Math.round(+new Date()/1000),
+          badges: ['预售'],
+          outsale: false,
+          presale: false,
+          price: 1229.70,
+          priceunit: 'USDT',
+          pricecurrency: 'USDT',
+          pricecurrencychar: '$'
+        }
       ]
     }
   },
@@ -64,10 +201,12 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
+.container
+  padding: 0 100px 0 100px
+
 .banner
   background-image: url("../../public/images/background_main_banner.png")
   height: 500px
-  padding: 0 100px 0 100px
   display: flex
 
 .left-banner
@@ -94,4 +233,16 @@ export default defineComponent({
   margin: 0
   padding: 0
   background-color: red
+
+.title
+  width: 100%
+  font-size: 28px
+  text-align: center
+  color: $grey-7
+
+h4
+  font-weight: bold
+
+.recommend-list
+  display: flex
 </style>

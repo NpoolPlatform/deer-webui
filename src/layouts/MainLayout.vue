@@ -49,6 +49,7 @@
           <q-tab name="mainpage" icon="whatshot" :label="$t('MENU.MAINPAGE')" />
           <q-tab name="goods" icon="storefront" :label="$t('MENU.POWERGOODS')" />
           <q-tab name="help" icon="help" :label="$t('MENU.HELP')" />
+          <q-tab name="aboutus" icon="group" :label="$t('MENU.ABOUTUS')" />
         </q-tabs>
         <q-space />
         <q-btn flat :label="$t('MENU.MYASSETS')" color="grey-8">
@@ -126,6 +127,7 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
+        <q-btn dense flat icon="share" color="blue"></q-btn>
         <q-btn dense flat icon="notifications_none" color="grey-6">
           <q-badge v-if="newMessages > 0" floating rounded dense color="red" align="middle">{{ newMessages }}</q-badge>
         </q-btn>

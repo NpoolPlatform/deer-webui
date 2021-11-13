@@ -14,13 +14,15 @@ export default {
     MYCOUPONS: 'Coupons',
     INVITATIONS: 'Invitations',
     SETTING: 'Setting',
-    EXIT: 'Exit'
+    EXIT: 'Exit',
+    ABOUTUS: 'About Us'
   },
   SLOGAN: {
     MINEME_MAIN: 'Mine Me, Digital Power Assets Along with You',
     MINEME_SUBTITLE: 'Safety Convenient Reality'
   },
   BUTTON: {
-    START_MINE_NOW: 'Start Mining now'
+    START_MINE_NOW: 'Start Mining now',
+    PLATFORM_RECOMMEND: 'Mine Me Prefered'
   }
 }
