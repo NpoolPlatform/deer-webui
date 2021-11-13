@@ -59,7 +59,7 @@
       <q-separator style="width: 80%;" />
     </div>
     <div class="justify-center row">
-      <q-btn class="button-buy-now" rounded>{{ $t('BUTTON.BUY_NOW') }}</q-btn>
+      <q-btn class="button-buy-now" rounded @click="onBuyNowClick">{{ $t('BUTTON.BUY_NOW') }}</q-btn>
     </div>
     <q-item>
       <q-item-section>
@@ -109,8 +109,11 @@ export default defineComponent({
     }
   },
   methods: {
-    randomNumber : function(){
+    randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    },
+    onBuyNowClick: function () {
+      console.log(this.good)
     }
   },
   computed: {
