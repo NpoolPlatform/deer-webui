@@ -23,6 +23,15 @@ export default {
     },
     BUTTON: {
       START_MINE_NOW: '立即开始挖矿之旅',
-      PLATFORM_RECOMMEND: 'Mine Me优选'
+      PLATFORM_RECOMMEND: 'Mine Me优选',
+      BUY_NOW: '现在就去购买'
+    },
+    GENERAL: {
+      DAYS: '天',
+      MAINTAINANCE_FEE: '技术服务费',
+      POWER_FEE: '电费',
+      RENT_FEE: '矿机租赁费',
+      DAILY_PRODUCTION: '历史产出',
+      GOOD_PRODUCTION: '商品产出率'
     }
   }

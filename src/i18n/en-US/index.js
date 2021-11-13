@@ -23,6 +23,15 @@ export default {
   },
   BUTTON: {
     START_MINE_NOW: 'Start Mining now',
-    PLATFORM_RECOMMEND: 'Mine Me Prefered'
+    PLATFORM_RECOMMEND: 'Mine Me Prefered',
+    BUY_NOW: 'Buy Now'
+  },
+  GENERAL: {
+    DAYS: 'Days',
+    MAINTAINANCE_FEE: 'Maintainance Fee',
+    POWER_FEE: 'Electrical Fee',
+    RENT_FEE: 'Machine Rent Fee',
+    DAILY_PRODUCTION: 'Daily Production',
+    GOOD_PRODUCTION: 'This Good Production'
   }
 }

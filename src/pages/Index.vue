@@ -76,7 +76,7 @@ export default defineComponent({
           duration: 180,
           unit: 'TH/s',
           amount: 200,
-          posters: [],
+          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
           gotourl: 'http://localhost:8080',
           fees: [
             {
@@ -91,7 +91,7 @@ export default defineComponent({
             }
           ],
           start: Math.round(+new Date()/1000),
-          badges: ['新币种'],
+          badges: ['新币种', '热卖', '即将售罄', '自营'],
           outsale: false,
           presale: false,
           price: 2029.70,
@@ -106,7 +106,7 @@ export default defineComponent({
           duration: 180,
           unit: 'TH/s',
           amount: 200,
-          posters: [],
+          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
           gotourl: 'http://localhost:8080',
           fees: [
             {
@@ -121,7 +121,7 @@ export default defineComponent({
             }
           ],
           start: Math.round(+new Date()/1000),
-          badges: ['热卖'],
+          badges: ['热卖', '自营'],
           outsale: false,
           presale: false,
           price: 1029.70,
@@ -136,7 +136,7 @@ export default defineComponent({
           duration: 180,
           unit: 'TH/s',
           amount: 200,
-          posters: [],
+          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
           gotourl: 'http://localhost:8080',
           fees: [
             {
@@ -151,7 +151,7 @@ export default defineComponent({
             }
           ],
           start: Math.round(+new Date()/1000),
-          badges: ['热卖'],
+          badges: ['热卖', '自营'],
           outsale: false,
           presale: false,
           price: 1129.70,
@@ -166,7 +166,7 @@ export default defineComponent({
           duration: 180,
           unit: 'TH/s',
           amount: 200,
-          posters: [],
+          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
           gotourl: 'http://localhost:8080',
           fees: [
             {
@@ -182,6 +182,36 @@ export default defineComponent({
           ],
           start: Math.round(+new Date()/1000),
           badges: ['预售'],
+          outsale: false,
+          presale: false,
+          price: 1229.70,
+          priceunit: 'USDT',
+          pricecurrency: 'USDT',
+          pricecurrencychar: '$'
+        }, {
+          id: 5,
+          cointype: 'BTC',
+          coinlogo: 'logo/btc.png',
+          title: '蚂蚁矿机S23Pro套餐',
+          duration: 180,
+          unit: 'TH/s',
+          amount: 200,
+          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
+          gotourl: 'http://localhost:8080',
+          fees: [
+            {
+              type: '技术服务费',
+              paytype: 'percent',
+              percent: 10,
+            }, {
+              type: '电费',
+              paytype: 'amount',
+              unitamount: 0.05,
+              currency: 'USDT'
+            }
+          ],
+          start: Math.round(+new Date()/1000),
+          badges: ['预售', '自营'],
           outsale: false,
           presale: false,
           price: 1229.70,
