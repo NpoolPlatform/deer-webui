@@ -166,6 +166,12 @@ export default defineComponent({
       username: 'kikakkz@hotmail.com'
     }
   },
+  created() {
+
+  },
+  beforeUnmount() {
+
+  },
   methods: {
     onAnnouncementClick: function (url) {
 

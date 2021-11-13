@@ -113,7 +113,12 @@ export default defineComponent({
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
     onBuyNowClick: function () {
-      console.log(this.good)
+      this.$router.push({
+        path: '/good',
+        params: {
+          good: this.good
+        }
+      })
     }
   },
   computed: {
