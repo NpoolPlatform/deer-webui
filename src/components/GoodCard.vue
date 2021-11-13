@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div style="width: 100%;">
+    <div>
+      <input type="text" :placeholder="$t('GENERAL.SEARCH_INTERESTING')" />
+    </div>
     <q-card class="my-card">
       <q-card-section>
         <div class="text-h6 q-mb-xs">Our Changing Planet</div>

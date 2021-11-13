@@ -32,6 +32,7 @@ export default {
       POWER_FEE: '电费',
       RENT_FEE: '矿机租赁费',
       DAILY_PRODUCTION: '历史产出',
-      GOOD_PRODUCTION: '商品产出率'
+      GOOD_PRODUCTION: '商品产出率',
+      SEARCH_INTERESTING: '搜索感兴趣的商品'
     }
   }

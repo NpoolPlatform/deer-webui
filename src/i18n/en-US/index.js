@@ -32,6 +32,7 @@ export default {
     POWER_FEE: 'Electrical Fee',
     RENT_FEE: 'Machine Rent Fee',
     DAILY_PRODUCTION: 'Daily Production',
-    GOOD_PRODUCTION: 'This Good Production'
+    GOOD_PRODUCTION: 'This Good Production',
+    SEARCH_INTERESTING: 'Search something interesting ...'
   }
 }

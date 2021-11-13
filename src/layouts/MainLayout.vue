@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="background: #ffffff;">
-      <q-toolbar class="bg-grey-1" style="padding: 0 100px 0 100px; min-height: 32px;">
+    <q-header style="background: #ffffff;" class="container">
+      <q-toolbar class="bg-grey-1" style="min-height: 32px;">
         <q-icon name="mic" style="color: #616161; font-size: 1.5rem;" />
         <q-carousel
           v-model="slide"
@@ -41,7 +41,7 @@
           </template>
         </q-select>
       </q-toolbar>
-      <q-toolbar style="padding: 0 100px 0 100px; height: 60px;">
+      <q-toolbar style="height: 60px;">
         <q-btn flat class="margin-0" style="padding: 0 40px 0 0;">
           <img src="logo/logo.png" style="width: 80px;">
         </q-btn>
@@ -134,7 +134,7 @@
       </q-toolbar>
     </q-header>
     
-    <q-page-container>
+    <q-page-container class="container">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -214,4 +214,7 @@ export default defineComponent({
 
 .lang-toggle
   border: 1px solid #027be3
+
+.container
+  padding: 0 100px 0 100px
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner container">
+    <div class="banner">
       <div class="left-banner">
         <h3 class="slogan-main">{{ $t('SLOGAN.MINEME_MAIN') }}</h3>
         <h5 class="slogan-subtitle">{{ $t('SLOGAN.MINEME_SUBTITLE') }}</h5>
@@ -23,7 +23,7 @@
           </q-carousel-slide>
         </q-carousel>
     </div>
-    <div class="container">
+    <div>
       <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
       <q-list class="recommend-list">
         <recommend-good-card
@@ -231,9 +231,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-.container
-  padding: 0 100px 0 100px
-
 .banner
   background-image: url("../../public/images/background_main_banner.png")
   height: 500px
