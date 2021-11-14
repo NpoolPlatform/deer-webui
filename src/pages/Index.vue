@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner">
+    <div class="banner container">
       <div class="left-banner">
         <h3 class="slogan-main">{{ $t('SLOGAN.MINEME_MAIN') }}</h3>
         <h5 class="slogan-subtitle">{{ $t('SLOGAN.MINEME_SUBTITLE') }}</h5>
@@ -23,7 +23,7 @@
           </q-carousel-slide>
         </q-carousel>
     </div>
-    <div>
+    <div class="container">
       <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
       <q-list class="recommend-list">
         <recommend-good-card
@@ -272,4 +272,7 @@ h4
 
 .recommend-list
   display: flex
+
+.container
+  padding: 0 100px 0 100px
 </style>
