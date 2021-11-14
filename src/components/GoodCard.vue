@@ -94,6 +94,21 @@
             <div class="good-parameter-unit">J/T</div>
           </div>
         </div>
+
+        <div class="row good-production-types">
+          <div class="good-production-types-label">{{ $t('GENERAL.PRODUCTION_COIN_TYPES') }}</div>
+          <q-btn
+            v-for="(coin, index) in good.supportedCoinTypes"
+            :key="index"
+            :label="coin"
+            text-color="grey-9"
+            :color="coinSelected[index] ? 'blue-4' : 'white'"
+            dense
+            @click="onCoinTypeClick(index)"
+            class="good-production-types-coin"
+          >
+          </q-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -112,12 +127,23 @@ export default defineComponent({
   },
   setup () {
     return {
-      slide: ref(0)
+      slide: ref(0),
+      coinSelected: [],
+      active: true
     }
   },
   computed: {
     good: function () {
-      return this.$store.state.good.goods[this.goodId]
+      var myGood = this.$store.state.good.goods[this.goodId]
+      myGood.supportedCoinTypes.forEach((coin, index) => {
+        if (coin == myGood.cointype) {
+          this.coinSelected.push(true)
+        } else {
+          this.coinSelected.push(false)
+        }
+      })
+      console.log(this.coinSelected)
+      return myGood
     },
     stars: function () {
       return this.good.rating
@@ -129,6 +155,17 @@ export default defineComponent({
   methods: {
     onMouseEnterThumbnail: function (index) {
       this.slide = index
+    },
+    onCoinTypeClick: function (index) {
+      var selected = new Array(this.coinSelected.length)
+      this.coinSelected.forEach((val, localIndex) => {
+        if (index == localIndex) {
+          selected[localIndex] = !val
+        } else {
+          selected[localIndex] = val
+        }
+      })
+      this.coinSelected = selected
     }
   }
 })
@@ -249,4 +286,18 @@ export default defineComponent({
   border-top: 1px solid $grey-2
   border-bottom: 1px solid $grey-2
   width: 200px
+  color: $grey-7
+
+.good-production-types
+  margin: 20px 0 20px 0
+  align-items: center
+
+.good-production-types-label
+  color: $grey-7
+  width: 110px
+  margin: 10px 30px 10px 40px
+
+.good-production-types-coin
+  width: 200px
+  margin: 10px
 </style>

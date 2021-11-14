@@ -38,6 +38,7 @@ export default {
       SEARCH_INTERESTING: '搜索感兴趣的商品',
       MINER_HASH_POWER: '矿机算力',
       MINER_POWER_COMSUPTION: '矿机功率',
-      MINER_POWER_EFFICIENCY: '矿机能效比'
+      MINER_POWER_EFFICIENCY: '矿机能效比',
+      PRODUCTION_COIN_TYPES: '产出类型'
     }
   }

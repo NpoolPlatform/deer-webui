@@ -38,6 +38,7 @@ export default {
     SEARCH_INTERESTING: 'Search something interesting ...',
     MINER_HASH_POWER: 'Miner Hash Power',
     MINER_POWER_COMSUPTION: 'Miner Power Comsuption',
-    MINER_POWER_EFFICIENCY: 'Miner Power Efficiency'
+    MINER_POWER_EFFICIENCY: 'Miner Power Efficiency',
+    PRODUCTION_COIN_TYPES: 'Production Types'
   }
 }

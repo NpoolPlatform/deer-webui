@@ -71,6 +71,7 @@ export default defineComponent({
         {
           id: 1,
           cointype: 'BTC',
+          supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S19Pro套餐',
           rating: 4.2,
@@ -103,6 +104,7 @@ export default defineComponent({
         }, {
           id: 2,
           cointype: 'BTC',
+          supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S20Pro套餐',
           rating: 4.2,
@@ -135,6 +137,7 @@ export default defineComponent({
         }, {
           id: 3,
           cointype: 'BTC',
+          supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S21Pro套餐',
           rating: 4.2,
@@ -167,6 +170,7 @@ export default defineComponent({
         }, {
           id: 4,
           cointype: 'BTC',
+          supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S22Pro套餐',
           rating: 4.2,
@@ -199,6 +203,7 @@ export default defineComponent({
         }, {
           id: 5,
           cointype: 'BTC',
+          supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S23Pro套餐',
           rating: 4.2,
