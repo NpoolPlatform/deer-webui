@@ -35,6 +35,9 @@ export default {
     RENT_FEE: 'Machine Rent Fee',
     DAILY_PRODUCTION: 'Daily Production',
     GOOD_PRODUCTION: 'This Good Production',
-    SEARCH_INTERESTING: 'Search something interesting ...'
+    SEARCH_INTERESTING: 'Search something interesting ...',
+    MINER_HASH_POWER: 'Miner Hash Power',
+    MINER_POWER_COMSUPTION: 'Miner Power Comsuption',
+    MINER_POWER_EFFICIENCY: 'Miner Power Efficiency'
   }
 }

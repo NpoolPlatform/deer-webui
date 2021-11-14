@@ -74,21 +74,21 @@
 
       <div>
         <div class="row">
-          <div class="good-parameter-label">矿机算力</div>
+          <div class="good-parameter-label">{{ $t('GENERAL.MINER_HASH_POWER') }}</div>
           <div class="row">
             <div class="good-parameter-data">110</div>
             <div class="good-parameter-unit">TH/s</div>
           </div>
         </div>
         <div class="row">
-          <div class="good-parameter-label">矿机功率</div>
+          <div class="good-parameter-label">{{ $t('GENERAL.MINER_POWER_COMSUPTION') }}</div>
           <div class="row">
             <div class="good-parameter-data">3250</div>
             <div class="good-parameter-unit">W</div>
           </div>
         </div>
         <div class="row">
-          <div class="good-parameter-label">能效比</div>
+          <div class="good-parameter-label">{{ $t('GENERAL.MINER_POWER_EFFICIENCY') }}</div>
           <div class="row">
             <div class="good-parameter-data">29.5</div>
             <div class="good-parameter-unit">J/T</div>
