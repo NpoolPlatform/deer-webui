@@ -1,2 +1,3 @@
-export function someMutation (/* state */) {
+export function updateGood (state, good) {
+  state.goods[good.id] = good
 }

@@ -5,7 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
-      { path: 'good', name: 'good', component: () => import('pages/Good.vue') }
+      { path: 'good', name: 'good', component: () => import('pages/Good.vue'), params: { goodId: '' } }
     ]
   },
 

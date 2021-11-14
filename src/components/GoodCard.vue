@@ -20,8 +20,8 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'GoodCard',
   props: {
-    good: {
-      type: Object,
+    goodId: {
+      type: String,
       required: true
     }
   },
@@ -30,6 +30,11 @@ export default defineComponent({
       stars: ref(4)
     }
   },
+  computed: {
+    good: function () {
+      return this.$store.state.good.goods[this.goodId]
+    }
+  }
 })
 </script>
 

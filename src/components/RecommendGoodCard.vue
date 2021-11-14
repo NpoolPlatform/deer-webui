@@ -90,7 +90,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'RecommentGoodCard',
@@ -101,11 +102,20 @@ export default defineComponent({
     }
   },
   setup() {
+    const $store = useStore()
+
+    const clickedGood = computed ({
+      set: val => {
+        $store.commit('good/updateGood', val)
+      }
+    })
+
     return {
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
-      slide: ref('style')
+      slide: ref('style'),
+      clickedGood
     }
   },
   methods: {
@@ -113,10 +123,11 @@ export default defineComponent({
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
     onBuyNowClick: function () {
+      this.clickedGood = this.good
       this.$router.push({
         name: 'good',
-        props: {
-          good: this.good
+        params: {
+          goodId: this.good.id
         }
       })
     }
