@@ -42,8 +42,8 @@
       <q-btn class="large-amount-deal-btn" rounded>{{ $t('BUTTON.LARGE_AMOUNT_DEAL_HINT') }}</q-btn>
     </div>
 
-    <div>
-      <div class="good-poster-info row">
+    <div class="good-poster-info">
+      <div class="row">
         <img avatar :src="good.coinlogo" class="good-poster-coin-logo" />
         <div class="good-title">
           <div class="q-mb-xs row good-title">
@@ -58,6 +58,18 @@
             <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
           </div>
         </div>
+      </div>
+
+      <div class="good-price row">
+        <p class="good-power-price good-price-label">{{ $t('GENERAL.RENT_FEE') }}</p>
+        <p class="good-power-price good-power-price-symbol">{{ good.pricecurrencychar }}</p>
+        <p class="good-power-price good-power-price-price">{{ good.price }}</p>
+        <p class="good-power-price good-price-label">{{ $t('GENERAL.MAINTAINANCE_FEE') }}</p>
+        <p class="good-power-price good-power-price-fee">10%</p>
+        <p class="good-power-price good-price-label">{{ $t('GENERAL.POWER_FEE') }}</p>
+        <p class="good-power-price good-power-price-symbol">{{ good.pricecurrencychar }}</p>
+        <p class="good-power-price good-power-power-fee">2.66/</p>
+        <p class="good-power-price good-power-power-fee-days">{{ $t('GENERAL.DAYS') }}</p>
       </div>
     </div>
   </div>
@@ -144,4 +156,49 @@ export default defineComponent({
   font-size: 20px
   height: 40px
   margin: 0
+
+.good-price
+  background-color: $grey-2
+  margin-top: 20px
+  margin-bottom: 20px
+  padding-left: 40px
+
+.good-power-price
+  text-align: center
+  line-height: 60px
+  margin: 0
+
+.good-power-price-symbol
+  font-weight: bold
+  line-height: 50px
+  font-size: 20px
+
+.good-power-price-price
+  font-weight: bold
+  font-size: 36px
+  color: $orange-10
+  width: 200px
+  text-align: left
+
+.good-price-label
+  color: $grey-7
+  margin-right: 10px
+
+.good-power-price-fee
+  font-weight: bold
+  font-size: 24px
+  color: $grey-8
+  width: 200px
+  text-align: left
+
+.good-power-power-fee
+  font-weight: bold
+  font-size: 24px
+  color: $grey-8
+
+.good-power-power-fee-days
+  font-size: 14px
+  color: $grey-7
+  margin-top: 4px
+  height: 46px
 </style>
