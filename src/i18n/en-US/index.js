@@ -24,7 +24,9 @@ export default {
   BUTTON: {
     START_MINE_NOW: 'Start Mining now',
     PLATFORM_RECOMMEND: 'Mine Me Prefered',
-    BUY_NOW: 'Buy Now'
+    BUY_NOW: 'Buy Now',
+    REPORT_ERROR: 'Report Error',
+    LARGE_AMOUNT_DEAL_HINT: 'Large Amount Deal'
   },
   GENERAL: {
     DAYS: 'Days',

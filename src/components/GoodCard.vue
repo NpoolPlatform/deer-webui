@@ -1,41 +1,65 @@
 <template>
-  <div class="ui icon input container">
-    <q-card class="good-poster" bordered>
-      <q-card-section>
-        <div class="text-h6 q-mb-xs">{{ good.title }}</div>
-        <div class="row no-wrap items-center">
-          <q-rating size="18px" v-model="stars" :max="5" color="primary" />
-          <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
-        </div>
-      </q-card-section>
-
-      <q-card-section class="good-poster-poster">
-        <q-carousel
-          swipeable
-          animated
-          v-model="slide"
-          infinite
-          dense
-          navigation-position="bottom"
-        >
-          <q-carousel-slide
-            v-for="(poster, index) in posters"
-            :name="index"
-            :key="index"
-            :img-src="poster" />
-        </q-carousel>
-
-        <div class="justify-center row good-poster-thumbnail-container">
-          <q-btn
-            v-for="(poster, index) in posters"
-            :key="index"
+  <div class="ui icon input container row">
+    <div>
+      <q-card class="good-poster" bordered>
+        <q-card-section class="good-poster-poster">
+          <q-carousel
+            swipeable
+            animated
+            v-model="slide"
+            infinite
             dense
-            @mouseenter="onMouseEnterThumbnail(index)">
-            <img :src="poster" class="good-poster-thumbnail" />
-          </q-btn>
+          >
+            <q-carousel-slide
+              v-for="(poster, index) in posters"
+              :name="index"
+              :key="index"
+              :img-src="poster" />
+          </q-carousel>
+
+          <div class="justify-center row good-poster-thumbnail-container">
+            <q-btn
+              v-for="(poster, index) in posters"
+              :key="index"
+              dense
+              @mouseenter="onMouseEnterThumbnail(index)">
+              <img :src="poster" class="good-poster-thumbnail" />
+            </q-btn>
+          </div>
+        </q-card-section>
+
+        <q-card-actions>
+          <q-btn dense flat round color="red" icon="favorite" />
+          <q-btn dense flat round color="teal" icon="bookmark" />
+          <q-btn dense flat round color="primary" icon="share" />
+          <q-btn dense flat round color="accent" icon="camera_indoor" />
+          <q-btn dense flat round color="positive" icon="compare" />
+          <q-space />
+          <q-btn flat icon="error_outline" color="red"></q-btn>
+        </q-card-actions>
+      </q-card>
+
+      <q-btn class="large-amount-deal-btn" rounded>{{ $t('BUTTON.LARGE_AMOUNT_DEAL_HINT') }}</q-btn>
+    </div>
+
+    <div>
+      <div class="good-poster-info row">
+        <img avatar :src="good.coinlogo" class="good-poster-coin-logo" />
+        <div class="good-title">
+          <div class="q-mb-xs row good-title">
+            {{ good.title }}
+            <p class="good-poster-title-parameter">
+              {{ good.amount }}{{ good.unit }} {{ good.duration }}{{ $t('GENERAL.DAYS') }}
+            </p>
+          </div>
+        
+          <div class="row no-wrap items-center">
+            <q-rating size="18px" v-model="stars" :max="5" color="primary" />
+            <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
+          </div>
         </div>
-      </q-card-section>
-    </q-card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -92,4 +116,32 @@ export default defineComponent({
 
 .good-poster-thumbnail
   width: 115px
+
+.large-amount-deal-btn
+  color: $grey-6
+  width: 500px
+  margin-top: 20px
+  margin-bottom: 20px
+
+.good-poster-title-parameter
+  margin-left: 10px
+  font-size: 16px
+  color: $grey-7
+
+.good-poster-coin-logo
+  width: 60px
+  height: 60px
+  margin-right: 10px
+
+.good-poster-info
+  margin-left: 20px
+  flex: 1
+
+.good-title
+  font-weight: bold
+  flex: 1
+  line-height: 40px
+  font-size: 20px
+  height: 40px
+  margin: 0
 </style>

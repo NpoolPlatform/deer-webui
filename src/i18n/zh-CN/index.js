@@ -24,7 +24,9 @@ export default {
     BUTTON: {
       START_MINE_NOW: '立即开始挖矿之旅',
       PLATFORM_RECOMMEND: 'Mine Me优选',
-      BUY_NOW: '现在就去购买'
+      BUY_NOW: '现在就去购买',
+      REPORT_ERROR: '报错',
+      LARGE_AMOUNT_DEAL_HINT: '大宗交易更加优惠'
     },
     GENERAL: {
       DAYS: '天',
