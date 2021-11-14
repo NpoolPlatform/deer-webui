@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup () {
     return {
-      slide: ref('style'),
+      slide: ref(0),
       sliders: [
         {
           label: 'slider-1',
@@ -73,6 +73,8 @@ export default defineComponent({
           cointype: 'BTC',
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S19Pro套餐',
+          rating: 4.2,
+          rateCount: 529,
           duration: 180,
           unit: 'TH/s',
           amount: 200,
@@ -103,6 +105,8 @@ export default defineComponent({
           cointype: 'BTC',
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S20Pro套餐',
+          rating: 4.2,
+          rateCount: 529,
           duration: 180,
           unit: 'TH/s',
           amount: 200,
@@ -133,6 +137,8 @@ export default defineComponent({
           cointype: 'BTC',
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S21Pro套餐',
+          rating: 4.2,
+          rateCount: 529,
           duration: 180,
           unit: 'TH/s',
           amount: 200,
@@ -163,6 +169,8 @@ export default defineComponent({
           cointype: 'BTC',
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S22Pro套餐',
+          rating: 4.2,
+          rateCount: 529,
           duration: 180,
           unit: 'TH/s',
           amount: 200,
@@ -193,6 +201,8 @@ export default defineComponent({
           cointype: 'BTC',
           coinlogo: 'logo/btc.png',
           title: '蚂蚁矿机S23Pro套餐',
+          rating: 4.2,
+          rateCount: 529,
           duration: 180,
           unit: 'TH/s',
           amount: 200,
