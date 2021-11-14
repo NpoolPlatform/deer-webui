@@ -63,7 +63,7 @@ export default defineComponent({
       return this.good.rating
     },
     posters: function () {
-      return this.good.posters
+      return this.good.posters.slice(0, Math.min(4, this.good.posters.length))
     }
   },
   methods: {
