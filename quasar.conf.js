@@ -9,12 +9,11 @@
 /* eslint-env node */
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers');
-const path = require('path')
 
 module.exports = configure(function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
-    supportTS: true,
+    supportTS: false,
 
     // https://quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
@@ -23,7 +22,8 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      'i18n'
+      'i18n',
+      'axios',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -71,20 +71,6 @@ module.exports = configure(function (ctx) {
       chainWebpack (chain) {
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
-        chain.module
-          .rule('i18n-resource')
-            .test(/\.(json5?|ya?ml)$/)
-              .include.add(path.resolve(__dirname, './src/i18n'))
-              .end()
-            .type('javascript/auto')
-            .use('i18n-resource')
-              .loader('@intlify/vue-i18n-loader')
-        chain.module
-          .rule('i18n')
-            .resourceQuery(/blockType=i18n/)
-            .type('javascript/auto')
-            .use('i18n')
-              .loader('@intlify/vue-i18n-loader')
       },
     },
 
@@ -99,9 +85,8 @@ module.exports = configure(function (ctx) {
     framework: {
       config: {},
 
-      iconSet: 'material-icons', // Quasar icon set
+      // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
-      i18n: 'en-US',
 
       // For special cases outside of where the auto-import strategy can have an impact
       // (like functional components as one of the examples),
@@ -222,7 +207,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'cloud-power-webui'
+        appId: 'deer-webui'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

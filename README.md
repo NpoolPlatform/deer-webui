@@ -1,4 +1,4 @@
-# Cloud Power (cloud-power-webui)
+# Cloud Power (deer-webui)
 
 Npool Cloud Power
 
