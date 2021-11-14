@@ -71,6 +71,30 @@
         <p class="good-power-price good-power-power-fee">2.66/</p>
         <p class="good-power-price good-power-power-fee-days">{{ $t('GENERAL.DAYS') }}</p>
       </div>
+
+      <div>
+        <div class="row">
+          <div class="good-parameter-label">矿机算力</div>
+          <div class="row">
+            <div class="good-parameter-data">110</div>
+            <div class="good-parameter-unit">TH/s</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="good-parameter-label">矿机功率</div>
+          <div class="row">
+            <div class="good-parameter-data">3250</div>
+            <div class="good-parameter-unit">W</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="good-parameter-label">能效比</div>
+          <div class="row">
+            <div class="good-parameter-data">29.5</div>
+            <div class="good-parameter-unit">J/T</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -201,4 +225,28 @@ export default defineComponent({
   color: $grey-7
   margin-top: 4px
   height: 46px
+
+.good-parameter-label
+  background-color: $grey-2
+  color: $grey-7
+  padding: 3px 10px 3px 3px
+  width: 200px
+  text-align: end
+  border: 1px solid $grey-3
+
+.good-parameter-data
+  color: $blue-8
+  font-weight: bold
+  padding: 3px 3px 3px 10px
+  border-top: 1px solid $grey-2
+  border-bottom: 1px solid $grey-2
+  width: 50px
+  text-align: end
+
+.good-parameter-unit
+  padding: 3px 3px 3px 10px
+  border-right: 1px solid $grey-2
+  border-top: 1px solid $grey-2
+  border-bottom: 1px solid $grey-2
+  width: 200px
 </style>
