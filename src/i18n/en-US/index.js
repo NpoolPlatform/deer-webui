@@ -54,6 +54,16 @@ export default {
     MANAGE_WITHDRAW_ADDRESS: 'Manage Withdraw Address',
     USE_OTHER_WITHDRAW_ADDRESS: 'Use Other Withdraw Address',
     WITHDRAW_TO: 'Withdraw To',
-    MODIFY_THIS_ADDRESS: 'Modify This Address'
+    MODIFY_THIS_ADDRESS: 'Modify This Address',
+    SELECT_MINING_POOL: 'Select Mining Pool',
+    SELECT_CONNECT_MINING_POOL: 'Select Mining Pool',
+    SAME_AS_DEAL: 'Same as Deal',
+    OTHER_DAYS: 'Other Days',
+    FIRST_ELECTRICAL_FEE_DURATION: 'First Payment Days',
+    USER_DEFINE_DAYS: 'User Define Days',
+    CONTINUATION_ELECTRICAL_FEE_METHOD: 'Continuation Way',
+    CONTINUATION_BY_MANUAL: 'Manually',
+    CONTINUATION_BY_WALLET: 'From Wallet',
+    CONTINUATION_BY_BALANCE: 'Balance'
   }
 }

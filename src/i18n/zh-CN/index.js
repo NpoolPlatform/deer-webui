@@ -54,6 +54,16 @@ export default {
       MANAGE_WITHDRAW_ADDRESS: '管理提现地址',
       USE_OTHER_WITHDRAW_ADDRESS: '使用其他提现地址',
       WITHDRAW_TO: '提现至',
-      MODIFY_THIS_ADDRESS: '修改本地址'
+      MODIFY_THIS_ADDRESS: '修改本地址',
+      SELECT_MINING_POOL: '选择矿池',
+      SELECT_CONNECT_MINING_POOL: '选择接入矿池',
+      SAME_AS_DEAL: '和订单一样',
+      OTHER_DAYS: '其他天数',
+      FIRST_ELECTRICAL_FEE_DURATION: '首次缴纳天数',
+      USER_DEFINE_DAYS: '自定义天数',
+      CONTINUATION_ELECTRICAL_FEE_METHOD: '续缴方式',
+      CONTINUATION_BY_MANUAL: '手动缴纳',
+      CONTINUATION_BY_WALLET: '绑定钱包缴纳',
+      CONTINUATION_BY_BALANCE: '从余额抵扣'
     }
   }

@@ -6,7 +6,7 @@
       <div class="order-manage-text">{{ $t('GENERAL.MANAGE_WITHDRAW_ADDRESS') }}</div>
     </div>
     <q-separator />
-    <div class="order-addresses">
+    <div class="order-section order-section-odd">
       <div
         v-for="withdrawAddress in withdrawAddresses"
         :key="withdrawAddress.address"
@@ -34,10 +34,95 @@
           ({{ withdrawAddress.remark }})
         </div>
         <q-space />
-        <div class="order-manage-text order-modify-text">{{ $t('GENERAL.MODIFY_THIS_ADDRESS') }}</div>
+        <div v-if="withdrawAddress.currentUsed" class="order-manage-text order-modify-text">{{ $t('GENERAL.MODIFY_THIS_ADDRESS') }}</div>
       </div>
 
       <div class="order-manage-text order-manage-text-inside">{{ $t('GENERAL.USE_OTHER_WITHDRAW_ADDRESS') }}</div>
+    </div>
+
+    <div class="order-section-space">
+      <div class="order-confirm-text">{{$t('GENERAL.SELECT_MINING_POOL') }}</div>
+      <q-separator />
+      <div class="row">
+        <div class="order-item-label">{{ $t('GENERAL.SELECT_CONNECT_MINING_POOL') }}</div>
+        <q-btn
+            dense
+            class="order-select-mining-pool-btn"
+            rounded>
+            BTC.com
+          </q-btn>
+          <q-btn
+            dense
+            class="order-select-mining-pool-btn"
+            rounded>
+            Viabtc
+          </q-btn>
+      </div>
+    </div>
+
+    <div class="order-section-space">
+      <div class="order-confirm-text">{{$t('GENERAL.POWER_FEE') }}</div>
+      <q-separator />
+      <div class="order-section order-section-odd">
+        <div class="row">
+          <div class="order-item-label">{{ $t('GENERAL.FIRST_ELECTRICAL_FEE_DURATION') }}</div>
+          <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              10 {{ $t('GENERAL.DAYS') }}
+            </q-btn>
+            <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              30 {{ $t('GENERAL.DAYS') }}
+            </q-btn>
+            <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              60 {{ $t('GENERAL.DAYS') }}
+            </q-btn>
+            <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              {{ $t('GENERAL.SAME_AS_DEAL') }}
+            </q-btn>
+        </div>
+        <div class="row">
+          <div class="order-item-label">{{ $t('GENERAL.USER_DEFINE_DAYS') }}</div>
+          <q-input
+            v-model="powerFeeDays"
+            outlined
+            dense
+            :label="$t('GENERAL.OTHER_DAYS')"
+            class="order-other-days"
+            />
+        </div>
+        <div class="row order-continuation-way">
+          <div class="order-item-label">{{ $t('GENERAL.CONTINUATION_ELECTRICAL_FEE_METHOD') }}</div>
+          <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              {{ $t('GENERAL.CONTINUATION_BY_MANUAL') }}
+            </q-btn>
+            <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              {{ $t('GENERAL.CONTINUATION_BY_WALLET') }}
+            </q-btn>
+            <q-btn
+              dense
+              class="order-select-mining-pool-btn"
+              rounded>
+              {{ $t('GENERAL.CONTINUATION_BY_BALANCE') }}
+            </q-btn>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -68,7 +153,8 @@ export default defineComponent({
         }
       ],
       currentWithdrawAddress: ref('1F6eVWEz2ZQ5M41PbLz417i9JKUY7oCFnVEEE'),
-      username: 'kikakkz@hotmail.com'
+      username: 'kikakkz@hotmail.com',
+      powerFeeDays: ''
     }
   },
   computed: {
@@ -137,7 +223,7 @@ export default defineComponent({
   background-color: $blue-1
 
 .order-manage-text-inside
-  margin: 10px 0 10px 120px
+  margin: 10px 0 0 120px
 
 .order-withdraw-address
   font-weight: bold
@@ -159,7 +245,41 @@ export default defineComponent({
   line-height: 24px
   margin-left: 20px
 
-.order-addresses
+.order-section
   margin-top: 10px
   margin-bottom: 10px
+  padding-bottom: 10px
+  padding-top: 10px
+
+.order-section-space
+  margin-top: 40px
+
+.order-select-mining-pool-btn
+  color: white
+  background-color: $blue-4
+  margin-top: 10px
+  margin-right: 10px
+  width: 200px
+
+.order-other-days
+  height: 25px
+  line-height: 25px
+  padding-top: 10px
+  width: 200px
+
+.order-item-label
+  width: 110px
+  line-height: 32px
+  margin-top: 10px
+  margin-right: 10px
+  font-size: 12px
+  color: $grey-7
+
+.order-section-odd
+  background-color: $blue-1
+  padding: 10px
+
+.order-continuation-way
+  padding-top: 8px
+  padding-bottom: 10px
 </style>
