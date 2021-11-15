@@ -310,6 +310,16 @@
     </div>
 
     <div style="height: 100px;" />
+
+    <div class="row submit-toolbar fixed-bottom shadow-1">
+      <q-space />
+      <div class="row">
+        <q-checkbox keep-color color="blue" v-model="agreeWithContract" :label="$t('GENERAL.AGREE_WITH')">
+          {{ $t('GENERAL.SERVICE_CONTRACT') }}
+        </q-checkbox>
+        <q-btn dense class="submit-order-btn" rounded :label="$t('BUTTON.SUBMIT_ORDER')"></q-btn>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -344,7 +354,8 @@ export default defineComponent({
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
-      goodCount: 1
+      goodCount: ref(1),
+      agreeWithContract: ref(false)
     }
   },
   computed: {
@@ -642,4 +653,15 @@ export default defineComponent({
   color: $orange-9
   font-size: 22px
   font-weight: bold
+
+.submit-order-btn
+  margin: 20px
+  color: $grey-4
+  background-color: $indigo-8
+  width: 250px
+
+.submit-toolbar
+  background-color: $grey-2
+  position: fixed-bottom
+  padding-right: 100px
 </style>

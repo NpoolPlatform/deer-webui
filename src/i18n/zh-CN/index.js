@@ -28,7 +28,8 @@ export default {
       REPORT_ERROR: '报错',
       LARGE_AMOUNT_DEAL_HINT: '大宗交易更加优惠',
       BUY_GOOD_NOW: '立即购买',
-      ADD_GOOD_CART: '加入购物车'
+      ADD_GOOD_CART: '加入购物车',
+      SUBMIT_ORDER: '提交订单'
     },
     GENERAL: {
       DAYS: '天',
@@ -76,6 +77,8 @@ export default {
       SUMMARY: '合计',
       DAYS_ELECTRICAL_FEE_COMNO: '天电费套餐',
       NEED_PAY: '需付款',
-      BUYER: '购买者'
+      BUYER: '购买者',
+      AGREE_WITH: '我同意',
+      SERVICE_CONTRACT: '《Mine Me 矿机共享服务协议》'
     }
   }

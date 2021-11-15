@@ -28,7 +28,8 @@ export default {
     REPORT_ERROR: 'Report Error',
     LARGE_AMOUNT_DEAL_HINT: 'Large Amount Deal',
     BUY_GOOD_NOW: 'Buy Now',
-    ADD_GOOD_CART: 'Add to Cart'
+    ADD_GOOD_CART: 'Add to Cart',
+    SUBMIT_ORDER: 'Submit Order'
   },
   GENERAL: {
     DAYS: 'Days',
@@ -76,6 +77,8 @@ export default {
     SUMMARY: 'Summary',
     DAYS_ELECTRICAL_FEE_COMNO: 'Days Electricity Fee',
     NEED_PAY: 'Total Pay',
-    BUYER: 'Buyer'
+    BUYER: 'Buyer',
+    AGREE_WITH: 'I agree with ',
+    SERVICE_CONTRACT: '《Mine Me miner sharing contract》'
   }
 }
