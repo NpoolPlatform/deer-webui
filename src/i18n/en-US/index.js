@@ -49,6 +49,11 @@ export default {
     UNIQUE_START_TIME: '00:00 Tomorrow',
     GOOD_VENDOR_HINT: 'Hashrate and After-Sales service provided by',
     SELF_RUN: 'Self-Run',
-    PLATFORM_NAME: 'Mine Me'
+    PLATFORM_NAME: 'Mine Me',
+    CONFIRM_WITHDRAW_ADDRESS: 'Confirm Withdraw Address',
+    MANAGE_WITHDRAW_ADDRESS: 'Manage Withdraw Address',
+    USE_OTHER_WITHDRAW_ADDRESS: 'Use Other Withdraw Address',
+    WITHDRAW_TO: 'Withdraw To',
+    MODIFY_THIS_ADDRESS: 'Modify This Address'
   }
 }

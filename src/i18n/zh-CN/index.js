@@ -49,6 +49,11 @@ export default {
       UNIQUE_START_TIME: '购买日之后零点',
       GOOD_VENDOR_HINT: '产品技术和售后服务提供商',
       SELF_RUN: '自营',
-      PLATFORM_NAME: 'Mine Me'
+      PLATFORM_NAME: 'Mine Me',
+      CONFIRM_WITHDRAW_ADDRESS: '确认提现地址',
+      MANAGE_WITHDRAW_ADDRESS: '管理提现地址',
+      USE_OTHER_WITHDRAW_ADDRESS: '使用其他提现地址',
+      WITHDRAW_TO: '提现至',
+      MODIFY_THIS_ADDRESS: '修改本地址'
     }
   }

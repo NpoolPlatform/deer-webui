@@ -226,8 +226,8 @@ export default defineComponent({
     },
     onGoodBuyNowClick: function () {
       this.$router.push({
-        name: 'generateOrder',
-        params: {
+        path: 'createOrder',
+        query: {
           goodId: this.good.id
         }
       })

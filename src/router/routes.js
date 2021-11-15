@@ -14,8 +14,8 @@ const routes = [
         query: { goodId: '' }
       },
       {
-        path:'generateOrder',
-        component: () => import('pages/GenerateOrder.vue'),
+        path:'createOrder',
+        component: () => import('pages/CreateOrder.vue'),
         query: { goodId: '' }
       }
     ]
