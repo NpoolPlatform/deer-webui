@@ -102,7 +102,7 @@
             :key="index"
             :label="coin"
             text-color="grey-9"
-            :color="coinSelected[index] ? 'blue-4' : 'white'"
+            color="blue-4"
             dense
             @click="onCoinTypeClick(index)"
             class="good-production-types-coin"
@@ -198,7 +198,6 @@ export default defineComponent({
   setup () {
     return {
       slide: ref(0),
-      coinSelected: [],
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
@@ -207,16 +206,7 @@ export default defineComponent({
   },
   computed: {
     good: function () {
-      var myGood = this.$store.state.good.goods[this.goodId]
-      console.log(myGood, this.goodId)
-      myGood.supportedCoinTypes.forEach(coin => {
-        if (coin == myGood.cointype) {
-          this.coinSelected.push(true)
-        } else {
-          this.coinSelected.push(false)
-        }
-      })
-      return myGood
+      return this.$store.state.good.goods[this.goodId]
     },
     stars: function () {
       return this.good.rating
@@ -230,15 +220,6 @@ export default defineComponent({
       this.slide = index
     },
     onCoinTypeClick: function (index) {
-      var selected = new Array(this.coinSelected.length)
-      this.coinSelected.forEach((val, localIndex) => {
-        if (index == localIndex) {
-          selected[localIndex] = !val
-        } else {
-          selected[localIndex] = val
-        }
-      })
-      this.coinSelected = selected
     },
     randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;

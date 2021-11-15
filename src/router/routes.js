@@ -15,9 +15,8 @@ const routes = [
       },
       {
         path:'generateOrder',
-        name: 'generateOrder',
         component: () => import('pages/GenerateOrder.vue'),
-        params: { goodId: '' }
+        query: { goodId: '' }
       }
     ]
   },
