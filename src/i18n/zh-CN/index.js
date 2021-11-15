@@ -74,6 +74,8 @@ export default {
       UNITS: '数量',
       PREFERENTIAL: '优惠',
       SUMMARY: '合计',
-      DAYS_ELECTRICAL_FEE_COMNO: '天电费套餐'
+      DAYS_ELECTRICAL_FEE_COMNO: '天电费套餐',
+      NEED_PAY: '需付款',
+      BUYER: '购买者'
     }
   }

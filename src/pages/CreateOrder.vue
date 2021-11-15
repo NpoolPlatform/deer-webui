@@ -207,7 +207,16 @@
         </div>
 
         <div class="row order-deal-info-summary order-deal-info-content">
-          {{ good.pricecurrencychar }} {{ good.price }}
+          <div class="row">
+            <q-space />
+            <div class="order-deal-info-currency">
+              {{ good.pricecurrencychar }}
+            </div>
+            <div class="order-deal-info-summary-amount">
+              {{ good.price }}
+            </div>
+            <q-space />
+          </div>
         </div>
       </div>
 
@@ -257,7 +266,45 @@
         </div>
 
         <div class="row order-deal-info-summary order-deal-info-content">
-          {{ good.pricecurrencychar }} {{ good.price }}
+          <div class="row">
+            <q-space />
+            <div class="order-deal-info-currency">
+              {{ good.pricecurrencychar }}
+            </div>
+            <div class="order-deal-info-summary-amount">
+              {{ good.price }}
+            </div>
+            <q-space />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <q-space />
+      <div class="order-deal-info-final-summary">
+        <div class="row">
+          <q-space />
+          <div class="row order-deal-info-final-preferential">
+            <div class="order-deal-info-final-preferential-label">{{ $t('GENERAL.PREFERENTIAL') }}:</div>
+            <div class="order-deal-info-final-preferential-currency">{{ good.pricecurrencychar}}</div>
+            <div class="order-deal-info-final-preferential-amount">{{ good.price}}</div>
+          </div>
+          <div class="row">
+            <div class="order-deal-info-final-summary-label">{{ $t('GENERAL.NEED_PAY') }}:</div>
+            <div class="order-deal-info-final-summary-currency">{{ good.pricecurrencychar}}</div>
+            <div class="order-deal-info-final-summary-amount">{{ good.price}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <q-space />
+          <div class="order-deal-info-final-summary-label">{{ $t('GENERAL.WITHDRAW_TO') }}:</div>
+          <div class="order-deal-info-final-summary-text">{{ currentWithdrawAddress }}</div>
+        </div>
+        <div class="row">
+          <q-space />
+          <div class="order-deal-info-final-summary-label-buyer">{{ $t('GENERAL.BUYER') }}:</div>
+          <div class="order-deal-info-final-summary-text-buyer">kikakkz@hotmail.com</div>
         </div>
       </div>
     </div>
@@ -479,45 +526,46 @@ export default defineComponent({
 
 .order-deal-info-good-poster
   margin: 10px
-  width: 60px
+  width: 40px
 
 .order-deal-info-good-info
   padding: 10px 0 0 10px
   flex: 1
 
 .order-deal-info-good-title
-  font-size: 16px
-  margin: 5px
+  font-size: 14px
+  margin: 0 0 2px 5px
   font-weight: bold
   color: $grey-8
 
 .order-deal-info-good-badge
-  margin: 9px 0 5px 5px
+  margin: 0 0 2px 5px
 
 .order-deal-info-good-rating
   margin-left: 10px
 
 .order-deal-info-content
-  height: 60px
   margin: 10px 1px 10px 1px
-  line-height: 60px
   text-align: center
-  font-size: 18px
+  font-size: 14px
   color: $grey-8
-  font-weight: bold
   display: inline
   border-left: solid 1px $grey-4
 
 .order-deal-info-content-left
   text-align: left
-  height: 60px
   margin: 10px 1px 10px 10px
-  line-height: 60px
-  font-size: 18px
+  font-size: 14px
   color: $grey-8
-  font-weight: bold
   display: inline
   width: 340px
+
+.order-deal-info-summary-amount
+  color: $orange-9
+  font-weight: bold
+
+.order-deal-info-currency
+  font-weight: bold
 
 .order-deal-info-summary
   flex: 1
@@ -525,4 +573,73 @@ export default defineComponent({
 .order-deal-info-section
   background-color: $light-green-1
   margin: 3px 10px 0 10px
+
+.order-deal-info-final-summary
+  border: solid 1px blue
+  margin: 20px 10px 20px 10px
+  padding: 20px 10px 20px 10px
+
+.order-deal-info-final-summary-label
+  color: $grey-8
+  font-size: 12px
+  height: 18px
+  margin-top: 10px
+  margin-right: 5px
+  font-weight: bold
+
+.order-deal-info-final-summary-text
+  color: $grey-8
+  font-size: 12px
+  height: 18px
+  margin-top: 10px
+  margin-right: 5px
+
+.order-deal-info-final-summary-label-buyer
+  color: $grey-8
+  font-size: 12px
+  height: 25px
+  margin-top: 0
+  margin-right: 5px
+  font-weight: bold
+
+.order-deal-info-final-summary-text-buyer
+  color: $grey-8
+  font-size: 12px
+  height: 25px
+  margin-top: 0
+  margin-right: 5px
+
+.order-deal-info-final-summary-currency
+  color: $grey-6
+  font-size: 22px
+  margin-right: 3px
+  font-weight: bold
+
+.order-deal-info-final-summary-amount
+  color: $blue-9
+  font-size: 22px
+  font-weight: bold
+
+.order-deal-info-final-preferential
+  padding-right: 10px
+  margin-right: 10px
+
+.order-deal-info-final-preferential-label
+  color: $grey-8
+  font-size: 12px
+  height: 18px
+  margin-right: 5px
+  font-weight: bold
+  margin-top: 10px
+
+.order-deal-info-final-preferential-currency
+  color: $grey-6
+  font-size: 22px
+  margin-right: 3px
+  font-weight: bold
+
+.order-deal-info-final-preferential-amount
+  color: $orange-9
+  font-size: 22px
+  font-weight: bold
 </style>

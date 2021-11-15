@@ -74,6 +74,8 @@ export default {
     UNITS: 'Units',
     PREFERENTIAL: 'Preferential',
     SUMMARY: 'Summary',
-    DAYS_ELECTRICAL_FEE_COMNO: 'Days Electricity Fee'
+    DAYS_ELECTRICAL_FEE_COMNO: 'Days Electricity Fee',
+    NEED_PAY: 'Total Pay',
+    BUYER: 'Buyer'
   }
 }
