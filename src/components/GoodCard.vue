@@ -152,7 +152,8 @@
             dense
             class="good-buy-now-btn"
             icon-right="arrow_right_alt"
-            rounded>
+            rounded
+            @click="onGoodBuyNowClick">
             {{ $t('BUTTON.BUY_GOOD_NOW') }}
           </q-btn>
           <q-btn
@@ -207,7 +208,8 @@ export default defineComponent({
   computed: {
     good: function () {
       var myGood = this.$store.state.good.goods[this.goodId]
-      myGood.supportedCoinTypes.forEach((coin, index) => {
+      console.log(myGood, this.goodId)
+      myGood.supportedCoinTypes.forEach(coin => {
         if (coin == myGood.cointype) {
           this.coinSelected.push(true)
         } else {
@@ -240,6 +242,14 @@ export default defineComponent({
     },
     randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    },
+    onGoodBuyNowClick: function () {
+      this.$router.push({
+        name: 'generateOrder',
+        params: {
+          goodId: this.good.id
+        }
+      })
     }
   }
 })

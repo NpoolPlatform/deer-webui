@@ -69,7 +69,7 @@ export default defineComponent({
       ],
       recommends: [
         {
-          id: 1,
+          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa",
           cointype: 'BTC',
           supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
@@ -102,7 +102,7 @@ export default defineComponent({
           pricecurrency: 'USDT',
           pricecurrencychar: '$'
         }, {
-          id: 2,
+          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaab",
           cointype: 'BTC',
           supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
@@ -135,7 +135,7 @@ export default defineComponent({
           pricecurrency: 'USDT',
           pricecurrencychar: '$'
         }, {
-          id: 3,
+          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaac",
           cointype: 'BTC',
           supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
@@ -168,7 +168,7 @@ export default defineComponent({
           pricecurrency: 'USDT',
           pricecurrencychar: '$'
         }, {
-          id: 4,
+          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaad",
           cointype: 'BTC',
           supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',
@@ -201,7 +201,7 @@ export default defineComponent({
           pricecurrency: 'USDT',
           pricecurrencychar: '$'
         }, {
-          id: 5,
+          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaae",
           cointype: 'BTC',
           supportedCoinTypes: ['BTC', 'BCH'],
           coinlogo: 'logo/btc.png',

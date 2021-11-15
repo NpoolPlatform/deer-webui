@@ -125,8 +125,8 @@ export default defineComponent({
     onBuyNowClick: function () {
       this.clickedGood = this.good
       this.$router.push({
-        name: 'good',
-        params: {
+        path: 'good',
+        query: {
           goodId: this.good.id
         }
       })

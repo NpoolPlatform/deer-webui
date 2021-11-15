@@ -4,8 +4,21 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      { path: 'good', name: 'good', component: () => import('pages/Good.vue'), params: { goodId: '' } }
+      {
+        path: '',
+        component: () => import('pages/Index.vue')
+      },
+      {
+        path: 'good',
+        component: () => import('pages/Good.vue'),
+        query: { goodId: '' }
+      },
+      {
+        path:'generateOrder',
+        name: 'generateOrder',
+        component: () => import('pages/GenerateOrder.vue'),
+        params: { goodId: '' }
+      }
     ]
   },
 

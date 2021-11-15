@@ -17,7 +17,7 @@ export default defineComponent({
   },
   computed: {
     goodId: function () {
-      return this.$route.params.goodId
+      return this.$route.query.goodId
     }
   }
 })
