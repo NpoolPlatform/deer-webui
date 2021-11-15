@@ -26,7 +26,9 @@ export default {
       PLATFORM_RECOMMEND: 'Mine Me优选',
       BUY_NOW: '现在就去购买',
       REPORT_ERROR: '报错',
-      LARGE_AMOUNT_DEAL_HINT: '大宗交易更加优惠'
+      LARGE_AMOUNT_DEAL_HINT: '大宗交易更加优惠',
+      BUY_GOOD_NOW: '立即购买',
+      ADD_GOOD_CART: '加入购物车'
     },
     GENERAL: {
       DAYS: '天',
@@ -39,6 +41,14 @@ export default {
       MINER_HASH_POWER: '矿机算力',
       MINER_POWER_COMSUPTION: '矿机功率',
       MINER_POWER_EFFICIENCY: '矿机能效比',
-      PRODUCTION_COIN_TYPES: '产出类型'
+      PRODUCTION_COIN_TYPES: '产出类型',
+      COMBO_UNITS: '套餐规格',
+      GOOD_LABELS: '商品标签',
+      COMBO_DURATION: '服务期限',
+      COMBO_START_TIME: '生效日期',
+      UNIQUE_START_TIME: '购买日之后零点',
+      GOOD_VENDOR_HINT: '产品技术和售后服务提供商',
+      SELF_RUN: '自营',
+      PLATFORM_NAME: 'Mine Me'
     }
   }

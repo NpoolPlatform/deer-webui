@@ -26,7 +26,9 @@ export default {
     PLATFORM_RECOMMEND: 'Mine Me Prefered',
     BUY_NOW: 'Buy Now',
     REPORT_ERROR: 'Report Error',
-    LARGE_AMOUNT_DEAL_HINT: 'Large Amount Deal'
+    LARGE_AMOUNT_DEAL_HINT: 'Large Amount Deal',
+    BUY_GOOD_NOW: 'Buy Now',
+    ADD_GOOD_CART: 'Add to Cart'
   },
   GENERAL: {
     DAYS: 'Days',
@@ -39,6 +41,14 @@ export default {
     MINER_HASH_POWER: 'Miner Hash Power',
     MINER_POWER_COMSUPTION: 'Miner Power Comsuption',
     MINER_POWER_EFFICIENCY: 'Miner Power Efficiency',
-    PRODUCTION_COIN_TYPES: 'Production Types'
+    PRODUCTION_COIN_TYPES: 'Production Types',
+    COMBO_UNITS: 'Combo Units',
+    GOOD_LABELS: 'Good Badges',
+    COMBO_DURATION: 'Combo Duration',
+    COMBO_START_TIME: 'Start Time',
+    UNIQUE_START_TIME: '00:00 Tomorrow',
+    GOOD_VENDOR_HINT: 'Hashrate and After-Sales service provided by',
+    SELF_RUN: 'Self-Run',
+    PLATFORM_NAME: 'Mine Me'
   }
 }

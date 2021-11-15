@@ -72,7 +72,7 @@
         <p class="good-power-price good-power-power-fee-days">{{ $t('GENERAL.DAYS') }}</p>
       </div>
 
-      <div>
+      <div class="good-parameter">
         <div class="row">
           <div class="good-parameter-label">{{ $t('GENERAL.MINER_HASH_POWER') }}</div>
           <div class="row">
@@ -109,6 +109,75 @@
           >
           </q-btn>
         </div>
+
+        <div class="row good-production-types">
+          <div class="good-production-types-label">{{ $t('GENERAL.COMBO_UNITS') }}</div>
+          <q-btn
+            :label="good.amount + ' ' + good.unit"
+            text-color="grey-9"
+            color="blue-4"
+            dense
+            class="good-production-spec"
+          >
+          </q-btn>
+        </div>
+
+        <div class="row good-production-types">
+          <div class="good-production-types-label">{{ $t('GENERAL.GOOD_LABELS') }}</div>
+          <q-badge
+            v-for="badge in good.badges"
+            :key="badge"
+            :color="badgeColors[randomNumber() % badgeColors.length]"
+            class="good-badge"
+          >
+            {{ badge }}
+          </q-badge>
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="good-production-detail-label">{{ $t('GENERAL.COMBO_DURATION') }}</div>
+            <div class="good-production-detail-label">{{ $t('GENERAL.COMBO_START_TIME') }}</div>
+            <div class="good-production-detail-label">{{ $t('GENERAL.POWER_FEE') }}</div>
+          </div>
+          <div class="row">
+            <div class="good-production-detail-data">{{ good.duration }} {{ $t('GENERAL.DAYS') }}</div>
+            <div class="good-production-detail-data">{{ $t('GENERAL.UNIQUE_START_TIME') }}</div>
+            <div class="good-production-detail-data">$ 0.05/T/{{ $t('GENERAL.DAYS') }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <q-btn
+            dense
+            class="good-buy-now-btn"
+            icon-right="arrow_right_alt"
+            rounded>
+            {{ $t('BUTTON.BUY_GOOD_NOW') }}
+          </q-btn>
+          <q-btn
+            dense
+            class="good-buy-now-btn"
+            icon-right="arrow_right_alt"
+            rounded>
+            {{ $t('BUTTON.ADD_GOOD_CART') }}
+          </q-btn>
+        </div>
+
+        <div class="row">
+          <div class="good-vendor-hint">
+            {{ $t('GENERAL.GOOD_VENDOR_HINT') }}
+          </div>
+           <q-badge
+            color="green-8"
+            class="good-vendor-hint-badge"
+          >
+            {{ $t('GENERAL.SELF_RUN') }}
+          </q-badge>
+          <div class="good-vendor-hint-platform-name">
+            {{ $t('GENERAL.PLATFORM_NAME') }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -129,7 +198,10 @@ export default defineComponent({
     return {
       slide: ref(0),
       coinSelected: [],
-      active: true
+      badgeColors: [
+        'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
+      ],
+      goodCount: 1
     }
   },
   computed: {
@@ -142,7 +214,6 @@ export default defineComponent({
           this.coinSelected.push(false)
         }
       })
-      console.log(this.coinSelected)
       return myGood
     },
     stars: function () {
@@ -166,6 +237,9 @@ export default defineComponent({
         }
       })
       this.coinSelected = selected
+    },
+    randomNumber : function (){
+      return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     }
   }
 })
@@ -263,6 +337,9 @@ export default defineComponent({
   margin-top: 4px
   height: 46px
 
+.good-parameter
+  margin-top: 40px
+
 .good-parameter-label
   background-color: $grey-2
   color: $grey-7
@@ -270,6 +347,7 @@ export default defineComponent({
   width: 200px
   text-align: end
   border: 1px solid $grey-3
+  font-weight: bold
 
 .good-parameter-data
   color: $blue-8
@@ -289,7 +367,7 @@ export default defineComponent({
   color: $grey-7
 
 .good-production-types
-  margin: 20px 0 20px 0
+  margin: 10px 0 10px 0
   align-items: center
 
 .good-production-types-label
@@ -300,4 +378,46 @@ export default defineComponent({
 .good-production-types-coin
   width: 200px
   margin: 10px
+
+.good-production-spec
+  width: 200px
+  margin: 0 10px 10px 10px
+
+.good-badge
+  margin-left: 10px
+
+.good-production-detail-label
+  background-color: $grey-2
+  color: $grey-7
+  padding: 3px 10px 3px 3px
+  width: 200px
+  text-align: center
+  border: 1px solid $grey-3
+  font-weight: bold
+
+.good-production-detail-data
+  color: $grey-8
+  padding: 3px 10px 3px 3px
+  width: 200px
+  text-align: center
+  border: 1px solid $grey-3
+
+.good-vendor-hint
+  margin: 10px 10px 10px 0
+  color: $grey-7
+
+.good-vendor-hint-badge
+  margin: 10px 10px 10px 0
+  
+.good-vendor-hint-platform-name
+  color: $blue-6
+  margin: 10px 10px 10px 0
+  font-weight: bold
+
+.good-buy-now-btn
+  color: white
+  background-color: $blue-4
+  margin-top: 40px
+  margin-right: 10px
+  width: 250px
 </style>
