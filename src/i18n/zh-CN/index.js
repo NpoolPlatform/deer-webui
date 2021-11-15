@@ -45,9 +45,12 @@ export default {
       COMBO_UNITS: '套餐规格',
       GOOD_LABELS: '商品标签',
       COMBO_DURATION: '服务期限',
-      COMBO_START_TIME: '生效日期',
+      COMBO_START_TIME: '生效时间',
       UNIQUE_START_TIME: '购买日之后零点',
       GOOD_VENDOR_HINT: '产品技术和售后服务提供商',
+      DAILY_PRICE: '每日价格',
+      HISTORY_PRODUCTION: '历史收益',
+      EXPECT_PRODUCTION: '预期收益',
       SELF_RUN: '自营',
       PLATFORM_NAME: 'Mine Me',
       CONFIRM_WITHDRAW_ADDRESS: '确认提现地址',
@@ -64,6 +67,13 @@ export default {
       CONTINUATION_ELECTRICAL_FEE_METHOD: '续缴方式',
       CONTINUATION_BY_MANUAL: '手动缴纳',
       CONTINUATION_BY_WALLET: '绑定钱包缴纳',
-      CONTINUATION_BY_BALANCE: '从余额抵扣'
+      CONTINUATION_BY_BALANCE: '从余额抵扣',
+      CONFIRM_DEAL_INFO: '确认订单信息',
+      GOOD: '商品',
+      PRICE: '单价',
+      UNITS: '数量',
+      PREFERENTIAL: '优惠',
+      SUMMARY: '合计',
+      DAYS_ELECTRICAL_FEE_COMNO: '天电费套餐'
     }
   }

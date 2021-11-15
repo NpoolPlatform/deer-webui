@@ -43,7 +43,7 @@
     <div class="order-section-space">
       <div class="order-confirm-text">{{$t('GENERAL.SELECT_MINING_POOL') }}</div>
       <q-separator />
-      <div class="row">
+      <div class="row order-section">
         <div class="order-item-label">{{ $t('GENERAL.SELECT_CONNECT_MINING_POOL') }}</div>
         <q-btn
             dense
@@ -124,6 +124,143 @@
         </div>
       </div>
     </div>
+
+    <div class="order-section-space">
+      <div class="order-confirm-text">{{$t('GENERAL.CONFIRM_DEAL_INFO') }}</div>
+      <q-separator />
+      <div class="row order-section">
+        <div class="order-deal-info-title order-deal-info-good">{{ $t('GENERAL.GOOD') }}</div>
+        <div class="order-deal-info-title order-deal-info-production-types">{{ $t('GENERAL.PRODUCTION_COIN_TYPES') }}</div>
+        <div class="order-deal-info-title order-deal-info-combo-units">{{ $t('GENERAL.COMBO_UNITS') }}</div>
+        <div class="order-deal-info-title order-deal-info-combo-duration">{{ $t('GENERAL.COMBO_DURATION') }}</div>
+        <div class="order-deal-info-title order-deal-info-start-time">{{ $t('GENERAL.COMBO_START_TIME') }}</div>
+        <div class="order-deal-info-title order-deal-info-daily-price">{{ $t('GENERAL.DAILY_PRICE') }}</div>
+        <div class="order-deal-info-title order-deal-info-price">{{ $t('GENERAL.PRICE') }}</div>
+        <div class="order-deal-info-title order-deal-info-units">{{ $t('GENERAL.UNITS') }}</div>
+        <div class="order-deal-info-title order-deal-info-preferential">{{ $t('GENERAL.PREFERENTIAL') }}</div>
+        <div class="order-deal-info-title order-deal-info-history-production">{{ $t('GENERAL.HISTORY_PRODUCTION') }}</div>
+        <div class="order-deal-info-title order-deal-info-expect-production">{{ $t('GENERAL.EXPECT_PRODUCTION') }}</div>
+        <div class="order-deal-info-title order-deal-info-summary">{{ $t('GENERAL.SUMMARY') }}</div>
+      </div>
+      <div class="row order-deal-info-section">
+        <div class="row order-deal-info-good">
+          <img class="order-deal-info-good-poster" :src="poster" />
+          <div>
+            <div class="row order-deal-info-good-info">
+              <div class="order-deal-info-good-title">{{ good.title }}</div>
+              <div>
+                <q-badge
+                  v-for="badge in good.badges"
+                  :key="badge"
+                  :color="badgeColors[randomNumber() % badgeColors.length]"
+                  class="order-deal-info-good-badge"
+                >
+                  {{ badge }}
+                </q-badge>
+              </div>
+            </div>
+            <div class="row no-wrap items-center order-deal-info-good-rating">
+              <q-rating size="18px" v-model="stars" :max="5" color="primary" />
+              <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row order-deal-info-production-types order-deal-info-content">
+          {{ good.cointype }}
+        </div>
+
+        <div class="row order-deal-info-combo-units order-deal-info-content">
+          {{ goodCount }}
+        </div>
+
+        <div class="row order-deal-info-combo-duration order-deal-info-content">
+          {{ good.duration }} {{ $t('GENERAL.DAYS') }}
+        </div>
+
+        <div class="row order-deal-info-start-time order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-daily-price order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-price order-deal-info-content">
+          {{ good.pricecurrencychar }} {{ good.price }}
+        </div>
+
+        <div class="row order-deal-info-units order-deal-info-content">
+          {{ good.amount }} {{ good.unit }}
+        </div>
+
+        <div class="row order-deal-info-preferential order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-history-production order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-expect-production order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-summary order-deal-info-content">
+          {{ good.pricecurrencychar }} {{ good.price }}
+        </div>
+      </div>
+
+      <div class="row order-deal-info-section">
+        <div class="row order-deal-info-good order-deal-info-content-left">
+          {{ powerFeeDays }} {{ $t('GENERAL.DAYS_ELECTRICAL_FEE_COMNO') }}
+        </div>
+
+        <div class="row order-deal-info-production-types order-deal-info-content">
+          -
+        </div>
+
+        <div class="row order-deal-info-combo-units order-deal-info-content">
+          {{ goodCount }}
+        </div>
+
+        <div class="row order-deal-info-combo-duration order-deal-info-content">
+          {{ good.duration }} {{ $t('GENERAL.DAYS') }}
+        </div>
+
+        <div class="row order-deal-info-start-time order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-daily-price order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-price order-deal-info-content">
+          {{ good.pricecurrencychar }} {{ good.price }}
+        </div>
+
+        <div class="row order-deal-info-units order-deal-info-content">
+          {{ good.amount }} {{ good.unit }}
+        </div>
+
+        <div class="row order-deal-info-preferential order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-history-production order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-expect-production order-deal-info-content">
+          TBD
+        </div>
+
+        <div class="row order-deal-info-summary order-deal-info-content">
+          {{ good.pricecurrencychar }} {{ good.price }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -154,7 +291,11 @@ export default defineComponent({
       ],
       currentWithdrawAddress: ref('1F6eVWEz2ZQ5M41PbLz417i9JKUY7oCFnVEEE'),
       username: 'kikakkz@hotmail.com',
-      powerFeeDays: ''
+      powerFeeDays: '',
+      badgeColors: [
+        'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
+      ],
+      goodCount: 1
     }
   },
   computed: {
@@ -166,11 +307,23 @@ export default defineComponent({
     },
     posters: function () {
       return this.good.posters.slice(0, Math.min(4, this.good.posters.length))
+    },
+    poster: function () {
+      if (this.good.posters.length > 0) {
+        return this.good.posters[0]
+      }
+      return 'logo/btc.png'
+    },
+    stars: function () {
+      return this.good.rating
     }
   },
   methods: {
     onWithdrawAddressUpdate: function (val, evt) {
       console.log(val, evt)
+    },
+    randomNumber : function (){
+      return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     }
   },
   watch: {
@@ -248,8 +401,7 @@ export default defineComponent({
 .order-section
   margin-top: 10px
   margin-bottom: 10px
-  padding-bottom: 10px
-  padding-top: 10px
+  padding: 10px
 
 .order-section-space
   margin-top: 40px
@@ -277,9 +429,98 @@ export default defineComponent({
 
 .order-section-odd
   background-color: $blue-1
-  padding: 10px
 
 .order-continuation-way
   padding-top: 8px
   padding-bottom: 10px
+
+.order-deal-info-title
+  border-bottom: solid 3px $blue-3
+  text-align: center
+  color: $grey-6
+  font-size: 12px
+  margin-left: 1px
+  margin-right: 1px
+
+.order-deal-info-good
+  width: 400px
+
+.order-deal-info-production-types
+  width: 120px
+
+.order-deal-info-combo-units
+  width: 80px
+
+.order-deal-info-combo-duration
+  width: 120px
+
+.order-deal-info-start-time
+  width: 100px
+
+.order-deal-info-daily-price
+  width: 100px
+
+.order-deal-info-price
+  width: 120px
+
+.order-deal-info-units
+  width: 120px
+
+.order-deal-info-preferential
+  width: 200px
+
+.order-deal-info-history-production
+  width: 100px
+
+.order-deal-info-expect-production
+  width: 100px
+
+.order-deal-info-good-poster
+  margin: 10px
+  width: 60px
+
+.order-deal-info-good-info
+  padding: 10px 0 0 10px
+  flex: 1
+
+.order-deal-info-good-title
+  font-size: 16px
+  margin: 5px
+  font-weight: bold
+  color: $grey-8
+
+.order-deal-info-good-badge
+  margin: 9px 0 5px 5px
+
+.order-deal-info-good-rating
+  margin-left: 10px
+
+.order-deal-info-content
+  height: 60px
+  margin: 10px 1px 10px 1px
+  line-height: 60px
+  text-align: center
+  font-size: 18px
+  color: $grey-8
+  font-weight: bold
+  display: inline
+  border-left: solid 1px $grey-4
+
+.order-deal-info-content-left
+  text-align: left
+  height: 60px
+  margin: 10px 1px 10px 10px
+  line-height: 60px
+  font-size: 18px
+  color: $grey-8
+  font-weight: bold
+  display: inline
+  width: 390px
+
+.order-deal-info-summary
+  flex: 1
+
+.order-deal-info-section
+  background-color: $light-green-1
+  margin: 3px 10px 0 10px
 </style>

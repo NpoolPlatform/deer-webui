@@ -48,6 +48,9 @@ export default {
     COMBO_START_TIME: 'Start Time',
     UNIQUE_START_TIME: '00:00 Tomorrow',
     GOOD_VENDOR_HINT: 'Hashrate and After-Sales service provided by',
+    DAILY_PRICE: 'Daily Price',
+    HISTORY_PRODUCTION: 'History Benefit',
+    EXPECT_PRODUCTION: 'Expected Benefit',
     SELF_RUN: 'Self-Run',
     PLATFORM_NAME: 'Mine Me',
     CONFIRM_WITHDRAW_ADDRESS: 'Confirm Withdraw Address',
@@ -64,6 +67,13 @@ export default {
     CONTINUATION_ELECTRICAL_FEE_METHOD: 'Continuation Way',
     CONTINUATION_BY_MANUAL: 'Manually',
     CONTINUATION_BY_WALLET: 'From Wallet',
-    CONTINUATION_BY_BALANCE: 'Balance'
+    CONTINUATION_BY_BALANCE: 'Balance',
+    CONFIRM_DEAL_INFO: 'Confirm Deal Info',
+    GOOD: 'Good',
+    PRICE: 'Price',
+    UNITS: 'Units',
+    PREFERENTIAL: 'Preferential',
+    SUMMARY: 'Summary',
+    DAYS_ELECTRICAL_FEE_COMNO: 'Days Electricity Fee'
   }
 }
