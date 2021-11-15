@@ -261,6 +261,8 @@
         </div>
       </div>
     </div>
+
+    <div style="height: 100px;" />
   </div>
 </template>
 
@@ -443,7 +445,7 @@ export default defineComponent({
   margin-right: 1px
 
 .order-deal-info-good
-  width: 400px
+  width: 350px
 
 .order-deal-info-production-types
   width: 120px
@@ -515,7 +517,7 @@ export default defineComponent({
   color: $grey-8
   font-weight: bold
   display: inline
-  width: 390px
+  width: 340px
 
 .order-deal-info-summary
   flex: 1
