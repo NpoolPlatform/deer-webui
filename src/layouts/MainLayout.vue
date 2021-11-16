@@ -45,92 +45,110 @@
         <q-btn flat class="margin-0" style="padding: 0 40px 0 0;">
           <img src="logo/logo.png" style="width: 80px;">
         </q-btn>
-        <q-tabs v-model="tab" class="text-grey-8" inline-label indicator-color="blue" active-color="blue">
+        <q-tabs v-model="tab" class="text-grey-8 main-tabs" inline-label indicator-color="blue" active-color="blue">
           <q-tab name="mainpage" icon="whatshot" :label="$t('MENU.MAINPAGE')" />
           <q-tab name="goods" icon="storefront" :label="$t('MENU.POWERGOODS')" />
           <q-tab name="help" icon="help" :label="$t('MENU.HELP')" />
           <q-tab name="aboutus" icon="group" :label="$t('MENU.ABOUTUS')" />
         </q-tabs>
         <q-space />
-        <q-btn flat :label="$t('MENU.MYASSETS')" color="grey-8">
-          <template v-slot:prepend>
-            <q-icon name="language" color="blue" />
-          </template>
-        </q-btn>
-        <q-btn-dropdown
-          split
-          color="grey-6"
-          dense
-          push
-          no-caps
-          flat
-          :label="username"
-          icon="person_outline"
-          @click="onUserInfoClick"
-        >
-          <q-list dense>
-            <q-item clickable v-close-popup @click="onMyOrdersClick">
-              <q-item-section side>
-                <q-icon name="menu_book" color="primary" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.MYORDERS') }}</q-item-label>
-              </q-item-section>
-            </q-item>
+        <div v-if="user.loggined" class="row">
+          <q-btn flat :label="$t('MENU.MYASSETS')" color="grey-8">
+            <template v-slot:prepend>
+              <q-icon name="language" color="blue" />
+            </template>
+          </q-btn>
+          <q-btn-dropdown
+            split
+            color="grey-6"
+            dense
+            push
+            no-caps
+            flat
+            :label="username"
+            icon="person_outline"
+            @click="onUserInfoClick"
+          >
+            <q-list dense>
+              <q-item clickable v-close-popup @click="onMyOrdersClick">
+                <q-item-section side>
+                  <q-icon name="menu_book" color="primary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.MYORDERS') }}</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <q-item clickable v-close-popup @click="onDepositPowerFeeClick">
-              <q-item-section side>
-                <q-icon name="power" color="secondary" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-item-label>
-              </q-item-section>
-            </q-item>
+              <q-item clickable v-close-popup @click="onDepositPowerFeeClick">
+                <q-item-section side>
+                  <q-icon name="power" color="secondary" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <q-item clickable v-close-popup @click="onMyCouponsClick">
-              <q-item-section side>
-                <q-icon name="card_giftcard" color="accent" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.MYCOUPONS') }}</q-item-label>
-              </q-item-section>
-            </q-item>
+              <q-item clickable v-close-popup @click="onMyCouponsClick">
+                <q-item-section side>
+                  <q-icon name="card_giftcard" color="accent" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.MYCOUPONS') }}</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <q-item clickable v-close-popup @click="onInvitationsClick">
-              <q-item-section side>
-                <q-icon name="insert_invitation" color="dark" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.INVITATIONS') }}</q-item-label>
-              </q-item-section>
-            </q-item>
+              <q-item clickable v-close-popup @click="onInvitationsClick">
+                <q-item-section side>
+                  <q-icon name="insert_invitation" color="dark" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.INVITATIONS') }}</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <q-item clickable v-close-popup @click="onSettingsClick">
-              <q-item-section side>
-                <q-icon name="settings" color="positive" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.SETTING') }}</q-item-label>
-              </q-item-section>
-            </q-item>
+              <q-item clickable v-close-popup @click="onSettingsClick">
+                <q-item-section side>
+                  <q-icon name="settings" color="positive" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.SETTING') }}</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <q-item clickable v-close-popup @click="onExitClick">
-              <q-item-section side>
-                <q-icon name="exit_to_app" color="info" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ $t('MENU.EXIT') }}</q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-icon name="arrow_right_alt" color="amber" />
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
+              <q-item clickable v-close-popup @click="onExitClick">
+                <q-item-section side>
+                  <q-icon name="exit_to_app" color="info" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('MENU.EXIT') }}</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="arrow_right_alt" color="amber" />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+          <q-btn dense flat icon="notifications_none" color="grey-6">
+            <q-badge v-if="newMessages > 0" floating rounded dense color="red" align="middle">{{ newMessages }}</q-badge>
+          </q-btn>
+        </div>
+        <div v-else class="row">
+          <q-btn
+            dense
+            class="login-btn"
+            rounded
+            @click="onLoginClick">
+            {{ $t('BUTTON.LOGIN') }}
+          </q-btn>
+          <q-btn
+            dense
+            class="register-btn"
+            rounded
+            @click="onRegisterClick">
+            {{ $t('BUTTON.REGISTER') }}
+          </q-btn>
+        </div>
         <q-btn dense flat icon="share" color="blue"></q-btn>
-        <q-btn dense flat icon="notifications_none" color="grey-6">
-          <q-badge v-if="newMessages > 0" floating rounded dense color="red" align="middle">{{ newMessages }}</q-badge>
-        </q-btn>
       </q-toolbar>
     </q-header>
     
@@ -196,8 +214,24 @@ export default defineComponent({
     },
     onExitClick: function () {
 
+    },
+    onRegisterClick: function () {
+
+    },
+    onLoginClick: function () {
+      this.$router.push({
+        path: 'signin',
+        query: {
+          by: 'email'
+        }
+      })
     }
-  } 
+  },
+  computed: {
+    user: function () {
+      return this.$store.state.user.user
+    }
+  }
 })
 </script>
 
@@ -226,4 +260,21 @@ export default defineComponent({
 .header
   height: 60px
   padding: 0 100px 0 100px
+
+.login-btn
+  border: solid 1px $indigo-8
+  margin: 5px
+  color: $indigo-8
+  font-size: 12px
+  width: 100px
+
+.register-btn
+  border: solid 1px $indigo-8
+  margin: 5px
+  background-color: $indigo-8
+  font-size: 12px
+  width: 100px
+
+.main-tabs
+  border-bottom: solid 1px $grey-4
 </style>

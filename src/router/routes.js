@@ -22,6 +22,12 @@ const routes = [
           paymentId: '',
           goodId: ''
         }
+      }, {
+        path:'signin',
+        component: () => import('pages/Signin.vue'),
+        query: {
+          by: 'email'
+        }
       }
     ]
   },

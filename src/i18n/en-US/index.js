@@ -29,7 +29,9 @@ export default {
     LARGE_AMOUNT_DEAL_HINT: 'Large Amount Deal',
     BUY_GOOD_NOW: 'Buy Now',
     ADD_GOOD_CART: 'Add to Cart',
-    SUBMIT_ORDER: 'Submit Order'
+    SUBMIT_ORDER: 'Submit Order',
+    REGISTER: 'Sign up',
+    LOGIN: 'Sign in'
   },
   GENERAL: {
     DAYS: 'Days',
@@ -91,6 +93,13 @@ export default {
     SCAN_TO_PAY: 'Scan to Pay',
     PAID: 'Paid',
     PENDING_PAYING: 'Pending Paying',
-    SCAN_PAY_ANNOUNCEMENT: '如果由于地址错误导致支付失败，可能是因为您的钱包不支持新/旧格式地址，请点击切换地址格式后再次支付。\n1、本地址只接受BCH付款，切勿支付其他币种，否则将丢币且无法找回；\n2、订单取消后请勿付款，否则汇率变动将可能导致您产生损失。'
+    SCAN_PAY_ANNOUNCEMENT: '如果由于地址错误导致支付失败，可能是因为您的钱包不支持新/旧格式地址，请点击切换地址格式后再次支付。\n1、本地址只接受BCH付款，切勿支付其他币种，否则将丢币且无法找回；\n2、订单取消后请勿付款，否则汇率变动将可能导致您产生损失。',
+    EMAIL: 'Email',
+    PHONE_NO: 'Phone NO.',
+    EMAIL_ADDRESS: 'Email Address',
+    PASSWORD: 'Password',
+    SIGN_IN: 'Sign In',
+    FORGET_PASSWORD: 'Forget Password',
+    CREATE_ACCOUNT: 'Create Account'
   }
 }

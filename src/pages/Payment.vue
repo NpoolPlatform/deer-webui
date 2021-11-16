@@ -358,7 +358,7 @@ export default defineComponent({
 .payment-deal-info
   border: solid 1px $grey-4
   width: 400px
-  height: 315px
+  height: 335px
   padding: 20px
 
 .payment-methods
@@ -430,7 +430,7 @@ export default defineComponent({
 
 .payment-deal-info-good-summary
   background-color: $green-1
-  margin: 10px
+  margin: 20px 10px 20px 10px
   padding: 0 10px 20px 10px
   border-radius: 10px
 
