@@ -123,6 +123,15 @@ export default defineComponent({
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
     onBuyNowClick: function () {
+      if (!this.user.login) {
+        this.$router.push({
+          path: 'signin',
+          query: {
+            by: 'email'
+          }
+        })
+        return
+      }
       this.clickedGood = this.good
       this.$router.push({
         path: 'good',
@@ -135,6 +144,9 @@ export default defineComponent({
   computed: {
     posters: function () {
       return this.good.posters.slice(0, Math.min(3, this.good.posters.length))
+    },
+    user: function () {
+      return this.$store.state.user.user
     }
   }
 })
@@ -144,6 +156,7 @@ export default defineComponent({
 .recommend-good
   width: 100%
   margin: 10px
+  border-radius: 30px
 
 .good-coinlogo
   width: 50px
