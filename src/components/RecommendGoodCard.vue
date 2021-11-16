@@ -114,7 +114,7 @@ export default defineComponent({
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
-      slide: ref('style'),
+      slide: ref('deals'),
       clickedGood
     }
   },

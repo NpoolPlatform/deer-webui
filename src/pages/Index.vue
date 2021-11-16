@@ -15,9 +15,9 @@
           style="margin: 100px 0 100px 0; background-color: yellow;"
         >
           <q-carousel-slide
-            v-for="slider in sliders" @click="onBannerSliderClick(slider.url)"
-            :key="slider.label"
-            :name="slider.label"
+            v-for="(slider, index) in sliders" @click="onBannerSliderClick(slider.url)"
+            :key="index"
+            :name="index"
             style="padding: 0; margin: 0;">
             <img :src="slider.image" class="slider-img" />
           </q-carousel-slide>
