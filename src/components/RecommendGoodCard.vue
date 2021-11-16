@@ -5,9 +5,9 @@
         <img :src="good.coinlogo" class="good-coinlogo">
       </q-item-section>
       <q-item-section>
-        <h6>{{ good.title }}</h6>
-        <div>
-          <p  class="good-parameter">
+        <div class="row">
+          <h6>{{ good.title }}</h6>
+          <p class="good-parameter">
             {{ good.amount }}{{ good.unit }} {{ good.duration }}{{ $t('GENERAL.DAYS') }}
           </p>
         </div>
@@ -151,14 +151,17 @@ export default defineComponent({
 
 h6
   font-size: 18px
-  color: $grey-8
+  color: $grey-7
   margin: 0
+  font-weight: bold
 
 .good-parameter
   margin-right: 10px
   font-size: 14px
-  color: $grey-6
-  margin: 0
+  color: $grey-7
+  margin-top: 8px
+  margin-bottom: 0
+  margin-left: 5px
 
 .good-poster
   max-width: 80px

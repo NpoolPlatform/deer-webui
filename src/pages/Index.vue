@@ -200,39 +200,6 @@ export default defineComponent({
           priceunit: 'USDT',
           pricecurrency: 'USDT',
           pricecurrencychar: '$'
-        }, {
-          id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaae",
-          cointype: 'BTC',
-          supportedCoinTypes: ['BTC', 'BCH'],
-          coinlogo: 'logo/btc.png',
-          title: '蚂蚁矿机S23Pro套餐',
-          rating: 4.2,
-          rateCount: 529,
-          duration: 180,
-          unit: 'TH/s',
-          amount: 200,
-          posters: ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png'],
-          gotourl: 'http://localhost:8080',
-          fees: [
-            {
-              type: '技术服务费',
-              paytype: 'percent',
-              percent: 10,
-            }, {
-              type: '电费',
-              paytype: 'amount',
-              unitamount: 0.05,
-              currency: 'USDT'
-            }
-          ],
-          start: Math.round(+new Date()/1000),
-          badges: ['预售', '自营'],
-          outsale: false,
-          presale: false,
-          price: 1229.70,
-          priceunit: 'USDT',
-          pricecurrency: 'USDT',
-          pricecurrencychar: '$'
         }
       ]
     }
