@@ -79,6 +79,13 @@ export default {
       NEED_PAY: '需付款',
       BUYER: '购买者',
       AGREE_WITH: '我同意',
-      SERVICE_CONTRACT: '《Mine Me 矿机共享服务协议》'
+      SERVICE_CONTRACT: '《Mine Me 矿机共享服务协议》',
+      CHECKOUT_COUNTER: '收银台',
+      DEAL_DETAIL: '订单详情',
+      SCAN_DIMENSION_CODE_PAY: '扫码支付',
+      GOTO_PAY: '去支付',
+      GOTO_PAY_BY_WALLET: '从钱包支付',
+      AVAILABLE_BALANCE: '可用余额',
+      DEAL_PAY_AMOUNT: '订单金额'
     }
   }

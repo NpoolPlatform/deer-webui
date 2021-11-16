@@ -79,6 +79,13 @@ export default {
     NEED_PAY: 'Total Pay',
     BUYER: 'Buyer',
     AGREE_WITH: 'I agree with ',
-    SERVICE_CONTRACT: '《Mine Me miner sharing contract》'
+    SERVICE_CONTRACT: '《Mine Me miner sharing contract》',
+    CHECKOUT_COUNTER: 'Checkout Counter',
+    DEAL_DETAIL: 'Deal Info',
+    SCAN_DIMENSION_CODE_PAY: 'Pay by Dimension Code',
+    GOTO_PAY: 'Goto Pay',
+    GOTO_PAY_BY_WALLET: 'Goto Pay by Wallet',
+    AVAILABLE_BALANCE: 'Balance',
+    DEAL_PAY_AMOUNT: 'Amount'
   }
 }

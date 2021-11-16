@@ -7,16 +7,21 @@ const routes = [
       {
         path: '',
         component: () => import('pages/Index.vue')
-      },
-      {
+      }, {
         path: 'good',
         component: () => import('pages/Good.vue'),
         query: { goodId: '' }
-      },
-      {
+      }, {
         path:'createOrder',
         component: () => import('pages/CreateOrder.vue'),
         query: { goodId: '' }
+      }, {
+        path:'payment',
+        component: () => import('pages/Payment.vue'),
+        query: {
+          paymentId: '',
+          goodId: ''
+        }
       }
     ]
   },

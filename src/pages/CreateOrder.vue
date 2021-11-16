@@ -317,7 +317,7 @@
         <q-checkbox keep-color color="blue" v-model="agreeWithContract" :label="$t('GENERAL.AGREE_WITH')">
           {{ $t('GENERAL.SERVICE_CONTRACT') }}
         </q-checkbox>
-        <q-btn dense class="submit-order-btn" rounded :label="$t('BUTTON.SUBMIT_ORDER')"></q-btn>
+        <q-btn dense class="submit-order-btn" rounded :label="$t('BUTTON.SUBMIT_ORDER')" @click="onSubmitOrderClick"></q-btn>
       </div>
     </div>
   </div>
@@ -384,6 +384,16 @@ export default defineComponent({
     },
     randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    },
+    onSubmitOrderClick: function () {
+      this.$router.push({
+        path: 'payment',
+        query: {
+          // TODO: submit order and switch to payment with responsed payment id
+          paymentId: this.good.id,
+          goodId: this.good.id
+        }
+      })
     }
   },
   watch: {
