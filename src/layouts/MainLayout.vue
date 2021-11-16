@@ -22,7 +22,7 @@
           </q-carousel-slide>
         </q-carousel>
         <q-space />
-        <q-btn flat class="text-grey-8 text-caption">{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-btn>
+        <q-btn v-if="user.loggined" flat class="text-grey-8 text-caption">{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-btn>
         <q-select
           v-model="locale"
           :options="[
@@ -42,7 +42,7 @@
         </q-select>
       </q-toolbar>
       <q-toolbar style="height: 60px;" class="header">
-        <q-btn flat class="margin-0" style="padding: 0 40px 0 0;">
+        <q-btn flat class="margin-0" style="padding: 0 40px 0 0;" @click="onLogoClick">
           <img src="logo/logo.png" style="width: 80px;">
         </q-btn>
         <q-tabs v-model="tab" class="text-grey-8 main-tabs" inline-label indicator-color="blue" active-color="blue">
@@ -229,6 +229,11 @@ export default defineComponent({
         query: {
           by: 'email'
         }
+      })
+    },
+    onLogoClick: function () {
+      this.$router.push({
+        path: '/',
       })
     }
   },
