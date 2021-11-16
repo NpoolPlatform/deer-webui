@@ -100,6 +100,13 @@ export default {
       PASSWORD: '密码',
       SIGN_IN: '登录',
       FORGET_PASSWORD: '忘记密码',
-      CREATE_ACCOUNT: '创建账号'
+      CREATE_ACCOUNT: '现在就去注册',
+      SIGNUP_NOW: '立即注册',
+      VERIFICATION_CODE: '验证码',
+      SEND_VERIFICATION_CODE: '发送验证码',
+      CLICK_AGREE: '点击"立即注册"表示同意 ',
+      TERMS_OF_USE: '用户协议',
+      ALREADY_HAS_ACCOUNT: '已有账户?',
+      QUESTION_CONTACT: '遇到问题?'
     }
   }

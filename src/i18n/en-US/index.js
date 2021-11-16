@@ -100,6 +100,13 @@ export default {
     PASSWORD: 'Password',
     SIGN_IN: 'Sign In',
     FORGET_PASSWORD: 'Forget Password',
-    CREATE_ACCOUNT: 'Create Account'
+    CREATE_ACCOUNT: 'Create Account Now',
+    SIGNUP_NOW: 'Sign Up Now',
+    VERIFICATION_CODE: 'Verification Code',
+    SEND_VERIFICATION_CODE: 'Send Verification Code',
+    CLICK_AGREE: 'By clicking "Sign Up Now", you agree to our ',
+    TERMS_OF_USE: 'Terms of Use',
+    ALREADY_HAS_ACCOUNT: 'Already has Account?',
+    QUESTION_CONTACT: 'Any Questions?'
   }
 }

@@ -28,6 +28,12 @@ const routes = [
         query: {
           by: 'email'
         }
+      }, {
+        path:'signup',
+        component: () => import('pages/Signup.vue'),
+        query: {
+          by: 'email'
+        }
       }
     ]
   },

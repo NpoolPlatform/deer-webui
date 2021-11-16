@@ -216,7 +216,12 @@ export default defineComponent({
 
     },
     onRegisterClick: function () {
-
+      this.$router.push({
+        path: 'signup',
+        query: {
+          by: 'email'
+        }
+      })
     },
     onLoginClick: function () {
       this.$router.push({

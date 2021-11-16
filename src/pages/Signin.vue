@@ -16,12 +16,12 @@
         
         <q-tab-panels v-model="loginType" animated>
           <q-tab-panel class="login-input-panel" name="email">
-            <q-input stack-label v-model="email" :label="$t('GENERAL.EMAIL_ADDRESS')" />
-            <q-input stack-label v-model="password" :label="$t('GENERAL.PASSWORD')" />
+            <q-input stack-label type="email" v-model="email" :label="$t('GENERAL.EMAIL_ADDRESS')" />
+            <q-input stack-label type="password" v-model="password" :label="$t('GENERAL.PASSWORD')" />
           </q-tab-panel>
           <q-tab-panel class="login-input-panel" name="phoneno">
             <q-input stack-label v-model="phoneno" :label="$t('GENERAL.PHONE_NO')" />
-            <q-input stack-label v-model="password" :label="$t('GENERAL.PASSWORD')" />
+            <q-input stack-label type="password" v-model="password" :label="$t('GENERAL.PASSWORD')" />
           </q-tab-panel>
         </q-tab-panels>
 
@@ -29,6 +29,7 @@
           dense
           class="sign-in-btn"
           :label="$t('GENERAL.SIGN_IN')"
+          @click="onSigninClick"
           rounded>
         </q-btn>
 
@@ -55,6 +56,11 @@ export default defineComponent({
       password: ref('')
     }   
   },
+  methods: {
+    onSigninClick: function () {
+      
+    }
+  }
 })
 </script>
 
