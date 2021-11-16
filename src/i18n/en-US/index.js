@@ -86,6 +86,10 @@ export default {
     GOTO_PAY: 'Goto Pay',
     GOTO_PAY_BY_WALLET: 'Goto Pay by Wallet',
     AVAILABLE_BALANCE: 'Balance',
-    DEAL_PAY_AMOUNT: 'Amount'
+    DEAL_PAY_AMOUNT: 'Amount',
+    PAY: 'Pay',
+    SCAN_TO_PAY: 'Scan to Pay',
+    PAID: 'Paid',
+    PENDING_PAYING: 'Pending Paying'
   }
 }

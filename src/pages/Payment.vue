@@ -44,7 +44,7 @@
         </div>
         <q-separator size="4px" />
         <div class="row payment-method-info">
-          <div class="payment-methods">
+          <div v-if="!paying" class="payment-methods">
             <div class="payment-label">{{ $t('GENERAL.SCAN_DIMENSION_CODE_PAY') }}</div>
             <div class="q-gutter-xs payment-scan-methods">
               <q-btn
@@ -76,6 +76,45 @@
                 rounded
                 @click="onPayClick">
                 {{ $t('GENERAL.GOTO_PAY_BY_WALLET') }}
+              </q-btn>
+            </div>
+          </div>
+          <div v-else class="payment-methods">
+            <div class="payment-label">{{ supportPayTypes[selectedPayTypeIndex].type }} {{ $t('GENERAL.PAY') }}</div>
+            <div class="row payment-address">
+              <div>
+                <div>
+                  {{ payingAmount }} {{ supportPayTypes[selectedPayTypeIndex].type }}
+                </div>
+                <div>
+                  1 {{ supportPayTypes[selectedPayTypeIndex].type }} = $ 621.48000000
+                </div>
+                <div>
+                  {{ payingAddress }}
+                </div>
+              </div>
+              
+              <div>
+                <vue-qrcode :value="payingAddress" level="H" />
+                <div>{{ $t('GENERAL.SCAN_TO_PAY') }}</div>
+              </div>
+            </div>
+            <q-separator />
+            <div class="row payment-pay-status">
+              <q-btn
+                dense
+                class="pay-btn"
+                icon-right="arrow_right_alt"
+                rounded
+                @click="onPayStatusClick">
+                {{ $t('GENERAL.PAID') }} ({{ supportPayTypes[selectedPayTypeIndex].type }})
+              </q-btn>
+              <q-btn
+                dense
+                class="pending-btn"
+                rounded
+                @click="onPayStatusClick">
+                {{ $t('GENERAL.PENDING_PAYING') }}
               </q-btn>
             </div>
           </div>
@@ -129,8 +168,12 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import VueQrcode from 'vue-qrcode'
 
 export default defineComponent({
+  components: {
+    VueQrcode
+  },
   setup() {
     return {
       payment: {
@@ -176,7 +219,10 @@ export default defineComponent({
           type: 'USDC' 
         }
       ],
-      selectedPayTypeIndex: 0
+      selectedPayTypeIndex: 0,
+      paying: false,
+      payingAmount: 5.19,
+      payingAddress: 'bitcoincash:qpg7yf0f06kk9zyn4adfr5pqx6l5q83xmulcmgxuqkge'
     }
   },
   mounted () {
@@ -226,7 +272,9 @@ export default defineComponent({
       }, 1000)
     },
     onPayClick: function () {
-    
+        this.paying = true
+    },
+    onPayStatusClick: function () {
     }
   }
 })
@@ -346,6 +394,13 @@ export default defineComponent({
   width: 250px
   margin-right: 10px
 
+.pending-btn
+  margin: 10px 0 10px 0
+  color: $grey-8
+  background-color: white
+  width: 250px
+  margin-right: 10px
+
 .payment-deal-info-deal-id
   font-weight: bold
   color: $grey-8
@@ -371,4 +426,10 @@ export default defineComponent({
   margin: 10px
   padding: 0 10px 20px 10px
   border-radius: 10px
+
+.payment-address
+  margin-bottom: 20px
+
+.payment-pay-status
+  margin-top: 20px
 </style>

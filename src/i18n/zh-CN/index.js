@@ -86,6 +86,10 @@ export default {
       GOTO_PAY: '去支付',
       GOTO_PAY_BY_WALLET: '从钱包支付',
       AVAILABLE_BALANCE: '可用余额',
-      DEAL_PAY_AMOUNT: '订单金额'
+      DEAL_PAY_AMOUNT: '订单金额',
+      PAY: '支付',
+      SCAN_TO_PAY: '扫描二维码支付',
+      PAID: '已支付',
+      PENDING_PAYING: '稍后支付'
     }
   }
