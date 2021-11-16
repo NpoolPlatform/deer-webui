@@ -81,22 +81,27 @@
           </div>
           <div v-else class="payment-methods">
             <div class="payment-label">{{ supportPayTypes[selectedPayTypeIndex].type }} {{ $t('GENERAL.PAY') }}</div>
+            <q-separator />
             <div class="row payment-address">
               <div>
-                <div>
+                <div class="payment-pay-amount">
                   {{ payingAmount }} {{ supportPayTypes[selectedPayTypeIndex].type }}
                 </div>
-                <div>
+                <div class="payment-pay-currency">
                   1 {{ supportPayTypes[selectedPayTypeIndex].type }} = $ 621.48000000
                 </div>
-                <div>
+                <div class="payment-pay-address">
                   {{ payingAddress }}
+                </div>
+
+                <div class="payment-pay-announcement">
+                  {{ $t('GENERAL.SCAN_PAY_ANNOUNCEMENT') }}
                 </div>
               </div>
               
-              <div>
-                <vue-qrcode :value="payingAddress" level="H" />
-                <div>{{ $t('GENERAL.SCAN_TO_PAY') }}</div>
+              <div class="payment-pay-qrcode-container">
+                <vue-qrcode class="payment-pay-qrcode" :value="payingAddress" scale="6" level="H" />
+                <div class="payment-scan-to-pay">{{ $t('GENERAL.SCAN_TO_PAY') }}</div>
               </div>
             </div>
             <q-separator />
@@ -353,10 +358,12 @@ export default defineComponent({
 .payment-deal-info
   border: solid 1px $grey-4
   width: 400px
+  height: 315px
   padding: 20px
 
 .payment-methods
   flex: 1
+  margin-right: 20px
 
 .payment-method-info
   margin-top: 20px
@@ -429,7 +436,44 @@ export default defineComponent({
 
 .payment-address
   margin-bottom: 20px
+  margin-left: 10px
 
 .payment-pay-status
   margin-top: 20px
+
+.payment-pay-amount
+  font-weight: bold
+  color: $orange-9
+  font-size: 24px
+  margin-top: 20px
+
+.payment-pay-currency
+  color: $orange-9
+  font-size: 16px
+
+.payment-pay-address
+  margin-top: 40px
+  font-size: 20px
+  color: $grey-7
+
+.payment-pay-announcement
+  width: 400px
+  margin-top: 20px
+  border: solid 1px $orange-4
+  background-color: $yellow-1
+  padding: 10px
+  color: orange
+  font-size: 8px
+  margin-top: 40px
+
+.payment-pay-qrcode-container
+  margin-left: 40px
+
+.payment-scan-to-pay
+  text-align: center
+  color: $grey-8
+
+.payment-pay-qrcode
+  background-color: red
+  margin: 0
 </style>
