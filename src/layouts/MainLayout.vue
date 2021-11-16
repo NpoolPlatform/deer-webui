@@ -12,9 +12,9 @@
           height="1.5rem"
         >
           <q-carousel-slide
-            v-for="announcement in announcements" @click="onAnnouncementClick(announcement.url)"
-            :key="announcement.title"
-            :name="announcement.title"
+            v-for="(announcement, index) in announcements" @click="onAnnouncementClick(announcement.url)"
+            :key="index"
+            :name="index"
             class="padding-0">
             <div class="text-subtitle2 text-grey-8 bg-grey-1 fill-parent">
               <a :href="announcement.url">{{ announcement.title }}</a>
@@ -170,7 +170,7 @@ export default defineComponent({
     return {
       newMessages: 0,
       locale,
-      slide: ref('style'),
+      slide: ref(0),
       announcements: [
         {
           title: 'A frog jump over a brown fox',
