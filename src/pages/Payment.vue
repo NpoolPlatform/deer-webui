@@ -397,7 +397,7 @@ export default defineComponent({
 .pay-btn
   margin: 10px 0 10px 0
   color: $grey-4
-  background-color: $indigo-8
+  background-color: $indigo-6
   width: 250px
   margin-right: 10px
 
