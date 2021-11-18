@@ -159,13 +159,21 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'MainLayout',
   setup () {
     const { locale } = useI18n({ useScope: 'global' })
+    const $store = useStore()
+
+    const appInfo = computed ({
+      set: val => {
+        $store.commit('appInfo/updateAppInfo', val)
+      }
+    })
 
     return {
       newMessages: 0,
@@ -181,14 +189,14 @@ export default defineComponent({
         }
       ],
       tab: ref('mainpage'),
-      username: 'kikakkz@hotmail.com'
+      username: 'kikakkz@hotmail.com',
+      appInfo
     }
   },
   created() {
-
-  },
-  beforeUnmount() {
-
+    this.appInfo = {
+      id: '7ff8da0a-ab2b-40f5-956c-2a0f607988b1'
+    }
   },
   methods: {
     onAnnouncementClick: function (url) {

@@ -69,6 +69,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { api } from 'boot/axios'
 
 export default defineComponent({
   setup() {
@@ -76,18 +77,38 @@ export default defineComponent({
       loginType: ref('email'),
       email: ref(''),
       phoneno: ref(''),
-      password: ref('')
+      password: ref(''),
+      verificationCode: ref('')
     }   
   },
   methods: {
     onSignupClick: function () {
-      
+      api.post('/user-management/v1/signup', {
+        Password: this.password,
+        EmailAddress: this.email,
+        PhoneNumber: this.phoneno,
+        Code: this.verificationCode,
+        AppId: this.appInfo.id
+      })
     },
     onSendPhoneVerificationCodeClick: function () {
 
     },
     onSendEmailVerificationCodeClick: function () {
-
+      api.post('/verification-door/v1/send/email', {
+        Email: this.email
+      })
+      .then(function (resp) {
+        console.log(resp)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
+  },
+  computed: {
+    appInfo: function () {
+      return this.$store.state.appInfo.appInfo
     }
   }
 })
