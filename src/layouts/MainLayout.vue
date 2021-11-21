@@ -196,7 +196,6 @@ export default defineComponent({
         }
       ],
       tab: ref('mainpage'),
-      username: 'kikakkz@hotmail.com',
       appInfo,
       q,
       user
@@ -253,6 +252,11 @@ export default defineComponent({
       this.$router.push({
         path: '/',
       })
+    }
+  },
+  computed: {
+    username: function () {
+      return this.user.info.Username
     }
   }
 })
