@@ -21,17 +21,19 @@ export const success = function (notif, msg) {
   })
 }
 
-export const fail = function (notif, msg) {
+export const fail = function (notif, msg, error, data) {
   if (notif === undefined) {
     Notify.create({
       type: 'negative',
-      message: msg
+      message: msg + ": " + error,
+      caption: JSON.stringify(data)
     })
   }
   
   notif({
     type: 'negative',
-    message: msg
+    message: msg + ": " + error,
+    caption: JSON.stringify(data)
   })
 }
 
