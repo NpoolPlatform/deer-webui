@@ -17,7 +17,7 @@
         <q-tab-panels v-model="loginType" animated>
           <q-tab-panel class="signup-input-panel" name="email">
             <q-input stack-label type="email" v-model="email" :label="$t('GENERAL.EMAIL_ADDRESS')" />
-            <q-input stack-label type="password" v-model="password" :label="$t('GENERAL.VERIFICATION_CODE')">
+            <q-input stack-label v-model="verificationCode" :label="$t('GENERAL.VERIFICATION_CODE')">
               <template v-slot:append>
                 <q-btn
                   class="signup-send-verification-code"
@@ -29,7 +29,7 @@
           </q-tab-panel>
           <q-tab-panel class="signup-input-panel" name="phoneno">
             <q-input stack-label v-model="phoneno" :label="$t('GENERAL.PHONE_NO')" />
-            <q-input stack-label type="password" v-model="password" :label="$t('GENERAL.VERIFICATION_CODE')">
+            <q-input stack-label v-model="verificationCode" :label="$t('GENERAL.VERIFICATION_CODE')">
               <template v-slot:append>
                 <q-btn
                   class="signup-send-verification-code"
@@ -70,15 +70,31 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { api } from 'boot/axios'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   setup() {
+    const q = useQuasar()
+
     return {
       loginType: ref('email'),
       email: ref(''),
       phoneno: ref(''),
       password: ref(''),
-      verificationCode: ref('')
+      verificationCode: ref(''),
+      success (notif, msg) {
+        notif({
+          type: 'positive',
+          message: msg
+        })
+      },
+      fail (notif, msg) {
+        notif({
+          type: 'negative',
+          message: msg
+        })
+      },
+      q
     }   
   },
   methods: {
@@ -90,21 +106,36 @@ export default defineComponent({
         Code: this.verificationCode,
         AppId: this.appInfo.id
       })
-    },
-    onSendPhoneVerificationCodeClick: function () {
-
-    },
-    onSendEmailVerificationCodeClick: function () {
-      api.post('/verification-door/v1/send/email', {
-        Email: this.email
-      })
       .then(function (resp) {
         console.log(resp)
       })
       .catch(function (error) {
         console.log(error)
       })
-    }
+    },
+    onSendPhoneVerificationCodeClick: function () {
+
+    },
+    onSendEmailVerificationCodeClick: function () {
+      const notif = this.q.notify({
+        type: 'ongoing',
+        message: this.$t('GENERAL.EMAIL_SENDING')
+      })
+
+      var thiz = this
+      api.post('/verification-door/v1/send/email', {
+        Email: this.email
+      })
+      .then(function (resp) {
+        const msg = thiz.$t('GENERAL.EMAIL_SENT') + this.email + ', ' + this.$t('GENERAL.CHECK_EMAIL')
+        thiz.success(notif, msg)
+      })
+      .catch(function (error) {
+        const msg = thiz.$t('GENERAL.FAIL_EMAIL_SEND') + error
+        thiz.fail(notif, msg)
+      })
+    },
+    
   },
   computed: {
     appInfo: function () {

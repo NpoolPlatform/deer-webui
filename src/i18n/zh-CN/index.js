@@ -107,6 +107,10 @@ export default {
       CLICK_AGREE: '点击"立即注册"表示同意 ',
       TERMS_OF_USE: '用户协议',
       ALREADY_HAS_ACCOUNT: '已有账户?',
-      QUESTION_CONTACT: '遇到问题?'
+      QUESTION_CONTACT: '遇到问题?',
+      EMAIL_SENT: '邮件已经发送至',
+      CHECK_EMAIL: '请检查收件箱.',
+      EMAIL_SENDING: '正在发送邮件验证码 ...',
+      FAIL_EMAIL_SEND: '发送邮件失败: '
     }
   }

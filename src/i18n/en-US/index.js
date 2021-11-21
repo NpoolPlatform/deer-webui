@@ -107,6 +107,10 @@ export default {
     CLICK_AGREE: 'By clicking "Sign Up Now", you agree to our ',
     TERMS_OF_USE: 'Terms of Use',
     ALREADY_HAS_ACCOUNT: 'Already has Account?',
-    QUESTION_CONTACT: 'Any Questions?'
+    QUESTION_CONTACT: 'Any Questions?',
+    EMAIL_SENT: 'Email is already sent to',
+    CHECK_EMAIL: 'please check you inbox.',
+    EMAIL_SENDING: 'Sending verification code ...',
+    FAIL_EMAIL_SEND: 'Fail to send email: '
   }
 }
