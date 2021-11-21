@@ -18,6 +18,7 @@
     "global": "^4.4.0",
     "qrcode": "^1.4.4",
     "quasar": "^2.0.0",
+    "vue-cookies": "^1.7.4",
     "vue-i18n": "9.0.0",
     "vue-qrcode": "^1.0.0",
     "vuex": "^4.0.2"

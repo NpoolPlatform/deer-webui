@@ -162,17 +162,20 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
   setup () {
     const { locale } = useI18n({ useScope: 'global' })
     const $store = useStore()
+    const q = useQuasar()
 
     const appInfo = computed ({
       set: val => {
         $store.commit('appInfo/updateAppInfo', val)
-      }
+      },
+      get: () => $store.state.appInfo.appInfo
     })
 
     return {
@@ -190,13 +193,15 @@ export default defineComponent({
       ],
       tab: ref('mainpage'),
       username: 'kikakkz@hotmail.com',
-      appInfo
+      appInfo,
+      q
     }
   },
   created() {
     this.appInfo = {
       id: '7ff8da0a-ab2b-40f5-956c-2a0f607988b1'
     }
+    this.q.cookies.set('AppID', this.appInfo.id)
   },
   methods: {
     onAnnouncementClick: function (url) {

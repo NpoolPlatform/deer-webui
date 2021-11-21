@@ -70,35 +70,21 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { api } from 'boot/axios'
-import { useQuasar } from 'quasar'
+import { success, fail, waiting } from '../notify/notify'
 
 export default defineComponent({
   setup() {
-    const q = useQuasar()
-
     return {
       loginType: ref('email'),
       email: ref(''),
       phoneno: ref(''),
       password: ref(''),
       verificationCode: ref(''),
-      success (notif, msg) {
-        notif({
-          type: 'positive',
-          message: msg
-        })
-      },
-      fail (notif, msg) {
-        notif({
-          type: 'negative',
-          message: msg
-        })
-      },
-      q
     }   
   },
   methods: {
     onSignupClick: function () {
+      var thiz = this
       api.post('/user-management/v1/signup', {
         Password: this.password,
         EmailAddress: this.email,
@@ -107,32 +93,35 @@ export default defineComponent({
         AppId: this.appInfo.id
       })
       .then(function (resp) {
-        console.log(resp)
+        thiz.$router.push({
+          path: 'signin',
+          query: {
+            by: 'email'
+          }
+        })
       })
       .catch(function (error) {
-        console.log(error)
+        const msg = thiz.$t('GENERAL.FAIL_REGISTER') + error + '(' + error.response + ')'
+        fail(undefined, msg)
       })
     },
     onSendPhoneVerificationCodeClick: function () {
 
     },
     onSendEmailVerificationCodeClick: function () {
-      const notif = this.q.notify({
-        type: 'ongoing',
-        message: this.$t('GENERAL.EMAIL_SENDING')
-      })
+      const notif = waiting(this.$t('GENERAL.EMAIL_SENDING'))
 
       var thiz = this
       api.post('/verification-door/v1/send/email', {
         Email: this.email
       })
       .then(function (resp) {
-        const msg = thiz.$t('GENERAL.EMAIL_SENT') + this.email + ', ' + this.$t('GENERAL.CHECK_EMAIL')
-        thiz.success(notif, msg)
+        const msg = thiz.$t('GENERAL.EMAIL_SENT') + thiz.email + ', ' + thiz.$t('GENERAL.CHECK_EMAIL')
+        success(notif, msg)
       })
       .catch(function (error) {
-        const msg = thiz.$t('GENERAL.FAIL_EMAIL_SEND') + error
-        thiz.fail(notif, msg)
+        const msg = thiz.$t('GENERAL.FAIL_EMAIL_SEND') + error + '(' + error.response.data + ')'
+        fail(notif, msg)
       })
     },
     

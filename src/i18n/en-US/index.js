@@ -111,6 +111,7 @@ export default {
     EMAIL_SENT: 'Email is already sent to',
     CHECK_EMAIL: 'please check you inbox.',
     EMAIL_SENDING: 'Sending verification code ...',
-    FAIL_EMAIL_SEND: 'Fail to send email: '
+    FAIL_EMAIL_SEND: 'Fail to send email: ',
+    FAIL_REGISTER: 'Register is interrupted: '
   }
 }
