@@ -112,6 +112,7 @@ export default {
       CHECK_EMAIL: '请检查收件箱.',
       EMAIL_SENDING: '正在发送邮件验证码 ...',
       FAIL_EMAIL_SEND: '发送邮件失败: ',
-      FAIL_REGISTER: '注册过程出现错误: '
+      FAIL_REGISTER: '注册过程出现错误: ',
+      FAIL_SIGNIN: '登录失败'
     }
   }

@@ -46,6 +46,8 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { api } from 'boot/axios'
+import { fail } from '../notify/notify'
 
 export default defineComponent({
   setup() {
@@ -58,7 +60,19 @@ export default defineComponent({
   },
   methods: {
     onSigninClick: function () {
-      
+      var thiz = this
+
+      api.post('/login-door/v1/login', {
+        Email: this.email,
+        Phone: this.phoneno,
+        Password: this.password
+      })
+      .then(function (resp) {
+        console.log(resp)
+      })
+      .catch(function (error) {
+        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error, error.response.data)
+      })
     }
   }
 })

@@ -199,7 +199,7 @@ export default defineComponent({
   },
   created() {
     this.appInfo = {
-      id: '7ff8da0a-ab2b-40f5-956c-2a0f607988b1'
+      id: '7e395ecd-1ea0-43c4-b9d5-52ff668331bd'
     }
     this.q.cookies.set('AppID', this.appInfo.id)
   },

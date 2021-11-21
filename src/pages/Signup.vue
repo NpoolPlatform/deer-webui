@@ -101,8 +101,7 @@ export default defineComponent({
         })
       })
       .catch(function (error) {
-        const msg = thiz.$t('GENERAL.FAIL_REGISTER') + error + '(' + error.response + ')'
-        fail(undefined, msg)
+        fail(undefined, thiz.$t('GENERAL.FAIL_REGISTER'), error, error.response.data)
       })
     },
     onSendPhoneVerificationCodeClick: function () {
