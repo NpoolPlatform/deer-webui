@@ -2,13 +2,13 @@
   <q-card class="recommend-good">
     <q-item>
       <q-item-section avatar>
-        <img :src="good.coinlogo" class="good-coinlogo">
+        <img :src="coinlogo" class="good-coinlogo">
       </q-item-section>
       <q-item-section>
         <div class="row">
-          <h6>{{ good.title }}</h6>
+          <h6>{{ good.Title }}</h6>
           <p class="good-parameter">
-            {{ good.amount }}{{ good.unit }} {{ good.duration }}{{ $t('GENERAL.DAYS') }}
+            {{ good.UnitPower }}{{ good.Unit }} {{ good.DurationDays }}{{ $t('GENERAL.DAYS') }}
           </p>
         </div>
         <div>
@@ -136,14 +136,29 @@ export default defineComponent({
       this.$router.push({
         path: 'good',
         query: {
-          goodId: this.good.id
+          goodId: this.good.ID
         }
       })
     }
   },
   computed: {
     posters: function () {
+      if (this.good.extra === undefined) {
+        return ["logo/btc.png", "logo/btc.png", "logo/btc.png"]
+      }
       return this.good.posters.slice(0, Math.min(3, this.good.posters.length))
+    },
+    coinlogo: function () {
+      if (this.CoinInfo === undefined) {
+        return "logo/btc.png"
+      }
+      return this.CoinInfo.CoinLogo
+    },
+    labels: function () {
+      if (this.Extra === undefined || this.Extra.Labels.length === 0) {
+        return [this.$t('GENERAL.SELF_RUN')]
+      }
+      return this.Extra.Labels 
     },
     user: function () {
       return this.$store.state.user.user

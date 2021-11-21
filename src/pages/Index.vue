@@ -25,20 +25,20 @@
     </div>
     <div class="container">
       <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
-      <!-- q-list class="recommend-list">
+      <q-list class="recommend-list">
         <recommend-good-card
           v-for="recommend in recommends"
           :key="recommend.ID"
           :good="recommend">
         </recommend-good-card>
-      </q-list -->
+      </q-list>
     </div>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
-// import RecommendGoodCard from '../components/RecommendGoodCard.vue'
+import RecommendGoodCard from '../components/RecommendGoodCard.vue'
 import { api } from 'boot/axios'
 import { fail } from '../notify/notify'
 import mitt from 'mitt'
@@ -46,7 +46,7 @@ import mitt from 'mitt'
 export default defineComponent({
   name: 'PageIndex',
   components: {
-    // RecommendGoodCard
+    RecommendGoodCard
   },
   setup () {
     return {
@@ -115,17 +115,19 @@ export default defineComponent({
         ],
         Start: Math.round(+new Date()/1000),
         Price: 2029.70,
-        pricecurrency: {
+        PriceCurrency: {
           ID: "aaaaaaaa-bbbb-cccc-aaaa-aaaaaaae",
           Name: "USDT",
           Unit: "USDT",
           Symbol: "$"
         }
       }],
-      emitter: mitt()
+      emitter: mitt(),
+      recommendGoods: []
     }
   },
   created() {
+    this.recommendGoods = this.recommends
     this.getRecommendGoods()
     this.emitter.on('recommend_goods_received', this.onRecommendGoodsReceived)
   },
@@ -146,7 +148,8 @@ export default defineComponent({
     },
     onRecommendGoodsReceived: function (recommends) {
       console.log(recommends)
-      this.recommends = recommends
+      this.recommendGoods = recommends
+      this.recommends = this.recommendGoods.slice(0, Math.min(3, this.recommendGoods.length))
     }
   }
 })
