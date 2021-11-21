@@ -22,7 +22,7 @@
           </q-carousel-slide>
         </q-carousel>
         <q-space />
-        <q-btn v-if="user.loggined" flat class="text-grey-8 text-caption">{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-btn>
+        <q-btn v-if="user.logined" flat class="text-grey-8 text-caption">{{ $t('MENU.DEPOSIT_ELETRICAL_FEE') }}</q-btn>
         <q-select
           v-model="locale"
           :options="[
@@ -52,7 +52,7 @@
           <q-tab name="aboutus" icon="group" :label="$t('MENU.ABOUTUS')" />
         </q-tabs>
         <q-space />
-        <div v-if="user.loggined" class="row">
+        <div v-if="user.logined" class="row">
           <q-btn flat :label="$t('MENU.MYASSETS')" color="grey-8">
             <template v-slot:prepend>
               <q-icon name="language" color="blue" />
@@ -178,6 +178,10 @@ export default defineComponent({
       get: () => $store.state.appInfo.appInfo
     })
 
+    const user = computed ({
+      get: () => $store.state.user.user
+    })
+
     return {
       newMessages: 0,
       locale,
@@ -194,7 +198,8 @@ export default defineComponent({
       tab: ref('mainpage'),
       username: 'kikakkz@hotmail.com',
       appInfo,
-      q
+      q,
+      user
     }
   },
   created() {
@@ -248,11 +253,6 @@ export default defineComponent({
       this.$router.push({
         path: '/',
       })
-    }
-  },
-  computed: {
-    user: function () {
-      return this.$store.state.user.user
     }
   }
 })

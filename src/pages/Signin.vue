@@ -54,7 +54,7 @@ export default defineComponent({
   setup() {
     const $store = useStore()
 
-    const loginedUser = computed ({
+    const user = computed ({
       get: () => $store.state.user.user,
       set: val => {
         $store.commit('user/updateUser', val)
@@ -66,7 +66,7 @@ export default defineComponent({
       email: ref(''),
       phoneno: ref(''),
       password: ref(''),
-      loginedUser
+      user
     }   
   },
   methods: {
@@ -79,7 +79,7 @@ export default defineComponent({
         Password: this.password
       })
       .then(function (resp) {
-        thiz.loginedUser = {
+        thiz.user = {
           logined: true,
           info: resp.data.Info
         }
