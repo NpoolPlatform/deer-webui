@@ -45,17 +45,28 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { api } from 'boot/axios'
 import { fail } from '../notify/notify'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
+    const $store = useStore()
+
+    const loginedUser = computed ({
+      get: () => $store.state.user.user,
+      set: val => {
+        $store.commit('user/updateUser', val)
+      }
+    })
+
     return {
       loginType: ref('email'),
       email: ref(''),
       phoneno: ref(''),
-      password: ref('')
+      password: ref(''),
+      loginedUser
     }   
   },
   methods: {
@@ -68,7 +79,13 @@ export default defineComponent({
         Password: this.password
       })
       .then(function (resp) {
-        console.log(resp)
+        thiz.loginedUser = {
+          logined: true,
+          info: resp.data.Info
+        }
+        thiz.$router.push({
+          path: '/',
+        })
       })
       .catch(function (error) {
         fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error, error.response.data)
