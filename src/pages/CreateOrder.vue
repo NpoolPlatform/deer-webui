@@ -147,10 +147,10 @@
           <img class="order-deal-info-good-poster" :src="poster" />
           <div>
             <div class="row order-deal-info-good-info">
-              <div class="order-deal-info-good-title">{{ good.title }}</div>
+              <div class="order-deal-info-good-title">{{ title }}</div>
               <div>
                 <q-badge
-                  v-for="badge in good.badges"
+                  v-for="badge in badges"
                   :key="badge"
                   :color="badgeColors[randomNumber() % badgeColors.length]"
                   class="order-deal-info-good-badge"
@@ -161,13 +161,13 @@
             </div>
             <div class="row no-wrap items-center order-deal-info-good-rating">
               <q-rating size="18px" v-model="stars" :max="5" color="primary" />
-              <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
+              <span class="text-caption text-grey q-ml-sm">{{ rating }} ({{ voteCount }})</span>
             </div>
           </div>
         </div>
 
         <div class="row order-deal-info-production-types order-deal-info-content">
-          {{ good.cointype }}
+          {{ cointype }}
         </div>
 
         <div class="row order-deal-info-combo-units order-deal-info-content">
@@ -175,7 +175,7 @@
         </div>
 
         <div class="row order-deal-info-combo-duration order-deal-info-content">
-          {{ good.duration }} {{ $t('GENERAL.DAYS') }}
+          {{ duration }} {{ $t('GENERAL.DAYS') }}
         </div>
 
         <div class="row order-deal-info-start-time order-deal-info-content">
@@ -187,11 +187,11 @@
         </div>
 
         <div class="row order-deal-info-price order-deal-info-content">
-          {{ good.pricecurrencychar }} {{ good.price }}
+          {{ currencySymbol }} {{ price }}
         </div>
 
         <div class="row order-deal-info-units order-deal-info-content">
-          {{ good.amount }} {{ good.unit }}
+          {{ amount }} {{ unit }}
         </div>
 
         <div class="row order-deal-info-preferential order-deal-info-content">
@@ -210,10 +210,10 @@
           <div class="row">
             <q-space />
             <div class="order-deal-info-currency">
-              {{ good.pricecurrencychar }}
+              {{ currencySymbol }}
             </div>
             <div class="order-deal-info-summary-amount">
-              {{ good.price }}
+              {{ price }}
             </div>
             <q-space />
           </div>
@@ -234,7 +234,7 @@
         </div>
 
         <div class="row order-deal-info-combo-duration order-deal-info-content">
-          {{ good.duration }} {{ $t('GENERAL.DAYS') }}
+          {{ duration }} {{ $t('GENERAL.DAYS') }}
         </div>
 
         <div class="row order-deal-info-start-time order-deal-info-content">
@@ -246,11 +246,11 @@
         </div>
 
         <div class="row order-deal-info-price order-deal-info-content">
-          {{ good.pricecurrencychar }} {{ good.price }}
+          {{ currencySymbol }} {{ price }}
         </div>
 
         <div class="row order-deal-info-units order-deal-info-content">
-          {{ good.amount }} {{ good.unit }}
+          {{ amount }} {{ unit }}
         </div>
 
         <div class="row order-deal-info-preferential order-deal-info-content">
@@ -269,10 +269,10 @@
           <div class="row">
             <q-space />
             <div class="order-deal-info-currency">
-              {{ good.pricecurrencychar }}
+              {{ currencySymbol }}
             </div>
             <div class="order-deal-info-summary-amount">
-              {{ good.price }}
+              {{ price }}
             </div>
             <q-space />
           </div>
@@ -287,13 +287,13 @@
           <q-space />
           <div class="row order-deal-info-final-preferential">
             <div class="order-deal-info-final-preferential-label">{{ $t('GENERAL.PREFERENTIAL') }}:</div>
-            <div class="order-deal-info-final-preferential-currency">{{ good.pricecurrencychar}}</div>
-            <div class="order-deal-info-final-preferential-amount">{{ good.price}}</div>
+            <div class="order-deal-info-final-preferential-currency">{{ currencySymbol}}</div>
+            <div class="order-deal-info-final-preferential-amount">{{ price}}</div>
           </div>
           <div class="row">
             <div class="order-deal-info-final-summary-label">{{ $t('GENERAL.NEED_PAY') }}:</div>
-            <div class="order-deal-info-final-summary-currency">{{ good.pricecurrencychar}}</div>
-            <div class="order-deal-info-final-summary-amount">{{ good.price}}</div>
+            <div class="order-deal-info-final-summary-currency">{{ currencySymbol }}</div>
+            <div class="order-deal-info-final-summary-amount">{{ price}}</div>
           </div>
         </div>
         <div class="row">
@@ -366,17 +366,55 @@ export default defineComponent({
       return this.$store.state.good.goods[this.goodId]
     },
     posters: function () {
-      return this.good.posters.slice(0, Math.min(4, this.good.posters.length))
+      if (this.good === undefined || this.good.Extra === undefined ||
+        this.good.Extra.Posters === undefined ||
+        this.good.Extra.Posters.length === 0) {
+        return ['logo/btc.png', 'logo/btc.png', 'logo/btc.png']
+      }
+      return this.good.Extra.Posters.slice(0, Math.min(3, this.good.Extra.Posters.length))
     },
     poster: function () {
-      if (this.good.posters.length > 0) {
-        return this.good.posters[0]
+      if (this.posters === undefined || this.posters.length > 0) {
+        return this.posters[0]
       }
       return 'logo/btc.png'
     },
     stars: function () {
-      return this.good.rating
-    }
+      return this.good.Extra.Rating
+    },
+    title: function () {
+      return this.good.Title
+    },
+    badges: function () {
+      if (this.good.Extra === undefined || this.good.Extra.Labels.length === 0) {
+        return [this.$t('GENERAL.SELF_RUN')]
+      }
+      return this.good.Extra.Labels
+    },
+    rating: function () {
+      return this.good.Extra.Rating
+    },
+    voteCount: function () {
+      return this.good.Extra.VoteCount
+    },
+    cointype: function () {
+      return this.good.CoinInfo.Name
+    },
+    duration: function () {
+      return this.good.DurationDays
+    },
+    currencySymbol: function () {
+      return this.good.PriceCurrency.Symbol
+    },
+    price: function () {
+      return this.good.Price
+    },
+    amount: function () {
+      return this.good.Total
+    },
+    unit: function () {
+      return this.good.PriceCurrency.Unit
+    },
   },
   methods: {
     onWithdrawAddressUpdate: function (val, evt) {
@@ -390,8 +428,8 @@ export default defineComponent({
         path: 'payment',
         query: {
           // TODO: submit order and switch to payment with responsed payment id
-          paymentId: this.good.id,
-          goodId: this.good.id
+          paymentId: this.good.ID,
+          goodId: this.good.ID
         }
       })
     }

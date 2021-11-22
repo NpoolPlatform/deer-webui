@@ -44,30 +44,30 @@
 
     <div class="good-poster-info">
       <div class="row">
-        <img avatar :src="good.coinlogo" class="good-poster-coin-logo" />
+        <img avatar :src="coinlogo" class="good-poster-coin-logo" />
         <div class="good-title">
           <div class="q-mb-xs row good-title">
-            {{ good.title }}
+            {{ title }}
             <p class="good-poster-title-parameter">
-              {{ good.amount }}{{ good.unit }} {{ good.duration }}{{ $t('GENERAL.DAYS') }}
+              {{ amount }}{{ unit }} {{ duration }}{{ $t('GENERAL.DAYS') }}
             </p>
           </div>
         
           <div class="row no-wrap items-center">
             <q-rating size="18px" v-model="stars" :max="5" color="primary" />
-            <span class="text-caption text-grey q-ml-sm">{{ good.rating }} ({{ good.rateCount }})</span>
+            <span class="text-caption text-grey q-ml-sm">{{ rating }} ({{ voteCount }})</span>
           </div>
         </div>
       </div>
 
       <div class="good-price row">
         <p class="good-power-price good-price-label">{{ $t('GENERAL.RENT_FEE') }}</p>
-        <p class="good-power-price good-power-price-symbol">{{ good.pricecurrencychar }}</p>
-        <p class="good-power-price good-power-price-price">{{ good.price }}</p>
+        <p class="good-power-price good-power-price-symbol">{{ currencySymbol }}</p>
+        <p class="good-power-price good-power-price-price">{{ price }}</p>
         <p class="good-power-price good-price-label">{{ $t('GENERAL.MAINTAINANCE_FEE') }}</p>
         <p class="good-power-price good-power-price-fee">10%</p>
         <p class="good-power-price good-price-label">{{ $t('GENERAL.POWER_FEE') }}</p>
-        <p class="good-power-price good-power-price-symbol">{{ good.pricecurrencychar }}</p>
+        <p class="good-power-price good-power-price-symbol">{{ currencySymbol }}</p>
         <p class="good-power-price good-power-power-fee">2.66/</p>
         <p class="good-power-price good-power-power-fee-days">{{ $t('GENERAL.DAYS') }}</p>
       </div>
@@ -98,7 +98,7 @@
         <div class="row good-production-types">
           <div class="good-production-types-label">{{ $t('GENERAL.PRODUCTION_COIN_TYPES') }}</div>
           <q-btn
-            v-for="(coin, index) in good.supportedCoinTypes"
+            v-for="(coin, index) in supportedCoins"
             :key="index"
             :label="coin"
             text-color="grey-9"
@@ -113,7 +113,7 @@
         <div class="row good-production-types">
           <div class="good-production-types-label">{{ $t('GENERAL.COMBO_UNITS') }}</div>
           <q-btn
-            :label="good.amount + ' ' + good.unit"
+            :label="amount + ' ' + unit"
             text-color="grey-9"
             color="blue-4"
             dense
@@ -125,7 +125,7 @@
         <div class="row good-production-types">
           <div class="good-production-types-label">{{ $t('GENERAL.GOOD_LABELS') }}</div>
           <q-badge
-            v-for="badge in good.badges"
+            v-for="badge in badges"
             :key="badge"
             :color="badgeColors[randomNumber() % badgeColors.length]"
             class="good-badge"
@@ -201,19 +201,78 @@ export default defineComponent({
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
-      goodCount: 1
+      goodCount: 1,
     }
   },
   computed: {
     good: function () {
+      console.log("after click", this.goodId);
+      console.log(this.$store.state.good);
+      console.log("good now is", this.$store.state.good.goods[this.goodId]);
       return this.$store.state.good.goods[this.goodId]
     },
     stars: function () {
-      return this.good.rating
+      return this.good.Extra.Rating
     },
     posters: function () {
-      return this.good.posters.slice(0, Math.min(4, this.good.posters.length))
-    }
+      if (this.good.Extra === undefined ||
+        this.good.Extra.Posters === undefined ||
+        this.good.Extra.Posters.length === 0) {
+        return ['logo/btc.png', 'logo/btc.png', 'logo/btc.png']
+      }
+      return this.good.Extra.Posters.slice(0, Math.min(3, this.good.Extra.Posters.length))
+    },
+
+    coinlogo: function () {
+      console.log("good at coinlogo is", this.good);
+      if (this.good.CoinInfo === undefined ||
+        this.good.CoinInfo.Logo === '' ||
+        this.good.CoinInfo.Logo == undefined) {
+        return 'logo/btc.png'
+      }
+      return this.good.CoinInfo.Logo
+    },
+    title: function () {
+      return this.good.Title
+    },
+    badges: function () {
+      if (this.good.Extra === undefined || this.good.Extra.Labels.length === 0) {
+        return [this.$t('GENERAL.SELF_RUN')]
+      }
+      return this.good.Extra.Labels
+    },
+    rating: function () {
+      return this.good.Extra.Rating
+    },
+    voteCount: function () {
+      return this.good.Extra.VoteCount
+    },
+    cointype: function () {
+      if (this.good.CoinInfo === undefined ||
+        this.good.CoinInfo.Logo === '' ||
+        this.good.CoinInfo.Logo == undefined) {
+        return 'BTC'
+      }
+      return this.good.CoinInfo.Name
+    },
+    duration: function () {
+      return this.good.DurationDays
+    },
+    currencySymbol: function () {
+      return this.good.PriceCurrency.Symbol
+    },
+    price: function () {
+      return this.good.Price
+    },
+    amount: function () {
+      return this.good.Total
+    },
+    unit: function () {
+      return this.good.PriceCurrency.Unit
+    },
+    supportedCoins: function () {
+      return this.good.SupportedCoins
+    },
   },
   methods: {
     onMouseEnterThumbnail: function (index) {
@@ -228,7 +287,7 @@ export default defineComponent({
       this.$router.push({
         path: 'createOrder',
         query: {
-          goodId: this.good.id
+          goodId: this.good.ID
         }
       })
     }

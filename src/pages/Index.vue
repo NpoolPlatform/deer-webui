@@ -27,8 +27,8 @@
       <h4 class="title">{{ $t('BUTTON.PLATFORM_RECOMMEND') }}</h4>
       <q-list class="recommend-list">
         <recommend-good-card
-          v-for="recommend in recommends"
-          :key="recommend.ID"
+          v-for="(recommend, index) in recommends"
+          :key="index"
           :good="recommend">
         </recommend-good-card>
       </q-list>
