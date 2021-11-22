@@ -85,6 +85,8 @@ export default defineComponent({
   methods: {
     onSignupClick: function () {
       var thiz = this
+      var failToRegister = this.$t('GENERAL.FAIL_REGISTER')
+
       api.post('/user-management/v1/signup', {
         Password: this.password,
         EmailAddress: this.email,
@@ -101,7 +103,7 @@ export default defineComponent({
         })
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_REGISTER'), error)
+        fail(undefined, failToRegister, error)
       })
     },
     onSendPhoneVerificationCodeClick: function () {
@@ -109,6 +111,7 @@ export default defineComponent({
     },
     onSendEmailVerificationCodeClick: function () {
       const notif = waiting(this.$t('GENERAL.EMAIL_SENDING'))
+      var failToSend = this.$t('GENERAL.FAIL_EMAIL_SEND')
 
       var thiz = this
       api.post('/verification-door/v1/send/email', {
@@ -119,7 +122,7 @@ export default defineComponent({
         success(notif, msg)
       })
       .catch(function (error) {
-        fail(notif, thiz.$t('GENERAL.FAIL_EMAIL_SEND'), error)
+        fail(notif, failToSend, error)
       })
     },
     

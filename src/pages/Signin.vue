@@ -72,6 +72,7 @@ export default defineComponent({
   methods: {
     onSigninClick: function () {
       var thiz = this
+      var failToSign = this.$t('GENERAL.FAIL_SIGNIN')
 
       api.post('/login-door/v1/login', {
         Email: this.email,
@@ -88,7 +89,7 @@ export default defineComponent({
         })
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error)
+        fail(undefined, failToSign, error)
       })
     }
   }
