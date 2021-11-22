@@ -256,7 +256,7 @@ export default defineComponent({
   },
   computed: {
     username: function () {
-      return this.user.info.Username
+      return this.user.info.BasicInfo.Username
     }
   }
 })

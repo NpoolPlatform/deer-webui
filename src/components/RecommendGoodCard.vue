@@ -6,14 +6,14 @@
       </q-item-section>
       <q-item-section>
         <div class="row">
-          <h6>{{ good.Title }}</h6>
+          <h6>{{ title }}</h6>
           <p class="good-parameter">
-            {{ good.UnitPower }}{{ good.Unit }} {{ good.DurationDays }}{{ $t('GENERAL.DAYS') }}
+            {{ unitPower }}{{ unit }} {{ durationDays }}{{ $t('GENERAL.DAYS') }}
           </p>
         </div>
         <div>
           <q-badge
-            v-for="badge in good.badges"
+            v-for="badge in labels"
             :key="badge"
             :color="badgeColors[randomNumber() % badgeColors.length]"
             style="margin-right: 6px;"
@@ -52,8 +52,8 @@
       </q-carousel>
     </div>
     <div class="justify-center row good-price-container">
-      <h5 class="good-price-char">{{ good.pricecurrencychar }}</h5>
-      <h2 class="good-price-number">{{ good.price }}</h2>
+      <h5 class="good-price-char">{{ currencySymbol }}</h5>
+      <h2 class="good-price-number">{{ price }}</h2>
     </div>
     <div class="justify-center row">
       <q-separator style="width: 80%;" />
@@ -143,25 +143,47 @@ export default defineComponent({
   },
   computed: {
     posters: function () {
-      if (this.good.extra === undefined) {
-        return ["logo/btc.png", "logo/btc.png", "logo/btc.png"]
+      if (this.good.Extra === undefined ||
+        this.good.Extra.Posters === undefined ||
+        this.good.Extra.Posters.length === 0) {
+        return ['logo/btc.png', 'logo/btc.png', 'logo/btc.png']
       }
-      return this.good.posters.slice(0, Math.min(3, this.good.posters.length))
+      return this.good.Extra.Posters.slice(0, Math.min(3, this.good.Extra.Posters.length))
     },
     coinlogo: function () {
-      if (this.CoinInfo === undefined) {
-        return "logo/btc.png"
+      if (this.good.CoinInfo === undefined ||
+        this.good.CoinInfo.Logo === '' ||
+        this.good.CoinInfo.Logo == undefined) {
+        return 'logo/btc.png'
       }
-      return this.CoinInfo.CoinLogo
+      return this.good.CoinInfo.Logo
     },
     labels: function () {
-      if (this.Extra === undefined || this.Extra.Labels.length === 0) {
+      if (this.good.Extra === undefined || this.good.Extra.Labels.length === 0) {
         return [this.$t('GENERAL.SELF_RUN')]
       }
-      return this.Extra.Labels 
+      return this.good.Extra.Labels
     },
     user: function () {
       return this.$store.state.user.user
+    },
+    currencySymbol: function () {
+      return this.good.PriceCurrency.Symbol
+    },
+    title: function () {
+      return this.good.Title
+    },
+    unitPower: function () {
+      return this.good.UnitPower
+    },
+    unit: function () {
+      return this.good.Unit
+    },
+    durationDays: function () {
+      return this.good.DurationDays
+    },
+    price: function () {
+      return this.good.Price
     }
   }
 })

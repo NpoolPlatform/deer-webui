@@ -70,25 +70,26 @@ export default defineComponent({
           url: 'http://localhost:8080',
         }
       ],
-      recommends: [{
+      recommendGoods: ref([{
         Actuals: true,
-        ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa",
-        BenefitType: "platform",
+        BenefitType: 'platform',
+        Classic: true,
         CoinInfo: {
-          ID: "aaaaaaaa-bbbb-aaaa-aaaa-aaaaaaaa",
-          CoinType: "BTC",
-          CoinLogo: 'logo/btc.png'
+          ID: 'aaaaaaaa-bbbb-aaaa-aaaa-aaaaaaaa',
+          Name: 'BTC',
+          Logo: 'logo/btc.png',
+          Unit: 'BTC',
+          PreSale: false
         },
-        SupportedCoinTypes: [{
-          ID: "aaaaaaaa-bbbb-dddd-aaaa-aaaaaaaa",
-          CoinType: "BTC",
-          CoinLogo: 'logo/btc.png'
-        }, {
-          ID: "aaaaaaaa-bbbb-cccc-aaaa-aaaaaaaa",
-          CoinType: "BCH",
-          CoinLogo: 'logo/btc.png'
-        }],
-        Title: '蚂蚁矿机S19Pro套餐',
+        DeliveryAt: 1637564087,
+        DeviceInfo: {
+          ID: "b8769b9e-5767-4e81-ad70-3bb8176aa169",
+          Manufacturer: "Ant-1637564087022583747",
+          PowerComsuption: 120,
+          ShipmentAt: 1637564087,
+          Type: "S19-1637564087022583747"
+        },
+        DurationDays: 180,
         Extra: {
           Rating: 4.2,
           VoteCount: 529,
@@ -97,39 +98,84 @@ export default defineComponent({
           OutSale: false,
           PreSale: false,
         },
-        DurationDays: 180,
+        ID: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa',
+        InheritFromGood: {
+          Actuals: true,
+          BenefitType: "platform",
+          Classic: true,
+          CoinInfoID: "6ba7b812-9dad-11d1-80b4-00c04fd430c9",
+          DeliveryAt: 1637564087,
+          DeviceInfoID: "b8769b9e-5767-4e81-ad70-3bb8176aa169",
+          DurationDays: 180,
+          ID: "b1699189-bb6c-4262-8198-7b5feeeff7ec",
+          InheritFromGoodID: "00000000-0000-0000-0000-000000000000",
+          Price: 13,
+          PriceCurrency: "e522b14b-6817-4623-b058-34aea85ef891",
+          SeparateFee: true,
+          Start: 1637564087,
+          SupportCoinTypeIDs: [
+            'dabb0dca-311b-465a-be56-f71982ff4922',
+            '5135e69c-1993-4860-a466-0e8bc53a4cea'
+          ],
+          Title: "Ant Miner S19 Pro",
+          Total: 100,
+          Unit: "TH/s",
+          UnitPower: 10,
+          VendorLocationID: "dad9d9d0-f38d-4f8c-b5df-a38503200d25"
+        },
+        Price: 2029.70,
+        PriceCurrency: {
+          ID: 'aaaaaaaa-bbbb-cccc-aaaa-aaaaaaae',
+          Name: 'USDT',
+          Unit: 'USDT',
+          Symbol: '$'
+        },
+        SeparateFee: true,
+        Start: 1637564087,
+        SupportedCoins: [{
+          ID: 'aaaaaaaa-bbbb-aaaa-aaaa-aaaaaaaa',
+          Name: 'BTC',
+          Logo: 'logo/btc.png',
+          Unit: 'BTC',
+          PreSale: false
+        }, {
+          ID: 'aaaaaaaa-bbbb-aaaa-aaaa-aaaaaaab',
+          Name: 'BCH',
+          Logo: 'logo/btc.png',
+          Unit: 'BCH',
+          PreSale: false
+        }],
+        Title: '蚂蚁矿机S19Pro套餐',
+        Total: 10000,
         Unit: 'TH/s',
         UnitPower: 200,
         Fees: [
           {
-            ID: "aaaaaaaa-bbbb-cccc-aaaa-aaaaaaab",
+            ID: 'aaaaaaaa-bbbb-cccc-aaaa-aaaaaaab',
             FeeType: '技术服务费',
             PayType: 'percent',
             PercentValue: 10,
           }, {
-            ID: "aaaaaaaa-bbbb-cccc-aaaa-aaaaaaac",
+            ID: 'aaaaaaaa-bbbb-cccc-aaaa-aaaaaaac',
             FeeType: '电费',
             PayType: 'amount',
             AmountValue: 0.05,
           }
         ],
-        Start: Math.round(+new Date()/1000),
-        Price: 2029.70,
-        PriceCurrency: {
-          ID: "aaaaaaaa-bbbb-cccc-aaaa-aaaaaaae",
-          Name: "USDT",
-          Unit: "USDT",
-          Symbol: "$"
+        VendorLocation: {
+          Address: "Shanghai-1637564087022583747",
+          City: "Shanghai-1637564087022583747",
+          Country: "China-1637564087022583747",
+          ID: "dad9d9d0-f38d-4f8c-b5df-a38503200d25",
+          Province: "Shanghai-1637564087022583747"
         }
-      }],
-      emitter: mitt(),
-      recommendGoods: []
+      }]),
+      emitter: mitt()
     }
   },
   created() {
-    this.recommendGoods = this.recommends
-    this.getRecommendGoods()
     this.emitter.on('recommend_goods_received', this.onRecommendGoodsReceived)
+    this.getRecommendGoods()
   },
   methods: {
     onBannerSliderClick: function(url) {
@@ -137,19 +183,25 @@ export default defineComponent({
     },
     getRecommendGoods: function () {
       var thiz = this
+      var emitter = this.emitter
 
       api.post('/cloud-hashing-apis/v1/get/goods/detail')
       .then(function (resp) {
-        thiz.emitter.emit('recommend_goods_received', resp.data.Details)
+        emitter.emit('recommend_goods_received', resp.data.Details)
       })
       .catch(function (error) {
         fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error)
       })
     },
     onRecommendGoodsReceived: function (recommends) {
-      console.log(recommends)
       this.recommendGoods = recommends
-      this.recommends = this.recommendGoods.slice(0, Math.min(3, this.recommendGoods.length))
+    }
+  },
+  computed: {
+    recommends() {
+      return this.recommendGoods.filter((good, index) => {
+        return index < 4
+      })
     }
   }
 })
