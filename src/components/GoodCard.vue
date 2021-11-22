@@ -218,9 +218,9 @@ export default defineComponent({
       if (this.good.Extra === undefined ||
         this.good.Extra.Posters === undefined ||
         this.good.Extra.Posters.length === 0) {
-        return ['logo/btc.png', 'logo/btc.png', 'logo/btc.png']
+        return ['logo/btc.png', 'logo/btc.png', 'logo/btc.png', 'logo/btc.png']
       }
-      return this.good.Extra.Posters.slice(0, Math.min(3, this.good.Extra.Posters.length))
+      return this.good.Extra.Posters.slice(0, Math.min(4, this.good.Extra.Posters.length))
     },
 
     coinlogo: function () {
