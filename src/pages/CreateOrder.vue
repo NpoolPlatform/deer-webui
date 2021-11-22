@@ -325,6 +325,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { hint } from '../notify/notify'
 
 export default defineComponent({
   setup () {
@@ -420,10 +421,15 @@ export default defineComponent({
     onWithdrawAddressUpdate: function (val, evt) {
       console.log(val, evt)
     },
-    randomNumber : function (){
+    randomNumber: function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
     onSubmitOrderClick: function () {
+      if (!this.agreeWithContract) {
+        hint(undefined, this.$t('GENERAL.NEED_AGREE_CONTRACT'))
+        return
+      }
+
       this.$router.push({
         path: 'payment',
         query: {

@@ -113,6 +113,7 @@ export default {
       EMAIL_SENDING: '正在发送邮件验证码 ...',
       FAIL_EMAIL_SEND: '发送邮件失败: ',
       FAIL_REGISTER: '注册过程出现错误: ',
-      FAIL_SIGNIN: '登录失败'
+      FAIL_SIGNIN: '登录失败',
+      NEED_AGREE_CONTRACT: '请先统一服务协议'
     }
   }

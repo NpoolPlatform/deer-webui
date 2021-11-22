@@ -37,8 +37,6 @@ export const fail = function (notif, msg, error) {
     })
     return
   }
-
-  console.log(notif)
   
   notif({
     type: 'negative',
@@ -47,8 +45,24 @@ export const fail = function (notif, msg, error) {
   })
 }
 
+export const hint = function (notif, msg) {
+  if (notif == undefined) {
+    Notify.create({
+      type: 'warning',
+      message: msg
+    })
+    return
+  }
+  
+  notif({
+    type: 'warning',
+    message: msg
+  })
+}
+
 export default (
   success,
   fail,
-  waiting
+  waiting,
+  hint
 )
