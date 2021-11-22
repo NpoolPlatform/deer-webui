@@ -123,7 +123,7 @@ export default defineComponent({
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
     onBuyNowClick: function () {
-      if (!this.user.login) {
+      if (!this.user.logined) {
         this.$router.push({
           path: 'signin',
           query: {
