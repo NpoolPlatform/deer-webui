@@ -22,7 +22,13 @@ export const success = function (notif, msg) {
   })
 }
 
-export const fail = function (notif, msg, error, data) {
+export const fail = function (notif, msg, error) {
+  var data = error
+
+  if (error.response != undefined) {
+    data = error.response.data
+  }
+
   if (notif == undefined) {
     Notify.create({
       type: 'negative',

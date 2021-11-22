@@ -138,12 +138,12 @@ export default defineComponent({
     getRecommendGoods: function () {
       var thiz = this
 
-      api.post('/cloud-hashing-goods/v1/get/goods/detail')
+      api.post('/cloud-hashing-apis/v1/get/goods/detail')
       .then(function (resp) {
         thiz.emitter.emit('recommend_goods_received', resp.data.Details)
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error, error)
+        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error)
       })
     },
     onRecommendGoodsReceived: function (recommends) {

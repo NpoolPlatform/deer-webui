@@ -88,7 +88,7 @@ export default defineComponent({
         })
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error, error.response.data)
+        fail(undefined, thiz.$t('GENERAL.FAIL_SIGNIN'), error)
       })
     }
   }

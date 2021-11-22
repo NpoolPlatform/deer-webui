@@ -101,7 +101,7 @@ export default defineComponent({
         })
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_REGISTER'), error, error.response.data)
+        fail(undefined, thiz.$t('GENERAL.FAIL_REGISTER'), error)
       })
     },
     onSendPhoneVerificationCodeClick: function () {
@@ -119,7 +119,7 @@ export default defineComponent({
         success(notif, msg)
       })
       .catch(function (error) {
-        fail(notif, thiz.$t('GENERAL.FAIL_EMAIL_SEND'), error, error.response.data)
+        fail(notif, thiz.$t('GENERAL.FAIL_EMAIL_SEND'), error)
       })
     },
     
