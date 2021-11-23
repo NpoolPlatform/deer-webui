@@ -19,7 +19,6 @@ const routes = [
         path:'payment',
         component: () => import('pages/Payment.vue'),
         query: {
-          paymentId: '',
           goodId: ''
         }
       }, {

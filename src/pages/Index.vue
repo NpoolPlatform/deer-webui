@@ -177,6 +177,9 @@ export default defineComponent({
     this.emitter.on('recommend_goods_received', this.onRecommendGoodsReceived)
     this.getRecommendGoods()
   },
+  beforeUnmount() {
+    this.emitter.off('recommend_goods_received')
+  },
   methods: {
     onBannerSliderClick: function(url) {
 

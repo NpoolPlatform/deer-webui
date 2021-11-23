@@ -114,6 +114,8 @@ export default {
       FAIL_EMAIL_SEND: '发送邮件失败: ',
       FAIL_REGISTER: '注册过程出现错误: ',
       FAIL_SIGNIN: '登录失败',
-      NEED_AGREE_CONTRACT: '请先统一服务协议'
+      NEED_AGREE_CONTRACT: '请先统一服务协议',
+      FAIL_CREATE_ORDER: '创建订单失败',
+      FAIL_GET_COININFOS: '获取支付信息失败'
     }
   }

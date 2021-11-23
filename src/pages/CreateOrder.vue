@@ -324,11 +324,22 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { hint } from '../notify/notify'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup () {
+    const $store = useStore()
+    
+    const appInfo = computed ({
+      get: () => $store.state.appInfo.appInfo
+    })
+
+    const user = computed ({
+      get: () => $store.state.user.user
+    })
+
     return {
       withdrawAddresses: [
         {
@@ -356,7 +367,9 @@ export default defineComponent({
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
       ],
       goodCount: ref(1),
-      agreeWithContract: ref(false)
+      agreeWithContract: ref(false),
+      appInfo,
+      user,
     }
   },
   computed: {
@@ -433,12 +446,10 @@ export default defineComponent({
       this.$router.push({
         path: 'payment',
         query: {
-          // TODO: submit order and switch to payment with responsed payment id
-          paymentId: this.good.ID,
           goodId: this.good.ID
         }
       })
-    }
+    },
   },
   watch: {
     currentWithdrawAddress: function (val) {

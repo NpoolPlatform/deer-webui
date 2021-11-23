@@ -50,14 +50,14 @@
               <q-btn
                 color="blue-4"
                 class="payment-scan-item"
-                :label="payType.type"
                 v-for="payType in supportPayTypes"
-                :key="payType.type" />
+                :label="payType.Name"
+                :key="payType.Name" />
             </div>
             <div class="row">
               <div class="payment-scan-amount-label">{{ $t('GENERAL.NEED_PAY') }}:</div>
               <div class="payment-scan-amount-amount">{{ payment.summary }}</div>
-              <div class="payment-scan-amount-unit">{{ supportPayTypes[selectedPayTypeIndex].type }}</div>
+              <div class="payment-scan-amount-unit">{{ supportPayTypes[selectedPayTypeIndex].Name }}</div>
             </div>
 
             <div class="row">
@@ -67,7 +67,7 @@
                 icon-right="arrow_right_alt"
                 rounded
                 @click="onPayClick">
-                {{ $t('GENERAL.GOTO_PAY') }} ({{ supportPayTypes[selectedPayTypeIndex].type }})
+                {{ $t('GENERAL.GOTO_PAY') }} ({{ supportPayTypes[selectedPayTypeIndex].Name }})
               </q-btn>
               <q-btn
                 dense
@@ -80,15 +80,15 @@
             </div>
           </div>
           <div v-else class="payment-methods">
-            <div class="payment-label">{{ supportPayTypes[selectedPayTypeIndex].type }} {{ $t('GENERAL.PAY') }}</div>
+            <div class="payment-label">{{ supportPayTypes[selectedPayTypeIndex].Name }} {{ $t('GENERAL.PAY') }}</div>
             <q-separator />
             <div class="row payment-address">
               <div>
                 <div class="payment-pay-amount">
-                  {{ payingAmount }} {{ supportPayTypes[selectedPayTypeIndex].type }}
+                  {{ payingAmount }} {{ supportPayTypes[selectedPayTypeIndex].Name }}
                 </div>
                 <div class="payment-pay-currency">
-                  1 {{ supportPayTypes[selectedPayTypeIndex].type }} = $ 621.48000000
+                  1 {{ supportPayTypes[selectedPayTypeIndex].Name }} = $ 621.48000000
                 </div>
                 <div class="payment-pay-address">
                   {{ payingAddress }}
@@ -119,7 +119,7 @@
                 icon-right="arrow_right_alt"
                 rounded
                 @click="onPayStatusClick">
-                {{ $t('GENERAL.PAID') }} ({{ supportPayTypes[selectedPayTypeIndex].type }})
+                {{ $t('GENERAL.PAID') }} ({{ supportPayTypes[selectedPayTypeIndex].Name }})
               </q-btn>
               <q-btn
                 dense
@@ -179,14 +179,28 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import VueQrcode from 'vue-qrcode'
+import { api } from 'boot/axios'
+import { fail } from '../notify/notify'
+import { useStore } from 'vuex'
+import mitt from 'mitt'
 
 export default defineComponent({
   components: {
     VueQrcode
   },
   setup() {
+    const $store = useStore()
+    
+    const appInfo = computed ({
+      get: () => $store.state.appInfo.appInfo
+    })
+
+    const user = computed ({
+      get: () => $store.state.user.user
+    })
+
     return {
       payment: {
         id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaad',
@@ -204,46 +218,35 @@ export default defineComponent({
       remainMinute: ref(6),
       remainSecond: ref(6),
       paymentInterval: ref(-1),
-      supportPayTypes: [
-        {
-          icon: 'logo/btc.png',
-          type: 'BTC'
-        }, {
-          icon: 'logo/btc.png',
-          type: 'BCH' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'ETH' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'ETC' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'LTC' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'USDT(ERC20)' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'USDT(OMNI)' 
-        }, {
-          icon: 'logo/btc.png',
-          type: 'USDC' 
-        }
-      ],
+      supportPayTypes: ref([{
+        ID: '6ba7b812-9dad-11d1-80b4-00c04fd430c8',
+        Name: 'BTC',
+        Unit: 'BTC',
+        Logo: 'logo/btc.png'    
+      }]),
       selectedPayTypeIndex: 0,
       paying: false,
       payingAmount: 5.19,
-      payingAddress: 'bitcoincash:qpg7yf0f06kk9zyn4adfr5pqx6l5q83xmulcmgxuqkge'
+      payingAddress: 'bitcoincash:qpg7yf0f06kk9zyn4adfr5pqx6l5q83xmulcmgxuqkge',
+      appInfo,
+      user,
+      emitter: mitt()
     }
   },
   mounted () {
     this.startTimer(this.payment.deadline)
+    this.getCoinInfos()
   },
   beforeUnmount () {
     if (this.paymentInterval != -1) {
       clearInterval(this.paymentInterval)
     }
+  },
+  created() {
+    this.emitter.on('order_submitted', this.onOrderCreated)
+  },
+  beforeUnmount() {
+    this.emitter.off('order_submitted')
   },
   computed: {
     paymentId: function () {
@@ -285,6 +288,7 @@ export default defineComponent({
       return this.good.Extra.VoteCount
     },
     cointype: function () {
+      console.log(this.good.CoinInfo)
       return this.good.CoinInfo.Name
     },
     duration: function () {
@@ -304,6 +308,19 @@ export default defineComponent({
     },
   },
   methods: {
+    onOrderCreated: function (order) {
+      console.log(order)
+    },
+    getCoinInfos: function () {
+      var thiz = this
+      api.post('/sphinx-coininfo/v1/get/coin/infos')
+      .then(function (resp) {
+        thiz.supportPayTypes = resp.data.Infos
+      })
+      .catch(function (error) {
+        fail(undefined, thiz.$t('GENERAL.FAIL_GET_COININFOS'), error)
+      })
+    },
     randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
@@ -322,7 +339,38 @@ export default defineComponent({
       }, 1000)
     },
     onPayClick: function () {
+      var fees = []
+      if (this.good.Fees != undefined) {
+        for (let i = 0; i < this.good.Fees.length; i++) {
+          fees.push({
+            ID: this.good.Fees[i].ID,
+            DurationDays: 10
+          })
+        }
+      }
+
+      console.log(this.user)
+
+      var order = {
+        GoodID: this.goodId,
+        Units: 1,
+        UserID: this.user.info.BasicInfo.UserID,
+        AppID: this.appInfo.id,
+        Fees: fees,
+        PaymentCoinTypeID: this.supportPayTypes[this.selectedPayTypeIndex].ID,
+      }
+
+      var thiz = this
+      var emitter = this.emitter
+
+      api.post('/cloud-hashing-apis/v1/submit/order', order)
+      .then(function (resp) {
+        emitter.emit('order_submitted', resp.data.Info)
         this.paying = true
+      })
+      .catch(function (error) {
+        fail(undefined, thiz.$t('GENERAL.FAIL_CREATE_ORDER'), error)
+      })
     },
     onPayStatusClick: function () {
     }

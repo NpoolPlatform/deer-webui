@@ -206,9 +206,6 @@ export default defineComponent({
   },
   computed: {
     good: function () {
-      console.log("after click", this.goodId);
-      console.log(this.$store.state.good);
-      console.log("good now is", this.$store.state.good.goods[this.goodId]);
       return this.$store.state.good.goods[this.goodId]
     },
     stars: function () {
@@ -224,7 +221,6 @@ export default defineComponent({
     },
 
     coinlogo: function () {
-      console.log("good at coinlogo is", this.good);
       if (this.good.CoinInfo === undefined ||
         this.good.CoinInfo.Logo === '' ||
         this.good.CoinInfo.Logo == undefined) {

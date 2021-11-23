@@ -134,8 +134,6 @@ export default defineComponent({
       }
       // this.clickedGood = this.good
       this.$store.commit('good/updateGood', this.good)
-      console.log("click", this.good);
-      console.log("before click", this.good.ID);
       this.$router.push({
         path: 'good',
         query: {
