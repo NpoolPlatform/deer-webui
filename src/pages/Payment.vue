@@ -249,8 +249,11 @@ export default defineComponent({
     this.emitter.off('order_submitted')
   },
   computed: {
-    paymentId: function () {
-      return this.$route.query.paymentId
+    orderId: function () {
+      return this.$route.query.orderId
+    },
+    order: function () {
+      return this.$store.state.order.orders[this.orderId]
     },
     goodId: function () {
       return this.$route.query.goodId
@@ -349,13 +352,8 @@ export default defineComponent({
         }
       }
 
-      console.log(this.user)
-
       var order = {
-        GoodID: this.goodId,
-        Units: 1,
-        UserID: this.user.info.BasicInfo.UserID,
-        AppID: this.appInfo.id,
+        OrderID: this.orderId,
         Fees: fees,
         PaymentCoinTypeID: this.supportPayTypes[this.selectedPayTypeIndex].ID,
       }
@@ -366,7 +364,7 @@ export default defineComponent({
       api.post('/cloud-hashing-apis/v1/submit/order', order)
       .then(function (resp) {
         emitter.emit('order_submitted', resp.data.Info)
-        this.paying = true
+        thiz.paying = true
       })
       .catch(function (error) {
         fail(undefined, thiz.$t('GENERAL.FAIL_CREATE_ORDER'), error)

@@ -105,7 +105,7 @@ export default defineComponent({
     const $store = useStore()
 
     const clickedGood = computed ({
-      set: val => {
+      set: (val) => {
         $store.commit('good/updateGood', val)
       }
     })
@@ -132,8 +132,7 @@ export default defineComponent({
         })
         return
       }
-      // this.clickedGood = this.good
-      this.$store.commit('good/updateGood', this.good)
+      this.clickedGood = this.good
       this.$router.push({
         path: 'good',
         query: {

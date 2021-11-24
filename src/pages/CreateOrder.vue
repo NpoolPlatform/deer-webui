@@ -325,8 +325,10 @@
 
 <script>
 import { defineComponent, ref, computed } from 'vue'
-import { hint } from '../notify/notify'
+import { hint, fail } from '../notify/notify'
 import { useStore } from 'vuex'
+import mitt from 'mitt'
+import { api } from 'boot/axios'
 
 export default defineComponent({
   setup () {
@@ -338,6 +340,12 @@ export default defineComponent({
 
     const user = computed ({
       get: () => $store.state.user.user
+    })
+
+    const order = computed ({
+      set: (val) => {
+        $store.commit('good/updateOrder', val)
+      }
     })
 
     return {
@@ -370,7 +378,15 @@ export default defineComponent({
       agreeWithContract: ref(false),
       appInfo,
       user,
+      order,
+      emitter: mitt()
     }
+  },
+  created() {
+    this.emitter.on('order_submitted', this.onOrderCreated)
+  },
+  beforeUnmount() {
+    this.emitter.off('order_submitted')
   },
   computed: {
     goodId: function () {
@@ -431,6 +447,16 @@ export default defineComponent({
     },
   },
   methods: {
+    onOrderCreated: function (order) {
+      this.order = order
+      this.$router.push({
+        path: 'payment',
+        query: {
+          orderId: order.ID,
+          goodId: this.good.ID
+        }
+      })
+    },
     onWithdrawAddressUpdate: function (val, evt) {
       console.log(val, evt)
     },
@@ -443,11 +469,22 @@ export default defineComponent({
         return
       }
 
-      this.$router.push({
-        path: 'payment',
-        query: {
-          goodId: this.good.ID
-        }
+      var order = {
+        GoodID: this.goodId,
+        Units: 1,
+        UserID: this.user.info.BasicInfo.UserID,
+        AppID: this.appInfo.id
+      }
+
+      var thiz = this
+      var emitter = this.emitter
+
+      api.post('/cloud-hashing-apis/v1/submit/order', order)
+      .then(function (resp) {
+        emitter.emit('order_submitted', resp.data.Info)
+      })
+      .catch(function (error) {
+        fail(undefined, thiz.$t('GENERAL.FAIL_CREATE_ORDER'), error)
       })
     },
   },
