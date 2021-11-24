@@ -344,7 +344,7 @@ export default defineComponent({
 
     const order = computed ({
       set: (val) => {
-        $store.commit('good/updateOrder', val)
+        $store.commit('order/updateOrder', val)
       }
     })
 
@@ -478,13 +478,14 @@ export default defineComponent({
 
       var thiz = this
       var emitter = this.emitter
+      var failMsg = thiz.$t('GENERAL.FAIL_CREATE_ORDER')
 
       api.post('/cloud-hashing-apis/v1/submit/order', order)
       .then(function (resp) {
         emitter.emit('order_submitted', resp.data.Info)
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_CREATE_ORDER'), error)
+        fail(undefined, failMsg, error)
       })
     },
   },

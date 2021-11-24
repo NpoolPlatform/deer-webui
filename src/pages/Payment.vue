@@ -131,7 +131,7 @@
             </div>
           </div>
           <div class="payment-deal-info">
-            <div class="payment-deal-info-deal-id">ID: {{ payment.id }}</div>
+            <div class="payment-deal-info-deal-id">ID: {{ orderId }}</div>
             <q-separator />
             <div class="payment-deal-info-info">
               <div class="row">
@@ -202,13 +202,13 @@ export default defineComponent({
     })
 
     return {
-      payment: {
+      payment: ref({
         id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaad',
         summary: 1290.78,
         payingId: ['aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaf'],
         gasPayingId: ['aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaag'],
         deadline: Math.round(+new Date()/1000) + 6 * 60 * 60
-      },
+      }),
       payings: [],
       gasPayings: [],
       badgeColors: [
@@ -243,10 +243,10 @@ export default defineComponent({
     }
   },
   created() {
-    this.emitter.on('order_submitted', this.onOrderCreated)
+    this.emitter.on('payment_created', this.onPaymentCreated)
   },
   beforeUnmount() {
-    this.emitter.off('order_submitted')
+    this.emitter.off('payment_created')
   },
   computed: {
     orderId: function () {
@@ -311,8 +311,10 @@ export default defineComponent({
     },
   },
   methods: {
-    onOrderCreated: function (order) {
-      console.log(order)
+    onPaymentCreated: function (order) {
+      this.payment.id = order.Payment.ID
+      this.payment.summary = order.Payment.Amount
+      this.payingAddress = order.Payment.Account.Address
     },
     getCoinInfos: function () {
       var thiz = this
@@ -360,14 +362,15 @@ export default defineComponent({
 
       var thiz = this
       var emitter = this.emitter
+      var failMsg = this.$t('GENERAL.FAIL_CREATE_ORDER')
 
-      api.post('/cloud-hashing-apis/v1/submit/order', order)
+      api.post('/cloud-hashing-apis/v1/create/order/payment', order)
       .then(function (resp) {
-        emitter.emit('order_submitted', resp.data.Info)
+        emitter.emit('payment_created', resp.data.Info)
         thiz.paying = true
       })
       .catch(function (error) {
-        fail(undefined, thiz.$t('GENERAL.FAIL_CREATE_ORDER'), error)
+        fail(undefined, failMsg, error)
       })
     },
     onPayStatusClick: function () {

@@ -4,6 +4,7 @@ import { createStore } from 'vuex'
 import good from './module-good'
 import user from './module-user'
 import appInfo from './module-appinfo'
+import order from './module-order'
 
 /*
  * If not building with SSR mode, you can
@@ -19,7 +20,8 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       good,
       user,
-      appInfo
+      appInfo,
+      order
     },
 
     // enable strict mode (adds overhead!)
