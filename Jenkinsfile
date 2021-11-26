@@ -14,13 +14,14 @@ pipeline {
       steps {
         sh (returnStdout: false, script: '''
 	  set +e
-	  command quasar
+	  PATH=/usr/local/bin:$PATH command quasar
 	  rc=$?
 	  set -e
 	  if [ ! $rc -eq 0 ]; then
+	    n latest
             npm i --global @quasar/cli
 	  fi
-	  quasar build
+	  PATH=/usr/local/bin:$PATH quasar build
         '''.stripIndent())
       }
     }
