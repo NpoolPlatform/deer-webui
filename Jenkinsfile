@@ -19,8 +19,9 @@ pipeline {
 	  set -e
 	  if [ ! $rc -eq 0 ]; then
 	    n latest
-            npm i --global @quasar/cli
+            PATH=/usr/local/bin:$PATH npm i --global @quasar/cli
 	  fi
+	  PATH=/usr/local/bin:$PATH npm install
 	  PATH=/usr/local/bin:$PATH quasar build
         '''.stripIndent())
       }
