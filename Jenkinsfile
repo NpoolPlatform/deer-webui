@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh (returnStdout: false, script: '''
 	  set +e
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin/quasar command quasar
+	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin command quasar
 	  rc=$?
 	  set -e
 	  if [ ! $rc -eq 0 ]; then
@@ -24,8 +24,8 @@ pipeline {
 	    PATH=/usr/local/bin:$PATH yarn config set registry 'https://registry.npm.taobao.org'
             PATH=/usr/local/bin:$PATH yarn add global quasar-cli@latest
 	  fi
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin/quasar yarn install --registry https://registry.npm.taobao.org/
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin/quasar quasar build
+	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin yarn install --registry https://registry.npm.taobao.org/
+	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin quasar build
         '''.stripIndent())
       }
     }
