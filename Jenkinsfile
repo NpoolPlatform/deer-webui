@@ -21,7 +21,8 @@ pipeline {
 	    n latest
             PATH=/usr/local/bin:$PATH npm i --global @quasar/cli
 	  fi
-	  PATH=/usr/local/bin:$PATH npm install --registry https://registry.npm.taobao.org
+	  PATH=/usr/local/bin:$PATH npm install yarn --registry https://registry.npm.taobao.org
+	  PATH=/usr/local/bin:$PATH yarn install
 	  PATH=/usr/local/bin:$PATH quasar build
         '''.stripIndent())
       }
