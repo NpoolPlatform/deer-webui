@@ -80,9 +80,6 @@ module.exports = configure(function (ctx) {
       proxy: {
         '/api': {
           target: 'http://api.npool.top:30080',
-          pathRewrite: {
-            '^/api': ''
-          },
           changeOrigin: true
         }
       },
