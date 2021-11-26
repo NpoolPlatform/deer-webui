@@ -79,7 +79,7 @@ pipeline {
         expression { DEPLOY_TARGET == 'true' }
       }
       steps {
-        sh 'echo Deploying'
+        sh 'kubectl apply -k k8s'
       }
     }
 
