@@ -18,7 +18,7 @@ pipeline {
 	  rc=$?
 	  set -e
 	  if [ ! $rc -eq 0 ]; then
-            npm install --global quasar-cli
+            npm i --global @quasar/cli
 	  fi
 	  quasar build
         '''.stripIndent())
