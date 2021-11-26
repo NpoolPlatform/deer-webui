@@ -21,7 +21,7 @@ pipeline {
 	    n latest
 	    PATH=/usr/local/bin:$PATH npm i -g mirror-config-china --registry=https://registry.npm.taobao.org
 	    PATH=/usr/local/bin:$PATH npm install --global --registry https://registry.npm.taobao.org yarn
-            PATH=/usr/local/bin:$PATH npm i --global quasar-cli@latest --registry https://registry.npm.taobao.org/
+            PATH=/usr/local/bin:$PATH yarn add global quasar-cli@latest
 	  fi
 	  PATH=/usr/local/bin:$PATH yarn install --registry https://registry.npm.taobao.org/
 	  PATH=/usr/local/bin:$PATH quasar build
