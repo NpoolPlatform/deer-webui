@@ -52,7 +52,7 @@ pipeline {
     	    version=latest
 	  fi
 	  set -e 
-	  docker build -t entropypool/deer-webui:$version
+	  docker build -t entropypool/deer-webui:$version .
         '''.stripIndent())
       }
     }
