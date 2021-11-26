@@ -13,7 +13,13 @@ pipeline {
       }
       steps {
         sh (returnStdout: false, script: '''
-          npm install --global quasar-cli
+	  set +e
+	  command quasar
+	  rc=$?
+	  set -e
+	  if [ ! $rc -eq 0 ]; then
+            npm install --global quasar-cli
+	  fi
 	  quasar build
         '''.stripIndent())
       }
