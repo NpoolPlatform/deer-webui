@@ -20,9 +20,9 @@ pipeline {
 	  if [ ! $rc -eq 0 ]; then
 	    n latest
 	    PATH=/usr/local/bin:$PATH npm install --global --registry https://registry.npm.taobao.org yarn
-            PATH=/usr/local/bin:$PATH yarn add --dev quasar-cli@latest
+            PATH=/usr/local/bin:$PATH yarn add --dev quasar-cli@latest --registry https://registry.npm.taobao.org/
 	  fi
-	  PATH=/usr/local/bin:$PATH yarn install
+	  PATH=/usr/local/bin:$PATH yarn install --registry https://registry.npm.taobao.org/
 	  PATH=/usr/local/bin:$PATH quasar build
         '''.stripIndent())
       }
