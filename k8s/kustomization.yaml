@@ -1,0 +1,6 @@
+commonLabels:
+  # app: deer-webui
+
+resources:
+- 01-deer-webui.yaml
+- 02-ingress.yaml
