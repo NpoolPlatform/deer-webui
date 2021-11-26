@@ -1,5 +1,5 @@
 FROM nginx:1.20
 
-user ROOT
+user root
 
-COPY dist/spa /usr/share/nginx/html
+COPY dist/spa/ /usr/share/nginx/html
