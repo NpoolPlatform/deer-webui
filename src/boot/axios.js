@@ -8,8 +8,8 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  baseURL: 'http://api.npool.top:30080/api',
-  withCredentials: true
+  baseURL: 'http://www.npool.top:30080/api',
+  withCredentials: true,
 })
 
 export default boot(({ app }) => {
