@@ -49,6 +49,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      env: require('./EnvParse.js')(),
 
       // transpile: false,
       // publicPath: '/',
@@ -79,7 +80,7 @@ module.exports = configure(function (ctx) {
     devServer: {
       proxy: {
         '/api': {
-          target: 'http://api.npool.top:30080',
+          target: 'http://www.npool.top:30080',
           pathRewrite: {
             '^/api': '/api'
           },
