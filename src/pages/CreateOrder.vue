@@ -472,7 +472,7 @@ export default defineComponent({
       var order = {
         GoodID: this.goodId,
         Units: 1,
-        UserID: this.user.info.BasicInfo.UserID,
+        UserID: this.user.info.UserBasicInfo.UserID,
         AppID: this.appInfo.id
       }
 

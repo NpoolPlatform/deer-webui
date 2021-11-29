@@ -203,7 +203,7 @@ export default defineComponent({
   },
   created() {
     this.appInfo = {
-      id: '7e395ecd-1ea0-43c4-b9d5-52ff668331bd'
+      id: 'ff2c5d50-be56-413e-aba5-9c7ad888a769'
     }
     this.q.cookies.set('AppID', this.appInfo.id)
   },
@@ -256,7 +256,7 @@ export default defineComponent({
   },
   computed: {
     username: function () {
-      return this.user.info.BasicInfo.Username
+      return this.user.info.UserBasicInfo.Username
     }
   }
 })
