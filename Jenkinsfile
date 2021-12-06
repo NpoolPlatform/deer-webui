@@ -13,73 +13,235 @@ pipeline {
       }
       steps {
         sh (returnStdout: false, script: '''
-	  set +e
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin command quasar
-	  rc=$?
-	  set -e
-	  if [ ! $rc -eq 0 ]; then
-	    n latest
-	    PATH=/usr/local/bin:$PATH npm i -g mirror-config-china --registry=https://registry.npm.taobao.org
-	    PATH=/usr/local/bin:$PATH npm install --global --registry https://registry.npm.taobao.org yarn
-	    PATH=/usr/local/bin:$PATH yarn config set registry 'https://registry.npm.taobao.org'
-            PATH=/usr/local/bin:$PATH yarn add global quasar-cli@latest
-	  fi
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin yarn install --registry https://registry.npm.taobao.org/
-	  PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin quasar build
+      set +e
+      PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin command quasar
+      rc=$?
+      set -e
+      if [ ! $rc -eq 0 ]; then
+        n latest
+        PATH=/usr/local/bin:$PATH npm i -g mirror-config-china --registry=https://registry.npm.taobao.org
+        PATH=/usr/local/bin:$PATH npm install --global --registry https://registry.npm.taobao.org yarn
+        PATH=/usr/local/bin:$PATH yarn config set registry 'https://registry.npm.taobao.org'
+        PATH=/usr/local/bin:$PATH yarn add global quasar-cli@latest
+      fi
+      PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin yarn install --registry https://registry.npm.taobao.org/
+      PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin quasar build
         '''.stripIndent())
       }
     }
 
     stage('Switch to current cluster') {
-        steps {
-            sh 'cd /etc/kubeasz; ./ezctl checkout $TARGET_ENV'
-        }
+      when {
+        expression { BUILD_TARGET == 'true' }
+        expression { DEPLOY_TARGET == 'true' }
+      }
+      steps {
+        sh 'cd /etc/kubeasz; ./ezctl checkout $TARGET_ENV'
+      }
     }
 
-    stage('Generate docker image') {
+    stage('Generate docker image for development') {
       when {
         expression { BUILD_TARGET == 'true' }
       }
       steps {
         sh(returnStdout: true, script: '''
-          images=`docker images | grep entropypool | grep deer-webui | awk '{ print $3 }'`
+          images=`docker images | grep entropypool | grep deer-webui | grep latest | awk '{ print $3 }'`
           for image in $images; do
             docker rmi $image
           done
-	  set +e
-	  version=`git describe --tags --abbrev=0`
-	  if [ ! $? -eq 0 ]; then
-    	    version=latest
-	  fi
-	  set -e 
-	  docker build -t entropypool/deer-webui:$version .
+
+          docker build -t entropypool/deer-webui:latest .
+          '''.stripIndent())
+      }
+    }
+
+    stage('Tag patch') {
+      when {
+        expression { TAG_PATCH == 'true' }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          set +e
+          revlist=`git rev-list --tags --max-count=1`
+          rc=$?
+          set -e
+          if [ 0 -eq $rc ]; then
+            tag=`git describe --tags $revlist`
+            major=`echo $tag | awk -F '.' '{ print $1 }'`
+            minor=`echo $tag | awk -F '.' '{ print $2 }'`
+            patch=`echo $tag | awk -F '.' '{ print $3 }'`
+            case $TAG_FOR in
+              testing)
+                patch=$(( $patch + $patch % 2 + 1 ))
+                ;;
+              production)
+                patch=$(( $patch + 1 ))
+                git checkout $tag
+                ;;
+            esac
+            tag=$major.$minor.$patch
+          else
+            tag=0.1.1
+          fi
+          git tag -a $tag -m "Bump version to $tag"
+        '''.stripIndent())
+
+        withCredentials([gitUsernamePassword(credentialsId: 'KK-github-key', gitToolName: 'git-tool')]) {
+          sh 'git push --tag'
+        }
+      }
+    }
+
+    stage('Tag minor') {
+      when {
+        expression { TAG_MINOR == 'true' }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          set +e
+          revlist=`git rev-list --tags --max-count=1`
+          rc=$?
+          set -e
+          if [ 0 -eq $rc ]; then
+            tag=`git describe --tags $revlist`
+            major=`echo $tag | awk -F '.' '{ print $1 }'`
+            minor=`echo $tag | awk -F '.' '{ print $2 }'`
+            patch=`echo $tag | awk -F '.' '{ print $3 }'`
+            minor=$(( $minor + 1 ))
+            patch=1
+            tag=$major.$minor.$patch
+          else
+            tag=0.1.1
+          fi
+          git tag -a $tag -m "Bump version to $tag"
+        '''.stripIndent())
+
+        withCredentials([gitUsernamePassword(credentialsId: 'KK-github-key', gitToolName: 'git-tool')]) {
+          sh 'git push --tag'
+        }
+      }
+    }
+
+    stage('Tag major') {
+      when {
+        expression { TAG_MAJOR == 'true' }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          set +e
+          revlist=`git rev-list --tags --max-count=1`
+          rc=$?
+          set -e
+          if [ 0 -eq $rc ]; then
+            tag=`git describe --tags $revlist`
+            major=`echo $tag | awk -F '.' '{ print $1 }'`
+            minor=`echo $tag | awk -F '.' '{ print $2 }'`
+            patch=`echo $tag | awk -F '.' '{ print $3 }'`
+            major=$(( $major + 1 ))
+            minor=0
+            patch=1
+            tag=$major.$minor.$patch
+          else
+            tag=0.1.1
+          fi
+          git tag -a $tag -m "Bump version to $tag"
+        '''.stripIndent())
+
+        withCredentials([gitUsernamePassword(credentialsId: 'KK-github-key', gitToolName: 'git-tool')]) {
+          sh 'git push --tag'
+        }
+      }
+    }
+
+    stage('Generate docker image for testing or production') {
+      when {
+        expression { BUILD_TARGET == 'true' }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          revlist=`git rev-list --tags --max-count=1`
+          tag=`git describe --tags $revlist`
+          git checkout $tag
+          images=`docker images | grep entropypool | grep deer-webui | grep $tag | awk '{ print $3 }'`
+          for image in $images; do
+            docker rmi $image -f
+          done
+
+          docker build -t entropypool/deer-webui:$tag .
         '''.stripIndent())
       }
     }
 
-    stage('Release docker image') {
+    stage('Release docker image for development') {
+      when {
+        expression { RELEASE_TARGET == 'true' }
+      }
+      steps {
+        sh 'docker push entropypool/deer-webui:latest'
+      }
+    }
+
+    stage('Release docker image for testing or production') {
       when {
         expression { RELEASE_TARGET == 'true' }
       }
       steps {
         sh(returnStdout: true, script: '''
-	  set +e
-	  version=`git describe --tags --abbrev=0`
-	  if [ ! $? -eq 0 ]; then
-    	    version=latest
-	  fi
-	  set -e 
+          revlist=`git rev-list --tags --max-count=1`
+          version=`git describe --tags $revlist`
           docker push entropypool/deer-webui:$version
         '''.stripIndent())
       }
     }
 
-    stage('Deploy') {
+    stage('Deploy for development') {
       when {
         expression { DEPLOY_TARGET == 'true' }
+        expression { TARGET_ENV == 'development' }
       }
       steps {
         sh 'kubectl apply -k k8s'
+      }
+    }
+
+    stage('Deploy for testing') {
+      when {
+        expression { DEPLOY_TARGET == 'true' }
+        expression { TARGET_ENV == 'testing' }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          revlist=`git rev-list --tags --max-count=1`
+          tag=`git describe --tags $revlist`
+
+          git checkout $tag
+          sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
+          kubectl apply -k k8s
+        '''.stripIndent())
+      }
+    }
+
+    stage('Deploy for production') {
+      when {
+        expression { DEPLOY_TARGET == 'true' }
+        expression { TARGET_ENV ==~ /.*production.*/ }
+      }
+      steps {
+        sh(returnStdout: true, script: '''
+          revlist=`git rev-list --tags --max-count=1`
+          tag=`git describe --tags $revlist`
+          
+          major=`echo $tag | awk -F '.' '{ print $1 }'`
+          minor=`echo $tag | awk -F '.' '{ print $2 }'`
+          patch=`echo $tag | awk -F '.' '{ print $3 }'`
+          patch=$(( $patch - $patch % 2 ))
+          tag=$major.$minor.$patch
+
+          git checkout $tag
+          sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
+          kubectl apply -k k8s
+        '''.stripIndent())
       }
     }
 
