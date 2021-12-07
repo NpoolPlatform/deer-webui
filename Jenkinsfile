@@ -77,6 +77,7 @@ pipeline {
                 ;;
               production)
                 patch=$(( $patch + 1 ))
+                git reset --hard
                 git checkout $tag
                 ;;
             esac
@@ -162,6 +163,7 @@ pipeline {
         sh(returnStdout: true, script: '''
           revlist=`git rev-list --tags --max-count=1`
           tag=`git describe --tags $revlist`
+          git reset --hard
           git checkout $tag
           images=`docker images | grep entropypool | grep deer-webui | grep $tag | awk '{ print $3 }'`
           for image in $images; do
@@ -215,6 +217,7 @@ pipeline {
           revlist=`git rev-list --tags --max-count=1`
           tag=`git describe --tags $revlist`
 
+          git reset --hard
           git checkout $tag
           sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
           kubectl apply -k k8s
@@ -238,6 +241,7 @@ pipeline {
           patch=$(( $patch - $patch % 2 ))
           tag=$major.$minor.$patch
 
+          git reset --hard
           git checkout $tag
           sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
           kubectl apply -k k8s
