@@ -45,8 +45,7 @@ pipeline {
         expression { BUILD_TARGET == 'true' }
       }
       steps {
-          docker build -t entropypool/deer-webui:latest .
-          '''.stripIndent())
+        sh 'docker build -t entropypool/deer-webui:latest .'
       }
     }
 
