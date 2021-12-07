@@ -45,12 +45,6 @@ pipeline {
         expression { BUILD_TARGET == 'true' }
       }
       steps {
-        sh(returnStdout: true, script: '''
-          images=`docker images | grep entropypool | grep deer-webui | grep latest | awk '{ print $3 }'`
-          for image in $images; do
-            docker rmi $image -f
-          done
-
           docker build -t entropypool/deer-webui:latest .
           '''.stripIndent())
       }
@@ -165,11 +159,6 @@ pipeline {
           tag=`git describe --tags $revlist`
           git reset --hard
           git checkout $tag
-          images=`docker images | grep entropypool | grep deer-webui | grep $tag | awk '{ print $3 }'`
-          for image in $images; do
-            docker rmi $image -f
-          done
-
           docker build -t entropypool/deer-webui:$tag .
         '''.stripIndent())
       }
@@ -181,6 +170,12 @@ pipeline {
       }
       steps {
         sh 'docker push entropypool/deer-webui:latest'
+        sh(returnStdout: true, script: '''
+          images=`docker images | grep entropypool | grep deer-webui | grep none | awk '{ print $3 }'`
+          for image in $images; do
+            docker rmi $image -f
+          done
+        '''.stripIndent())
       }
     }
 
