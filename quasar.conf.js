@@ -80,7 +80,7 @@ module.exports = configure(function (ctx) {
     devServer: {
       proxy: {
         '/api': {
-          target: 'http://www.npool.top:30080',
+          target: 'http://www.npool.top',
           pathRewrite: {
             '^/api': '/api'
           },

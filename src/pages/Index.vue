@@ -203,9 +203,15 @@ export default defineComponent({
   },
   computed: {
     recommends() {
-      return this.recommendGoods.filter((good, index) => {
+      var goods = this.recommendGoods.filter((good, index) => {
         return index < 4
       })
+      if (goods.length < 4 && goods.length > 0) {
+        for (let i = goods.length; i < 4; i++) {
+          goods.push(goods[0])
+        }
+      }
+      return goods
     }
   }
 })
