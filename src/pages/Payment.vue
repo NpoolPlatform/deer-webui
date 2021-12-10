@@ -318,7 +318,7 @@ export default defineComponent({
     },
     getCoinInfos: function () {
       var thiz = this
-      api.post('/sphinx-coininfo/v1/get/coin/infos')
+      api.post('/sphinx-coininfo/v1/get/coininfos')
       .then(function (resp) {
         thiz.supportPayTypes = resp.data.Infos
       })
@@ -345,6 +345,7 @@ export default defineComponent({
     },
     onPayClick: function () {
       var fees = []
+
       if (this.good.Fees != undefined) {
         for (let i = 0; i < this.good.Fees.length; i++) {
           fees.push({
