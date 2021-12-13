@@ -225,7 +225,6 @@ export default defineComponent({
         Logo: 'logo/btc.png'    
       }]),
       selectedPayTypeIndex: 0,
-      paying: false,
       payingAmount: 5.19,
       payingAddress: 'bitcoincash:qpg7yf0f06kk9zyn4adfr5pqx6l5q83xmulcmgxuqkge',
       appInfo,
@@ -260,6 +259,9 @@ export default defineComponent({
     },
     good: function () {
       return this.$store.state.good.goods[this.goodId]
+    },
+    paying: function () {
+      return true
     },
     posters: function () {
       if (this.good.Extra === undefined ||

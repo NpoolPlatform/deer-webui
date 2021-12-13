@@ -71,6 +71,7 @@
 import { defineComponent, ref } from 'vue'
 import { api } from 'boot/axios'
 import { success, fail, waiting } from '../notify/notify'
+import sha256 from "crypto-js/sha256";
 
 export default defineComponent({
   setup() {
@@ -87,11 +88,11 @@ export default defineComponent({
       var thiz = this
       var failToRegister = this.$t('GENERAL.FAIL_REGISTER')
 
-      api.post('/user-management/v1/signup', {
-        Password: this.password,
+      api.post('/cloud-hashing-apis/v1/signup', {
+        Password: sha256(this.password).toString(),
         EmailAddress: this.email,
         PhoneNumber: this.phoneno,
-        Code: this.verificationCode,
+        VerificationCode: this.verificationCode,
         AppId: this.appInfo.id
       })
       .then(function (resp) {

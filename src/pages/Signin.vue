@@ -49,6 +49,7 @@ import { defineComponent, ref, computed } from 'vue'
 import { api } from 'boot/axios'
 import { fail } from '../notify/notify'
 import { useStore } from 'vuex'
+import sha256 from "crypto-js/sha256"
 
 export default defineComponent({
   setup() {
@@ -77,7 +78,7 @@ export default defineComponent({
       api.post('/login-door/v1/login', {
         Email: this.email,
         Phone: this.phoneno,
-        Password: this.password
+        Password: sha256(this.password).toString()
       })
       .then(function (resp) {
         thiz.user = {
