@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: deer-webui
-        image: entropypool/deer-webui:latest
+        image: uhub.service.ucloud.cn/entropypool/deer-webui:latest
         imagePullPolicy: Always
         env:
         - name: ENV_ENVIRONMENT_TARGET

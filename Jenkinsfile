@@ -45,7 +45,7 @@ pipeline {
         expression { BUILD_TARGET == 'true' }
       }
       steps {
-        sh 'docker build -t entropypool/deer-webui:latest .'
+        sh 'docker build -t $DOCKER_REGISTRY/entropypool/deer-webui:latest .'
       }
     }
 
@@ -158,7 +158,20 @@ pipeline {
           tag=`git describe --tags $revlist`
           git reset --hard
           git checkout $tag
-          docker build -t entropypool/deer-webui:$tag .
+          set +e
+          PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin command quasar
+          rc=$?
+          set -e
+          if [ ! $rc -eq 0 ]; then
+            n latest
+            PATH=/usr/local/bin:$PATH npm i -g mirror-config-china --registry=https://registry.npm.taobao.org
+            PATH=/usr/local/bin:$PATH npm install --global --registry https://registry.npm.taobao.org yarn
+            PATH=/usr/local/bin:$PATH yarn config set registry 'https://registry.npm.taobao.org'
+            PATH=/usr/local/bin:$PATH yarn add global quasar-cli@latest
+          fi
+          PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin yarn install --registry https://registry.npm.taobao.org/
+          PATH=/usr/local/bin:$PATH:./node_modules/@quasar/app/bin quasar build
+          docker build -t $DOCKER_REGISTRY/entropypool/deer-webui:$tag .
         '''.stripIndent())
       }
     }
@@ -168,7 +181,7 @@ pipeline {
         expression { RELEASE_TARGET == 'true' }
       }
       steps {
-        sh 'docker push entropypool/deer-webui:latest'
+        sh 'docker push $DOCKER_REGISTRY/entropypool/deer-webui:latest'
         sh(returnStdout: true, script: '''
           images=`docker images | grep entropypool | grep deer-webui | grep none | awk '{ print $3 }'`
           for image in $images; do
@@ -192,7 +205,7 @@ pipeline {
           rc=$?
           set -e
           if [ 0 -eq $rc ]; then
-            docker push entropypool/deer-webui:$tag
+            docker push $DOCKER_REGISTRY/entropypool/deer-webui:$tag
           fi
         '''.stripIndent())
       }
@@ -219,7 +232,7 @@ pipeline {
           rc=$?
           set -e
           if [ 0 -eq $rc ]; then
-            docker push entropypool/deer-webui:$tag
+            docker push $DOCKER_REGISTRY/entropypool/deer-webui:$tag
           fi
         '''.stripIndent())
       }
@@ -231,6 +244,7 @@ pipeline {
         expression { TARGET_ENV == 'development' }
       }
       steps {
+        sh 'sed -i "s/uhub.service.ucloud.cn/$DOCKER_REGISTRY/g" k8s/01-deer-webui.yaml'
         sh 'kubectl apply -k k8s'
       }
     }
@@ -248,6 +262,7 @@ pipeline {
           git reset --hard
           git checkout $tag
           sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
+          sed -i "s/uhub.service.ucloud.cn/$DOCKER_REGISTRY/g" k8s/01-deer-webui.yaml
           kubectl apply -k k8s
         '''.stripIndent())
       }
@@ -272,6 +287,7 @@ pipeline {
           git reset --hard
           git checkout $tag
           sed -i "s/deer-webui:latest/deer-webui:$tag/g" k8s/01-deer-webui.yaml
+          sed -i "s/uhub.service.ucloud.cn/$DOCKER_REGISTRY/g" k8s/01-deer-webui.yaml
           kubectl apply -k k8s
         '''.stripIndent())
       }

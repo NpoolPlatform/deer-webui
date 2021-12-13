@@ -11,7 +11,7 @@ metadata:
 
 spec:
   rules:
-    - host: www.npool.top
+    - host: www.xpool.top
       http:
         paths:
           - path: /
