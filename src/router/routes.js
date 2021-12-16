@@ -34,6 +34,12 @@ const routes = [
         query: {
           by: 'email'
         }
+      }, {
+        path:'dashboard',
+        component: () => import('pages/Dashboard.vue'),
+        query: {
+          userId: ''
+        }
       }
     ]
   },

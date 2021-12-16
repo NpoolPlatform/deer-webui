@@ -210,6 +210,7 @@ export default defineComponent({
         deadline: Math.round(+new Date()/1000) + 6 * 60 * 60
       }),
       payings: [],
+      paying: false,
       gasPayings: [],
       badgeColors: [
         'primary', 'secondary', 'accent', 'positive', 'negative', 'blue-6', 'green-4', 'orange-4', 'deep-purple-8'
@@ -218,6 +219,7 @@ export default defineComponent({
       remainMinute: ref(6),
       remainSecond: ref(6),
       paymentInterval: ref(-1),
+      paymentChecker: ref(-1),
       supportPayTypes: ref([{
         ID: '6ba7b812-9dad-11d1-80b4-00c04fd430c8',
         Name: 'BTC',
@@ -235,10 +237,14 @@ export default defineComponent({
   mounted () {
     this.startTimer(this.payment.deadline)
     this.getCoinInfos()
+    this.getPaymentByOrder(this.orderId)
   },
   beforeUnmount () {
     if (this.paymentInterval != -1) {
       clearInterval(this.paymentInterval)
+    }
+    if (this.paymentChecker != -1) {
+      clearInterval(this.paymentChecker)
     }
   },
   created() {
@@ -259,9 +265,6 @@ export default defineComponent({
     },
     good: function () {
       return this.$store.state.good.goods[this.goodId]
-    },
-    paying: function () {
-      return true
     },
     posters: function () {
       if (this.good.Extra === undefined ||
@@ -293,7 +296,6 @@ export default defineComponent({
       return this.good.Extra.VoteCount
     },
     cointype: function () {
-      console.log(this.good.CoinInfo)
       return this.good.CoinInfo.Name
     },
     duration: function () {
@@ -326,6 +328,20 @@ export default defineComponent({
       })
       .catch(function (error) {
         fail(undefined, thiz.$t('GENERAL.FAIL_GET_COININFOS'), error)
+      })
+    },
+    getPaymentByOrder: function (orderId) {
+      var thiz = this
+      api.post('/cloud-hashing-order/v1/get/payment/by/order', {
+        OrderID: this.orderId
+      })
+      .then(function (resp) {
+        if (resp.data.Info != null) {
+          thiz.paying = true
+        }
+      })
+      .catch(function (error) {
+
       })
     },
     randomNumber : function (){
@@ -370,6 +386,9 @@ export default defineComponent({
       api.post('/cloud-hashing-apis/v1/create/order/payment', order)
       .then(function (resp) {
         emitter.emit('payment_created', resp.data.Info)
+        thiz.paymentChecker = setTimeout(() => {
+          thiz.getPayment(resp.data.Info.Payment.ID)
+        }, 1000)
         thiz.paying = true
       })
       .catch(function (error) {
@@ -377,6 +396,17 @@ export default defineComponent({
       })
     },
     onPayStatusClick: function () {
+    },
+    getPayment: function (id) {
+      api.post('/cloud-hashing-order/v1/get/payment', {
+        ID: id
+      })
+      .then(function (resp) {
+        console.log(resp)
+      })
+      .catch(function (error) {
+
+      })
     }
   }
 })
