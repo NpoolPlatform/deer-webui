@@ -390,7 +390,7 @@ export default defineComponent({
         emitter.emit('payment_created', resp.data.Info)
         thiz.paymentChecker = setTimeout(() => {
           thiz.getPayment(resp.data.Info.Payment.ID)
-        }, 1000)
+        }, 30000)
         thiz.paying = true
       })
       .catch(function (error) {
@@ -405,14 +405,17 @@ export default defineComponent({
         ID: id
       })
       .then(function (resp) {
+        console.log(resp.data)
         if (resp.data.Info.State != 'done') {
           thiz.paymentChecker = setTimeout(() => {
             thiz.getPayment(resp.data.Info.ID)
-          }, 1000)
+          }, 30000)
         }
       })
       .catch(function (error) {
-
+        thiz.paymentChecker = setTimeout(() => {
+          thiz.getPayment(resp.data.Info.ID)
+        }, 5000)
       })
     },
     onPayCoinTypeClick: function (index) {
