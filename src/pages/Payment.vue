@@ -339,6 +339,7 @@ export default defineComponent({
       .then(function (resp) {
         if (resp.data.Info != null) {
           thiz.paying = true
+          thiz.getPayment(resp.data.Info.ID)
         }
       })
       .catch(function (error) {
@@ -399,11 +400,16 @@ export default defineComponent({
     onPayStatusClick: function () {
     },
     getPayment: function (id) {
+      var thiz = this
       api.post('/cloud-hashing-order/v1/get/payment', {
         ID: id
       })
       .then(function (resp) {
-        console.log(resp)
+        if (resp.data.Info.State != 'done') {
+          thiz.paymentChecker = setTimeout(() => {
+            thiz.getPayment(resp.data.Info.ID)
+          }, 1000)
+        }
       })
       .catch(function (error) {
 
