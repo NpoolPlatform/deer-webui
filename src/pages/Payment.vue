@@ -50,9 +50,10 @@
               <q-btn
                 color="blue-4"
                 class="payment-scan-item"
-                v-for="payType in supportPayTypes"
+                v-for="(payType, index) in supportPayTypes"
                 :label="payType.Name"
-                :key="payType.Name" />
+                :key="payType.Name"
+                @click="onPayCoinTypeClick(index)" />
             </div>
             <div class="row">
               <div class="payment-scan-amount-label">{{ $t('GENERAL.NEED_PAY') }}:</div>
@@ -407,6 +408,9 @@ export default defineComponent({
       .catch(function (error) {
 
       })
+    },
+    onPayCoinTypeClick: function (index) {
+      this.selectedPayTypeIndex = index
     }
   }
 })
