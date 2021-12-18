@@ -25,12 +25,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="good-info-detail">
-              本单详情
-            </div>
             <q-btn
               class="good-info-detail"
               flat
+              dense>
+              本单详情
+            </q-btn>
+            <q-btn
+              class="good-info-detail"
+              flat
+              dense>
+              分享给朋友享受下单优惠
+            </q-btn>
+            <q-btn
+              class="good-info-detail"
+              flat
+              dense
               @click="onOrderHistoryClick">
               历史订单
             </q-btn>
@@ -204,5 +214,6 @@ export default defineComponent({
   margin-top: 4px
   font-size: 8px
   margin-right: 10px
+  padding: 0
 
 </style>
