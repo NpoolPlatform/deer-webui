@@ -23,6 +23,12 @@ export default defineComponent({
     order: function () {
       return this.store.state.order.orders[this.orderId]
     },
+    goodId: function () {
+      return this.$route.query.goodId
+    },
+    good: function () {
+      return this.store.state.good.goods[this.goodId]
+    },
     paymentId: function () {
       return this.$route.query.paymentId
     },
