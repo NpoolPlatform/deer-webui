@@ -411,8 +411,9 @@ export default defineComponent({
         router.push({
           path: 'payDone',
           query: {
-            orderId: resp.data.Info.OrderID,
-            paymentId: resp.data.Info.ID
+            orderId: thiz.orderId,
+            paymentId: resp.data.Info.ID,
+            goodId: thiz.goodId
           }
         })
       })
