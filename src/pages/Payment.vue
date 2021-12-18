@@ -401,20 +401,29 @@ export default defineComponent({
     },
     getPayment: function (id) {
       var thiz = this
+      var router = this.$router
+
       api.post('/cloud-hashing-order/v1/get/payment', {
         ID: id
       })
       .then(function (resp) {
-        console.log(resp.data)
         if (resp.data.Info.State != 'done') {
           thiz.paymentChecker = setTimeout(() => {
             thiz.getPayment(resp.data.Info.ID)
           }, 30000)
+          return
         }
+        router.push({
+          path: 'payDone',
+          query: {
+            orderId: resp.data.Info.OrderID
+          }
+        })
       })
       .catch(function (error) {
+        console.log(error)
         thiz.paymentChecker = setTimeout(() => {
-          thiz.getPayment(resp.data.Info.ID)
+          thiz.getPayment(id)
         }, 5000)
       })
     },

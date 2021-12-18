@@ -40,6 +40,12 @@ const routes = [
         query: {
           userId: ''
         }
+      }, {
+        path:'payDone',
+        component: () => import('pages/PayDone.vue'),
+        query: {
+          orderId: ''
+        }
       }
     ]
   },
