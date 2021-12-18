@@ -192,14 +192,14 @@ export default defineComponent({
     VueQrcode
   },
   setup() {
-    const $store = useStore()
+    const store = useStore()
     
     const appInfo = computed ({
-      get: () => $store.state.appInfo.appInfo
+      get: () => store.state.appInfo.appInfo
     })
 
     const user = computed ({
-      get: () => $store.state.user.user
+      get: () => store.state.user.user
     })
 
     return {
@@ -232,13 +232,13 @@ export default defineComponent({
       payingAddress: 'bitcoincash:qpg7yf0f06kk9zyn4adfr5pqx6l5q83xmulcmgxuqkge',
       appInfo,
       user,
-      emitter: mitt()
+      emitter: mitt(),
+      store
     }
   },
   mounted () {
     this.startTimer(this.payment.deadline)
     this.getCoinInfos()
-    this.getPaymentByOrder(this.orderId)
   },
   beforeUnmount () {
     if (this.paymentInterval != -1) {
@@ -254,18 +254,23 @@ export default defineComponent({
   beforeUnmount() {
     this.emitter.off('payment_created')
   },
+  watch: {
+    order: function () {
+      this.getPaymentByOrder(this.order)
+    }
+  },
   computed: {
     orderId: function () {
       return this.$route.query.orderId
     },
     order: function () {
-      return this.$store.state.order.orders[this.orderId]
+      return this.store.state.order.orders[this.orderId]
     },
     goodId: function () {
       return this.$route.query.goodId
     },
     good: function () {
-      return this.$store.state.good.goods[this.goodId]
+      return this.store.state.good.goods[this.goodId]
     },
     posters: function () {
       if (this.good.Extra === undefined ||
@@ -331,21 +336,6 @@ export default defineComponent({
         fail(undefined, thiz.$t('GENERAL.FAIL_GET_COININFOS'), error)
       })
     },
-    getPaymentByOrder: function (orderId) {
-      var thiz = this
-      api.post('/cloud-hashing-order/v1/get/payment/by/order', {
-        OrderID: this.orderId
-      })
-      .then(function (resp) {
-        if (resp.data.Info != null) {
-          thiz.paying = true
-          thiz.getPayment(resp.data.Info.ID)
-        }
-      })
-      .catch(function (error) {
-
-      })
-    },
     randomNumber : function (){
       return Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     },
@@ -389,7 +379,7 @@ export default defineComponent({
       .then(function (resp) {
         emitter.emit('payment_created', resp.data.Info)
         thiz.paymentChecker = setTimeout(() => {
-          thiz.getPayment(resp.data.Info.Payment.ID)
+          thiz.getPaymentByOrder(resp.data.Info)
         }, 30000)
         thiz.paying = true
       })
@@ -399,31 +389,37 @@ export default defineComponent({
     },
     onPayStatusClick: function () {
     },
-    getPayment: function (id) {
+    getPaymentByOrder: function (order) {
       var thiz = this
       var router = this.$router
+      var store = this.store
 
-      api.post('/cloud-hashing-order/v1/get/payment', {
-        ID: id
+      api.post('/cloud-hashing-order/v1/get/payment/by/order', {
+        OrderID: order.ID
       })
       .then(function (resp) {
         if (resp.data.Info.State != 'done') {
           thiz.paymentChecker = setTimeout(() => {
-            thiz.getPayment(resp.data.Info.ID)
+            thiz.getPaymentByOrder(order)
           }, 30000)
           return
         }
+
+        store.commit('order/updateOrder', thiz.order)
+        store.commit('payment/updatePayment', resp.data.Info)
+
         router.push({
           path: 'payDone',
           query: {
-            orderId: resp.data.Info.OrderID
+            orderId: resp.data.Info.OrderID,
+            paymentId: resp.data.Info.ID
           }
         })
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error, order)
         thiz.paymentChecker = setTimeout(() => {
-          thiz.getPayment(id)
+          thiz.getPaymentByOrder(order)
         }, 5000)
       })
     },

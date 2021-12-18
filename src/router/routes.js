@@ -44,7 +44,8 @@ const routes = [
         path:'payDone',
         component: () => import('pages/PayDone.vue'),
         query: {
-          orderId: ''
+          orderId: '',
+          paymentId: ''
         }
       }
     ]
