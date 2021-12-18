@@ -116,6 +116,7 @@ export default {
       FAIL_SIGNIN: '登录失败',
       NEED_AGREE_CONTRACT: '请先统一服务协议',
       FAIL_CREATE_ORDER: '创建订单失败',
-      FAIL_GET_COININFOS: '获取支付信息失败'
+      FAIL_GET_COININFOS: '获取支付信息失败',
+      PAY_SUCCESS: '您已成功付款'
     }
   }

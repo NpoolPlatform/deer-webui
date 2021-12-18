@@ -328,9 +328,14 @@ export default defineComponent({
     },
     getCoinInfos: function () {
       var thiz = this
+      var store = this.store
+
       api.post('/sphinx-coininfo/v1/get/coininfos')
       .then(function (resp) {
         thiz.supportPayTypes = resp.data.Infos
+        for (let i = 0; i < thiz.supportPayTypes.length; i++) {
+          store.commit('coininfo/updateCoinInfo', thiz.supportPayTypes[i])
+        }
       })
       .catch(function (error) {
         fail(undefined, thiz.$t('GENERAL.FAIL_GET_COININFOS'), error)

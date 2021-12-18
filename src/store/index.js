@@ -6,6 +6,7 @@ import user from './module-user'
 import appInfo from './module-appinfo'
 import order from './module-order'
 import payment from './module-payment'
+import coininfo from './module-coininfo'
 
 /*
  * If not building with SSR mode, you can
@@ -23,7 +24,8 @@ export default store(function (/* { ssrContext } */) {
       user,
       appInfo,
       order,
-      payment
+      payment,
+      coininfo
     },
 
     // enable strict mode (adds overhead!)
