@@ -117,6 +117,7 @@ export default {
     NEED_AGREE_CONTRACT: 'Please agree the contract firstly',
     FAIL_CREATE_ORDER: 'Fail to create order',
     FAIL_GET_COININFOS: 'Fail to get pay metarials',
-    PAY_SUCCESS: 'You already pay '
+    PAY_SUCCESS: 'You already pay',
+    BENEFIT_ADDRESS: 'Benefit Address'
   }
 }

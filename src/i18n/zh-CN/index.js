@@ -117,6 +117,7 @@ export default {
       NEED_AGREE_CONTRACT: '请先统一服务协议',
       FAIL_CREATE_ORDER: '创建订单失败',
       FAIL_GET_COININFOS: '获取支付信息失败',
-      PAY_SUCCESS: '您已成功付款'
+      PAY_SUCCESS: '您已成功付款',
+      BENEFIT_ADDRESS: '收益地址'
     }
   }

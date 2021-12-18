@@ -37,9 +37,6 @@ const routes = [
       }, {
         path:'dashboard',
         component: () => import('pages/Dashboard.vue'),
-        query: {
-          userId: ''
-        }
       }, {
         path:'payDone',
         component: () => import('pages/PayDone.vue'),
