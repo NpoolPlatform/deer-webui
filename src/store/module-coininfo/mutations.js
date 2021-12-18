@@ -1,3 +1,3 @@
 export function updateCoinInfo (state, coinInfo) {
-  state.coinInfos[coinInfo.ID] = coinInfo
+  state.coininfos[coinInfo.ID] = coinInfo
 }
