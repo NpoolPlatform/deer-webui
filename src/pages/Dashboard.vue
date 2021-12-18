@@ -42,13 +42,12 @@ export default defineComponent({
       splitterModel: ref(20),
       tab: ref('myServices'),
       user,
-      orders: ref([])
+      orders: ref([]),
+      benefits: ref([])
     }
   },
   mounted: function () {
     var thiz = this
-
-    console.log(this.user)
 
     api.post('/cloud-hashing-apis/v1/get/orders/detail/by/app/user')
     .then(function (resp) {
@@ -59,6 +58,15 @@ export default defineComponent({
         }
       });
       thiz.orders = orders
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+
+    api.post('/cloud-hashing-billing/v1/get/user/benefits/by/app/user')
+    .then(function (resp) {
+      thiz.benefits = resp.data.Infos
+      console.log(thiz.benefits)
     })
     .catch(function (error) {
       console.log(error)
