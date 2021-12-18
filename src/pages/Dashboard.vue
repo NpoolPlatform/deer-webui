@@ -14,7 +14,12 @@
       <q-tab name="setting" icon="movie" label="设置" />
     </q-tabs>
     <div class="my-content">
-
+      <div
+        class="row"
+        v-for="order in orders"
+        :key="order.ID">
+        {{ order.Units }} / {{ order.Payment.Amount }} / {{ order.Payment.State }}
+      </div>
     </div>
   </div>
 </template>
@@ -37,15 +42,23 @@ export default defineComponent({
       splitterModel: ref(20),
       tab: ref('myServices'),
       user,
-      orders: []
+      orders: ref([])
     }
   },
   mounted: function () {
     var thiz = this
 
+    console.log(this.user)
+
     api.post('/cloud-hashing-apis/v1/get/orders/detail/by/app/user')
     .then(function (resp) {
-      thiz.orders = resp.data.Details
+      let orders = []
+      resp.data.Details.forEach(info => {
+        if (info.Payment != null) {
+          orders.push(info)
+        }
+      });
+      thiz.orders = orders
     })
     .catch(function (error) {
       console.log(error)

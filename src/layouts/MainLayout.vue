@@ -215,7 +215,9 @@ export default defineComponent({
 
     },
     onMyOrdersClick: function () {
-
+      this.$router.push({
+        path: 'dashboard'
+      })
     },
     onDepositPowerFeeClick: function () {
 
