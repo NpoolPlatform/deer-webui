@@ -18,7 +18,7 @@
         class="row"
         v-for="order in orders"
         :key="order.ID">
-        {{ order.Units }} / {{ order.Payment.Amount }} / {{ order.Payment.State }}
+        {{ order.Units }} / {{ order.Payment.Amount }} / {{ order.Payment.State }} / {{ order.Good.Title }}
       </div>
     </div>
   </div>
