@@ -5,13 +5,13 @@
       vertical
       inline-label
       active-color="blue-8"
-      class="text-grey-8 my-tabs">
-      <q-tab name="myServices" icon="mail" label="我的服务" />
-      <q-tab name="myMachines" icon="alarm" label="我的矿机" />
-      <q-tab name="myOrders" icon="movie" label="我的订单" />
-      <q-tab name="myCoupons" icon="movie" label="我的礼券" />
-      <q-tab name="myInvitations" icon="movie" label="有奖邀请" />
-      <q-tab name="setting" icon="movie" label="设置" />
+      class="text-grey-8">
+      <q-tab name="myServices" icon="mail" label="我的服务" style="justify-content:initial" />
+      <q-tab name="myMachines" icon="alarm" label="我的矿机" style="justify-content:initial" />
+      <q-tab name="myOrders" icon="movie" label="我的订单" style="justify-content:initial" />
+      <q-tab name="myCoupons" icon="movie" label="我的礼券" style="justify-content:initial" />
+      <q-tab name="myInvitations" icon="movie" label="有奖邀请" style="justify-content:initial" />
+      <q-tab name="setting" icon="movie" label="设置" style="justify-content:initial" />
     </q-tabs>
     <div class="my-content">
       <div
@@ -66,7 +66,6 @@ export default defineComponent({
     api.post('/cloud-hashing-billing/v1/get/user/benefits/by/app/user')
     .then(function (resp) {
       thiz.benefits = resp.data.Infos
-      console.log(thiz.benefits)
     })
     .catch(function (error) {
       console.log(error)
@@ -83,12 +82,9 @@ export default defineComponent({
   padding: 20px 100px 100px 100px
   background-color: $grey-1
 
-.my-tabs
-  text-align: left
-  width: 200px
-
 .my-content
   background-color: white
   height: 100%
+  padding-left: 20px
 
 </style>
