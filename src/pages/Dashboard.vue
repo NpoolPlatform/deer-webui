@@ -18,7 +18,15 @@
         class="row"
         v-for="order in orders"
         :key="order.ID">
-        {{ order.Units }} / {{ order.Payment.Amount }} / {{ order.Payment.State }} / {{ order.Good.Title }}
+        <div>
+          {{ order.Units }} / {{ order.Payment.Amount }} / {{ order.Payment.State }} / {{ order.Good.Title }}
+          <div
+            class="row"
+            v-for="(benefit, index) in userBenefitsByOrder(order)"
+            :key="index">
+            {{ benefit.ID }} / {{ benefit.Amount }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -70,6 +78,13 @@ export default defineComponent({
     .catch(function (error) {
       console.log(error)
     })
+  },
+  methods: {
+    userBenefitsByOrder: function (order) {
+      return this.benefits.filter(val => {
+        return val.OrderID == order.ID
+      })
+    }
   }
 })
 </script>
