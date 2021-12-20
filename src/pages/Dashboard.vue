@@ -24,7 +24,7 @@
             class="row"
             v-for="(benefit, index) in userBenefitsByOrder(order)"
             :key="index">
-            {{ benefit.ID }} / {{ benefit.Amount }}
+            {{ benefit.ID }} / {{ benefit.Amount }} / {{ benefitCreateAt(benefit.CreateAt) }}
           </div>
         </div>
       </div>
@@ -36,6 +36,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { api } from 'boot/axios'
+import moment from 'moment'
 
 export default defineComponent({
   setup() {
@@ -84,6 +85,9 @@ export default defineComponent({
       return this.benefits.filter(val => {
         return val.OrderID == order.ID
       })
+    },
+    benefitCreateAt: function (unixTimestamp) {
+      return moment(unixTimestamp * 1000).format('MM/DD/YYYY hh:mm')
     }
   }
 })
